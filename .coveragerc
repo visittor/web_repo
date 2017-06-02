@@ -1,0 +1,3 @@
+[run]
+source = web_repo
+omit = web_repo/test*
