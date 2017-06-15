@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <!-- ลองนำไปประยุกต์ใช้ดูครับ อธิบายให้เข้าใจง่ายๆไม่ถูกเหมือนกัน เอาเป็นว่าใครติดปัญหาก็ Email มาถามได้ครับ ที่ au_cty@hotmail.com -->
+    <script type="text/javascript">
+        function ShowReg(op) {
+// ต้องประกาศ ชื่อของ id ที่จะมีไว้ก่อนด้วย
+            document.getElementById('Manual Promotion1').style.display='none';
+            document.getElementById('Manual Promotion2').style.display='none';
+            document.getElementById('Manual Promotion3').style.display='none';
+            document.getElementById('Time Promotion1').style.display='none';
+            document.getElementById('Time Promotion2').style.display='none';
+            document.getElementById('Time Promotion3').style.display='none';
+            document.getElementById('Time Promotion4').style.display='none';
+
+// เช็คว่าคนดูเลือกค่าที่อยู่ใน Drop Down Menu อะไรมา แล้วก็แสดงเฉพาะส่วนที่ต้องการออกมา
+            if (op == "1") {
+                document.getElementById('Manual Promotion1').style.display="block";
+                document.getElementById('Manual Promotion2').style.display="block";
+                document.getElementById('Manual Promotion3').style.display="block";
+            }
+            if (op == "2") {
+                document.getElementById('Time Promotion1').style.display="block";
+                document.getElementById('Time Promotion2').style.display="block";
+                document.getElementById('Time Promotion3').style.display="block";
+                document.getElementById('Time Promotion4').style.display="block";
+            }
+        }
+
+    </script>
+</head>
+<body>
+<form action="submit.php" method="post" enctype="multipart/form-data">
+    <font size="2">เป็นสินค้าโปรโมชั่น : </font>
+    <select name="promotion" id="choice" onChange="ShowReg(this.selectedIndex)">
+        <option value="0">ไม่จัดโปรโมชั่น
+        <option value="1">จัดโปรโมชั่นแบบแก้ไขเอง
+        <option value="2">จัดโปรโมชั่นแบบราคาลดตามระยะเวลา
+    </select>
+
+    <div class="row">
+        <div class="col-xs-12 col-sm-6 col-md-8">.col-xs-12 .col-sm-6 .col-md-8</div>
+        <div class="col-xs-6 col-md-4">.col-xs-6 .col-md-4</div>
+    </div>
+    <div class="row">
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+        <!-- Optional: clear the XS cols if their content doesn't match in height -->
+        <div class="clearfix visible-xs-block"></div>
+        <div class="col-xs-6 col-sm-4">.col-xs-6 .col-sm-4</div>
+    </div>
+
+    <!-- ด้านล่างอย่าลืมใส่ id ให้กับแถวของตาราง พร้อมกับสั่งให้ยังไม่แสดง ถ้าไม่ถูกเรียก ด้วยนะครับ -->
+
+    <div id="No Promotion" style="display:none">
+    </div>
+
+    <div id="Manual Promotion1" style="display:none">
+        <font size="2">ราคาพิเศษ : </font><input name="specialprice" type="text" value="" size="30"maxlength="15">
+    </div>
+
+    <div id="Manual Promotion2" style="display:none">
+        <font size="2">วันเริ่มโปรโมชั่น : </font><input name="date_start_promotion1" type="text" value="" size="30"maxlength="15">
+    </div>
+
+    <div id="Time Promotion1" style="display:none">
+        <font size="2">เปอร์เซ็นที่ลด : </font><input name="percent" type="text" value="" size="30"maxlength="15">
+    </div>
+
+    <div id="Time Promotion2" style="display:none">
+        <font size="2">ลดราคาทุกกี่วัน : </font><input name="frequent" type="text" value="" size="30"maxlength="15">
+    </div>
+
+    <div id="Time Promotion3" style="display:none">
+        <font size="2">วันเริ่มโปรโมชั่น : </font><input name="date_start_promotion2" type="text" value="" size="30"maxlength="15">
+    </div>
+
+    <br>
+    <INPUT type="submit" value="ส่งข้อมูล"> <INPUT type="reset" value="ล้างค่า">
+</form>
+
+</body>
+</html>
