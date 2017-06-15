@@ -12,6 +12,7 @@ requires = [
     'pyramid',
     'pyramid_jinja2',
     'pyramid_chameleon',
+    'bcrypt',
     'pyramid_debugtoolbar',
     'pyramid_tm',
     'SQLAlchemy',
