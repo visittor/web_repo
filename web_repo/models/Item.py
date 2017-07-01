@@ -24,7 +24,7 @@ class item(Base):
 	main_category = Column(VARCHAR(3))
 	sub_category = Column(VARCHAR(3))
 	type_ = Column(VARCHAR(10))
-	storage = Column(VARCHAR(50))
+	storage = Column(VARCHAR(50))#where item can found
 	value = Column(Integer)
 	subject_name = Column(VARCHAR(50))
 	note = Column(VARCHAR(150))
