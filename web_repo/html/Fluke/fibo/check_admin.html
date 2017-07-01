@@ -1,0 +1,262 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+      <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบบริหารจัดการวัสดุอุปกรณ์ - สถาบันวิทยาการหุ่นยนต์ภาคสนาม มจธ.</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="assets/css/bootstrap.css" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="assets/css/font-awesome.css" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="assets/css/custom.css" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+</head>
+
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">MMS FIBO</a> 
+            </div>
+  <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระบบ : 30 May 2014 &nbsp; <a href="login.html" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+				<li class="text-center">
+                    <img src="assets/img/find_user.png" class="user-image img-responsive"/><!-- ใส่รูป -->
+					</li>
+				
+					
+                    <li>
+                        <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> หน้าแรก </a>
+                    </li>
+					
+					 <li>
+                        <a class="active-menu" href="#"><i class="fa fa-sitemap fa-3x"></i> การให้บริหารนักศึกษา<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a href="list_borrow.html">การยืม</a>
+                            </li>
+                            <li>
+                                <a href="list_takeback.html">การคืน</a>
+                            </li>
+                            
+                        </ul>
+                      </li>  
+                  <li  >
+                      <li>
+                        <a  href="list_category.html"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
+                    </li>
+                    <li>
+                        <a  href="list_subcategory.html"><i class="fa fa-qrcode fa-3x"></i> การจัดการหมวดหมู่ย่อย</a>
+                    </li>
+						   <li  >
+                        <a  href="list_devicetype.html"><i class="fa fa-bar-chart-o fa-3x"></i> การจัดการประเภทอุปกรณ์</a>
+                    </li>	
+                      <li  >
+                        <a  href="list_place.html"><i class="fa fa-table fa-3x"></i> การจัดการสถานที่เก็บของ</a>
+                    </li>
+                    <li  >
+                        <a  href="list_device.html"><i class="fa fa-edit fa-3x"></i> การจัดการอุปกรณ์ </a>
+                    </li>				
+					<li  >
+                        <a   href="list_user.html"><i class="fa fa-bolt fa-3x"></i> การจัดการผู้ใช้งาน</a>
+                    </li>	
+                     	
+                </ul>
+               
+            </div>
+            
+        </nav>  
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <center><h2>ตรวจสอบโดยอาจารย์ผู้รับผิดชอบ</h2></center>
+					<div class="col-md-6">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อมูลนักศึกษาผู้ขอยืม</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-4">
+										<img src="assets/img/find_user.png" />
+									</div>
+									<div class="col-md-8">
+										<table class="table table-hover">
+											<tr>
+												<td><b>ชื่อ - สกุล</b></td>
+												<td>นายภิเษก  ภิญโญธรรมากร</td>
+											</tr>
+											<tr>
+												<td><b>รหัสนักศึกษา</b></td>
+												<td>58340500036</td>
+											</tr>
+											<tr>
+												<td><b>นักศึกษาชั้นปีที่</b></td>
+												<td>3</td>
+											</tr>
+										</table>
+									</div>
+									
+								</div>
+							</div>
+						</div>
+                    </div>
+					<div class="col-md-6">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อมูลเพิ่มเติ่มเกียวกับการขอยืม</h3>
+							</div>
+							<div class="panel-body">
+								
+										<table class="table table-hover">
+											<tr>
+												<td><b>อาจารย์ที่ปรึกษา</b></td>
+												<td>อาจารย์ทอดสอบ  ทดลอง</td>
+											</tr>
+											<tr>
+												<td><b>วันเริ่มยืม</b></td>
+												<td> 13 เมษายน 2560</td>
+											</tr>
+											<tr>
+												<td><b>วันสุดท้ายของการยืม</b></td>
+												<td> 15 พฤษภาคม 2560</td>
+											</tr>
+										</table>
+									
+							</div>
+						</div>
+                    </div>
+					
+                </div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-danger">
+							<div class="panel-heading">
+								<h3 class="panel-title">อุปกรณ์ที่นักศึกษาขอยืม</h3>
+							</div>
+							<div class="panel-body">
+								
+										<table class="table table-hover">
+											<tr>
+												<th>#</th>
+												<th>รหัสอุปกรณ์</th>
+												<th>ชื่ออุปกรณ์</th>
+												<th>จำนวน</th>
+												<th>โมดูล / ที่มา</th>
+												<th>สถานที่เก็บ</th>
+											</tr>
+											<tr>
+												<td><input type="checkbox" value="" /></td>
+												<td>ELE001</td>
+												<td>Arduino</td>
+												<td>1</td>
+												<td>My first Robot</td>
+												<td>FB301</td>
+											<tr>
+											<tr>
+												<td><input type="checkbox" value="" /></td>
+												<td>ELE002</td>
+												<td>Rasberry Pi</td>
+												<td>1</td>
+												<td>Robotic Programming</td>
+												<td>FB203</td>
+											<tr>
+											<tr>
+												<td><input type="checkbox" value="" /></td>
+												<td>ELE003</td>
+												<td>Arduino</td>
+												<td>1</td>
+												<td>Exporotion</td>
+												<td>FB301</td>
+											<tr>
+											<tr>
+												<td><input type="checkbox" value="" /></td>
+												<td>ELE004</td>
+												<td>Arduino</td>
+												<td>1</td>
+												<td>My first Robot</td>
+												<td>FB301</td>
+											<tr>
+										</table>
+									
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="panel-title">หมายเหตุ / บันทึกเพิ่มเติม</h3>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" rows="3"></textarea>	
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อความถึงนักศึกษา</h3>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" rows="3"></textarea>	
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อความถึงผู้รับผิดชอบ</h3>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" rows="3"></textarea>	
+							</div>
+						</div>
+					</div>
+					<br>
+					<center>
+						<button type="button" class="btn btn-success"><i class="glyphicon glyphicon-ok"></i> บันทึก</button>
+						<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-remove"></i> ยกเลิก</button>
+					</center>
+				</div>
+				
+                 <!-- /. ROW  -->
+                 <hr />
+               
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+    <!-- JQUERY SCRIPTS -->
+    <script src="assets/js/jquery-1.10.2.js"></script>
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="assets/js/bootstrap.min.js"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="assets/js/jquery.metisMenu.js"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="assets/js/custom.js"></script>
+    
+   
+</body>
+</html>

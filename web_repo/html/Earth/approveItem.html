@@ -1,0 +1,260 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>ยืนยันการยืมอุปกรณ์</title>
+    <link rel="icon" href="image/FIBO.jpg">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css'>
+    <link rel='stylesheet prefetch'
+          href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+
+
+    <!-- library of header-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.7-dist/navbar-fixed-top.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/tooltip-viewport.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]-->
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+</head>
+<body id="page-top">
+
+<nav id="mainNav" class=" navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="glyphicon glyphicon-plus" href="Additem.html" data-toggle="tooltip" data-placement="bottom" title="เพิ่มอุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-shopping-cart tooltip-bottom" href="rentItem.html" data-toggle="tooltip" data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-calendar tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ระบบจองห้อง"> </a></li>
+                <li><a class="glyphicon glyphicon-tag tooltip-bottom" href="statusofrent.html" data-toggle="tooltip" data-placement="bottom" title="สถานะการยืม คืน"> </a></li>
+                <li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>
+                <li><a class="glyphicon glyphicon-user tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                <li><a class="page-scroll" href=""><b>LOG OUT</b></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<div id="page-wrapper">
+    <div id="page-inner">
+        <div class="row">
+            <center><h2>ยืนยันการยืมอุปกรณ์</h2></center>
+            <div class="col-md-6">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ข้อมูลนักศึกษาผู้ขอยืม</h3>
+                    </div>
+                    <div class="panel-body">
+                        <div class="row">
+                            <div class="col-md-4">
+                                <img src="assets/img/find_user.png"/>
+                            </div>
+                            <div class="col-md-8">
+                                <table class="table table-hover">
+                                    <tr>
+                                        <td><b>ชื่อ - สกุล</b></td>
+                                        <td>นายภิเษก ภิญโญธรรมากร</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>รหัสนักศึกษา</b></td>
+                                        <td>58340500036</td>
+                                    </tr>
+                                    <tr>
+                                        <td><b>นักศึกษาชั้นปีที่</b></td>
+                                        <td>3</td>
+                                    </tr>
+                                </table>
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-info">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ข้อมูลเพิ่มเติ่มเกียวกับการขอยืม</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <td><b>อาจารย์ที่ปรึกษา</b></td>
+                                <td>
+                                    <select class="form-control" name="" id="">
+                                        <option value="">อาจารย์ที่ปรึกษา</option>
+                                        <option value="">รศ.ดร.สยาม เจริญเสียง</option>
+                                        <option value="">ดร.อาบทิพย์ ธีรวงศ์กิจ</option>
+                                        <option value="">ดร.สุภชัย วงศ์บุณย์ยง</option>
+                                        <option value="">ดร.ปิติวุฒญ์ ธีรกิตติกุล</option>
+                                        <option value="">ดร.สุริยา นัฏสุภัคพงศ์</option>
+                                        <option value="">ดร.ปราการเกียรติ ยังคง</option>
+                                        <option value="">ดร.อรพดี จูฉิม</option>
+                                        <option value="">ผศ.ดร.ถวิดา มณีวรรณ์</option>
+                                        <option value="">ผศ.ดร.เอกชัย เป็งวัง</option>
+                                        <option value="">ดร.วราสิณี ฉายแสงมงคล</option>
+                                        <option value="">นายบวรศักดิ์ สกุลเกื้อกูลสุข</option>
+                                        <option value="">นายธนัชชา ชูพจน์เจริญ</option>
+                                    </select>
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>วันเริ่มยืม</b></td>
+                                <td >
+                                    <input type="date" class="form-control">
+                                </td>
+                            </tr>
+                            <tr>
+                                <td><b>วันสุดท้ายของการยืม</b></td>
+                                <td> <input type="date" class="form-control"></td>
+                            </tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">อุปกรณ์ที่นักศึกษาขอยืม</h3>
+                    </div>
+                    <div class="panel-body">
+
+                        <table class="table table-hover">
+                            <tr>
+                                <th>#</th>
+                                <th>รหัสอุปกรณ์</th>
+                                <th>ชื่ออุปกรณ์</th>
+                                <th>จำนวน</th>
+                                <th>โมดูล / ที่มา</th>
+                                <th>สถานที่เก็บ</th>
+                                <th></th>
+                            </tr>
+                            <tr>
+                                <td><input type="checkbox" value=""/></td>
+                                <td>ELE001</td>
+                                <td>Arduino</td>
+                                <td>1</td>
+                                <td>My first Robot</td>
+                                <td>FB301</td>
+                                <td><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+                            <tr>
+                            <tr>
+                                <td><input type="checkbox" value=""/></td>
+                                <td>ELE002</td>
+                                <td>Rasberry Pi</td>
+                                <td>1</td>
+                                <td>Robotic Programming</td>
+                                <td>FB203</td>
+                            <td><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+                            <tr>
+                            <tr>
+                                <td><input type="checkbox" value=""/></td>
+                                <td>ELE003</td>
+                                <td>Arduino</td>
+                                <td>1</td>
+                                <td>Exporotion</td>
+                                <td>FB301</td>
+                            <td><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+                            <tr>
+                            <tr>
+                                <td><input type="checkbox" value=""/></td>
+                                <td>ELE004</td>
+                                <td>Arduino</td>
+                                <td>1</td>
+                                <td>My first Robot</td>
+                                <td>FB301</td>
+                            <td><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
+                            <tr>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-6">
+                <div class="panel panel-warning">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">หมายเหตุ / บันทึกเพิ่มเติม</h3>
+                    </div>
+                    <div class="panel-body">
+                        <textarea class="form-control" rows="3"></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-primary">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ข้อความถึงนักศึกษา</h3>
+                    </div>
+                    <div class="panel-body">
+                        <textarea class="form-control" rows="3" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <div class="col-md-3">
+                <div class="panel panel-success">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">ข้อความถึงผู้รับผิดชอบ</h3>
+                    </div>
+                    <div class="panel-body">
+                        <textarea class="form-control" rows="3" disabled></textarea>
+                    </div>
+                </div>
+            </div>
+            <br>
+            <center>
+                <button type="button" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-ok"></i> บันทึก</button>
+                <button type="button" class="btn btn-danger btn-lg"><i class="glyphicon glyphicon-remove"></i> ยกเลิก</button>
+            </center>
+        </div>
+
+        <!-- /. ROW  -->
+        <hr/>
+
+    </div>
+    <!-- /. PAGE INNER  -->
+</div>
+<!-- /. PAGE WRAPPER  -->
+</div>
+<!-- /. WRAPPER  -->
+
+
+<!-- /.container -->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+<script src='bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
+<script src="bootstrap-3.3.7-dist/tooltip-viewport.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+</body>
+</html>

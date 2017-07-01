@@ -1,0 +1,947 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="image/FIBO.jpg">
+
+    <title>หน้ายืมคืนอุปกรณ์</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/navbar-fixed-top.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/tooltip-viewport.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.7-dist/album.css" rel="stylesheet">
+    <script language="javascript" type="text/javascript">
+        <!--
+        function listboxchange1(p_index) {
+
+            //Clear Current options in subcategory1
+            document.form1.subcategory1.options.length = 0;
+
+
+            switch (p_index) {
+
+                case "Class Project":
+                    document.form1.subcategory1.options[0] = new Option("เลือกรายวิชา", "");
+
+                    document.form1.subcategory1.options[1] = new Option("FRA241", "FRA241");
+
+                    document.form1.subcategory1.options[2] = new Option("FRA221", "FRA241");
+
+                    break;
+
+                case "Camp":
+                    document.form1.subcategory1.options[0] = new Option("เลือกชื่อค่าย", "");
+
+                    document.form1.subcategory1.options[1] = new Option("FIBO Robocamp#6", "FIBO Robocamp#6");
+
+                    document.form1.subcategory1.options[2] = new Option("FIBOLian4", "FIBOLian4");
+
+                    break;
+
+                case "Competition":
+                    document.form1.subcategory1.options[0] = new Option("เลือกชื่อการแข่งขัน", "");
+
+                    document.form1.subcategory1.options[1] = new Option("ABU2017", "ABU2017");
+
+                    document.form1.subcategory1.options[2] = new Option("ABU2016", "ABU2016");
+
+                    break;
+
+                case "Normal Activity":
+                    document.form1.subcategory1.options[0] = new Option("เลือกกิจกรรมทั่วไป", "");
+
+                    document.form1.subcategory1.options[1] = new Option("FIBOอาสา", "FIBOอาสา");
+
+                    document.form1.subcategory1.options[2] = new Option("Open house 2016", "Open house 2016");
+
+                    break;
+
+            }
+            return true;
+        }
+        //-->
+    </script>
+
+
+</head>
+
+
+
+<body>
+
+<nav id="mainNav" class=" navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="glyphicon glyphicon-plus" href="Additem.html" data-toggle="tooltip" data-placement="bottom" title="เพิ่มอุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-shopping-cart tooltip-bottom" href="rentItem.html" data-toggle="tooltip" data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-calendar tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ระบบจองห้อง"> </a></li>
+                <li><a class="glyphicon glyphicon-tag tooltip-bottom" href="statusofrent.html" data-toggle="tooltip" data-placement="bottom" title="สถานะการยืม คืน"> </a></li>
+                <li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>
+                <li><a class="glyphicon glyphicon-user tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                <li><a class="page-scroll" href=""><b>LOG OUT</b></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+    <div class="container">
+        <h1>ระบบยืม คืน อุปกรณ์</h1>
+        <p class="lead text-muted">การยืมของจะต้องเลือกหมวดหมู่หลักให้ตรงกับที่นักศึกษาจะทำการยืมของชิ้นนั้นโดยที่มีหมวดหมู่หลักจำนวน 5 หมวดหมู่หลักคือ
+            <br>1.Class project
+            <br>2.ค่าย
+            <br>3.การแข่งขัน
+            <br>4.กิจกรรมทั่วไป
+            <br>5.การเรียนการสอน</p>
+        <p>
+        <div class="col-md-3">
+            <div class="input-group ">
+                <input type="text" class="form-control " placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-info " type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+        <form id="form1" name="form1" method="post" action="insertarticle.asp" onsubmit="return ValidateForm(); true">
+            <div class="row">
+                <div class="col-md-2">
+                    <select class="form-control" name="category" id="category" onchange="javascript: listboxchange1(this.options[this.selectedIndex].value);">
+                        <option value="">เลือกหมวดหมู่หลัก</option>
+                        <option value="Class Project">Class Project</option>
+                        <option value="Camp">ค่าย</option>
+                        <option value="Competition">การแข่งขัน</option>
+                        <option value="Normal Activity">กิจกรรมทั่วไป</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                    <script type="text/javascript" language="javascript">
+                        <!--
+                        document.write('<select class="form-control" name="subcategory1" "><option value="">เลือกหมวดหมู่หลักก่อน</option></select>')
+                        -->
+                    </script>
+                </div>
+                <div class="col-md-1">
+                    <button class="btn btn-info " type="button">Go!</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="approveItem.html"><button class="btn btn-primary btn-lg" type="button">อุปกรณ์ที่ยืม <span class="badge">4</span></button></a>
+                </div>
+            </div>
+        </form>
+
+        </p>
+    </div>
+
+
+<div class="album text-muted">
+    <div class="container">
+
+        <div class="row">
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                <h4><a class="label label-success glyphicon glyphicon-time"> Available</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+<!--แบบของ Available-->
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> Available</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">เลือก</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+<!--แบบของ Check Out -->
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!--button-->
+                <div class="col-md-4">
+                    <h4><a class="label label-danger glyphicon glyphicon-time">CheckedOut</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal2" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#Modal3" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+                <!-- Large modal -->
+                <div class="modal fade bs-example-modal-sm" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                            </div>
+                            <div class="modal-body">
+                                <center>
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-6 col-md-offset-3 ">
+                                            <h3 class="text-primary"><strong>ไม่สามารถยืมได้</strong></h3>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time">CheckOut ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                                </center>
+                            </div>
+                            <div class="modal-footer">
+                            <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!--ทำซ้ำให้หน้ามันไม่พัง-->
+                <div class="modal fade bs-example-modal-lg" id="Modal3" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModal3">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+
+
+
+
+
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="card">
+                <img data-src="holder.js/100px280/thumb" alt="Card image cap Responsive image" class="img-responsive">
+                <!-- Large modal -->
+                <div class="col-md-4">
+                    <h4><a class="label label-success glyphicon glyphicon-time"> ว่าง</a></h4>
+                </div>
+                <a class="btn btn-primary " data-toggle="modal" data-target="#Modal" >เลือก</a>
+                <a class="btn btn-warning" data-toggle="modal" data-target="#exampleModal" >รายละเอียด</a>
+                <!--for admin-->
+                <a class="btn btn-danger">แก้ไข</a>
+
+                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabel">เรียบร้อย</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text1"></textarea>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">ไปที่หน้ายืมยันการยืมของ</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="modal fade bs-example-modal-lg" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel">
+                    <div class="modal-dialog modal-lg" role="document">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                <h3 class="modal-title" id="exampleModalLabe2">รายละเอียด</h3>
+                            </div>
+                            <div class="modal-body">
+                                <form>
+                                    <div class="row">
+                                        <div class="col-md-4">
+                                            <img data-src="holder.js/100px280/thumb"  class="img-responsive" alt="Responsive image">
+                                        </div>
+                                        <div class="col-md-4 col-md-offset-4 form-group">
+                                            <h4><span class="label label-success glyphicon glyphicon-pencil"> GenNumber</span></h4>
+                                        </div>
+                                        <div class="col-md-6 .col-md-offset-3 form-group">
+                                            <h5 class="text-primary"><strong>ชื่อ:</strong></h5>
+                                            <h5 class="text-primary"><strong>จำนวน:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมวดหมู่หลัก:</strong></h5>
+                                            <h5 class="text-primary"><strong>สถานที่เก็บ:</strong></h5>
+                                            <h5 class="text-primary"><strong>หมายเหตุ:</strong></h5>
+                                            <textarea class="form-control" id="message-text2"></textarea>
+                                            <h4><span class="label label-success glyphicon glyphicon-time"> ว่าง</span></h4>
+                                            <h4><span class="label label-danger glyphicon glyphicon-time"> ยืมโดย นายภิเษก ภิญโญธรรมากร</span></h4>
+                                        </div>
+                                    </div>
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-primary">choose</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <nav aria-label="...">
+        <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<footer class="text-muted">
+    <div class="container">
+        <p align="right">
+            <a href="#">Back to top</a>
+        </p>
+        <p align="center">สถาบันวิทยาการหุ่นยนต์ภาคสนาม</p>
+        <p align="center">Insitute of FIeld roBOtic</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="bootstrap-3.3.7-dist/js/vendor/holder.min.js"></script>
+<script>
+    $(function () {
+        Holder.addTheme("thumb", { background: "#55595c", foreground: "#eceeef", text: "Thumbnail" });
+    });
+</script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="bootstrap-3.3.7-dist/tooltip-viewport.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+</html>
