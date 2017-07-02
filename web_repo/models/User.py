@@ -24,6 +24,27 @@ class member(Base):
 	last_name = Column(VARCHAR(15))
 	email = Column(VARCHAR(15))
 
+	@property
+	def data_(self):
+		dic = self.__dict__
+		dic.pop("cart")
+		dic.pop("orders")
+		return dic
+
+	@property
+	def dict_(self):
+		dic = self.__dict__
+		for i in range(0, len(dic["cart"])):
+			dic["cart"][i] = dic["cart"][i].data_
+
+		for i in range(0, len(dic["orders"])):
+			dic["orders"][i] = dic["orders"][i].data_
+
+		return dic
+
+
+
+
 class teacher(Base):
 	__tablename__ = "teacher"
 	id = Column(Integer,primary_key = True)
@@ -33,3 +54,16 @@ class teacher(Base):
 	first_name = Column(VARCHAR(15))
 	last_name = Column(VARCHAR(15))
 	email = Column(VARCHAR(15))
+
+	@property
+	def data_(self):
+		dic = self.__dict__
+		dic.pop("responsible_cart")
+		return dic
+
+	@property
+	def dict_(self):
+		dic = self.__dict__
+		for i in range(0,len(dic["responsible_cart"])):
+			dic["responsible_cart"][i] = dic["responsible_cart"][i].data_
+		return dic

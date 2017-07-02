@@ -32,7 +32,18 @@ class cart(Base):
 	admin2teacher = Column(VARCHAR(150))
 	teacher2student = Column(VARCHAR(150))
 	teacher2admin = Column(VARCHAR(150))
-	
 
+	@property
+	def data_(self):
+		dic = self.__dict__
+		dic.pop('owner')
+		dic.pop('teacher')
+		return dic
 
+	@property
+	def dict_(self):
+		dic = self.__dict__
+		dic["owner"] = owner.data_
+		dic["teacher"] = teacher.data_
+		return dic
 
