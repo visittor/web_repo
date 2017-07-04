@@ -38,6 +38,7 @@ class cart(Base):
 		dic = self.__dict__
 		dic.pop('owner')
 		dic.pop('teacher')
+		dic.pop('items')
 		return dic
 
 	@property
@@ -45,5 +46,7 @@ class cart(Base):
 		dic = self.__dict__
 		dic["owner"] = owner.data_
 		dic["teacher"] = teacher.data_
+		for i in range(0, len(dic["items"])):
+			dic["items"][i] = dic["items"][i].data_
 		return dic
 

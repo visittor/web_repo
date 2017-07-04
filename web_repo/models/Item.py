@@ -22,8 +22,8 @@ class item(Base):
 	order = relationship("order_item",cascade = "delete",back_populates = "item")
 
 	name = Column(VARCHAR(15))
-	main_category = Column(VARCHAR(3))
-	sub_category = Column(VARCHAR(3))
+	main_category = Column(VARCHAR(15))
+	sub_category = Column(VARCHAR(15))
 	type_ = Column(VARCHAR(10))
 	storage = Column(VARCHAR(50))#where item can found
 	value = Column(Integer)
