@@ -25,7 +25,8 @@ class add_item_view(object):
 			session = self.request.dbsession
 			itm = item()
 			for key,value in self.param_for_item.items() :
-				getattr(itm, i) = kwargs.get(key, value)
+				# getattr(itm, key) = kwargs.get(key, value)
+				setattr(itm, key, kwargs.get(key, value))
 
 			session.add(itm)
 

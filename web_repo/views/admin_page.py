@@ -10,7 +10,6 @@ import transaction
 
 @view_defaults(renderer='../templates/fluke/temp.pt')
 class admin_home(object):
-
 	def __init__(self, request):
 		self.request = request
 
@@ -62,9 +61,12 @@ class admin_borrow_return(object):
 
 	@view_config(route_name='test_admin_borrow_json')
 	def test_admin_borrow(self):
-		json = self.request.json_body
+		print '+++++++++++\n\n'
+		json = self.request.GET
+		print '**********\n\n'
 		print json
-		return {'a' : 'hello_borrow'}
+		print '\n\n#########\n\n'
+		return [{'a' :0}, {'a':1}]
 
 	@view_config(route_name = 'test_admin_return_json')
 	def test_admin_return(self):
