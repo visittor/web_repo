@@ -13,6 +13,11 @@ def includeme(config):
     config.add_route('admin_return_json', '/admin_return.json')
     config.add_route('admin_edit_return_json', '/admin_edit_return.json')
 
+    config.add_route('admin_main_category_json','/admin_main_category.json')
+    config.add_route('admin_edit_main_category_json', '/admin_edit_main_category.json')
+    config.add_route('admin_delete_main_category_json', '/admin_delete_main_category.json')
+    config.add_route('admin_insert_main_category_json', '/admin_insert_main_category.json')
+
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
     
