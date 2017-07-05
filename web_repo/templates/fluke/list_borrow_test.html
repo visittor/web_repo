@@ -1,8 +1,7 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    Access-Control-Allow-Origin: *
-    <meta charset="utf-8" />
+      <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>ระบบบริหารจัดการวัสดุอุปกรณ์ - สถาบันวิทยาการหุ่นยนต์ภาคสนาม มจธ.</title>
 	<!-- BOOTSTRAP STYLES-->
@@ -13,43 +12,6 @@
     <link href="assets/css/custom.css" rel="stylesheet" />
      <!-- GOOGLE FONTS-->
    <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
-
-    <script src="jquery-3.2.1.min.js"></script>
-
-    <script type="text/javascript" src="alfunc.js"></script>
-    <script type="text/javascript" src="largfunc.js"></script>
-
-
-    <script>
-        $(document).ready(function(){
-            $("#butt").click(function(){
-                main();
-//                $("#page-inner").hide();
-//                $.ajax({
-//                    url: ' http://localhost:6543/test_admin_borrow.json',
-//                    type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
-//                    data: {
-//                            requestByAjax: 1,
-//                            },
-//                    dataType: 'json', //หรือ json หรือ xml
-//
-//                    success: edit(response)
-//                });
-            });
-        });
-    </script>
-    <!--<script>-->
-        <!--$.ajax({-->
-            <!--url: 'xxx.html',-->
-            <!--type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)-->
-            <!--data: [data],-->
-            <!--dataType: 'html', //หรือ json หรือ xml-->
-            <!--success: function(response){-->
-                <!--//callbackที่เตรียมไว้รันตอนเซิร์ฟเวอร์ตอบกลับมา-->
-            <!--}-->
-        <!--});-->
-    <!--</script>-->
-
 </head>
 
 
@@ -63,13 +25,13 @@
                     <span class="icon-bar"></span>
                     <span class="icon-bar"></span>
                 </button>
-                <a class="navbar-brand" href="index.html">FIBO admin</a> 
+                <a class="navbar-brand" href="index.html">MMS FIBO</a>
             </div>
   <div style="color: white;
 padding: 15px 50px 5px 50px;
 float: right;
 font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระบบ : 30 May 2014 &nbsp; <a href="login.html" class="btn btn-danger square-btn-adjust">Logout</a> </div>
-        </nav>   
+        </nav>
            <!-- /. NAV TOP  -->
                 <nav class="navbar-default navbar-side" role="navigation">
             <div class="sidebar-collapse">
@@ -77,24 +39,24 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
 				<li class="text-center">
                     <img src="assets/img/find_user.png" class="user-image img-responsive"/><!-- ใส่รูป -->
 					</li>
-				
-					
+
+
                     <li>
                         <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> หน้าแรก </a>
                     </li>
-					
+
 					 <li>
-                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> การให้บริหารนักศึกษา<span class="fa arrow"></span></a>
+                        <a class="active-menu" href="#"><i class="fa fa-sitemap fa-3x"></i> การให้บริหารนักศึกษา<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="list_borrow.html">การยืม</a>
+                                <a class="active-menu" href="list_borrow.html">การยืม</a>
                             </li>
                             <li>
                                 <a href="list_takeback.html">การคืน</a>
                             </li>
-                            
+
                         </ul>
-                      </li>  
+                      </li>
                   <li  >
                       <li>
                         <a  href="list_category.html"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
@@ -104,35 +66,90 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
                     </li>
 						   <li  >
                         <a  href="list_devicetype.html"><i class="fa fa-bar-chart-o fa-3x"></i> การจัดการประเภทอุปกรณ์</a>
-                    </li>	
+                    </li>
                       <li  >
                         <a  href="list_place.html"><i class="fa fa-table fa-3x"></i> การจัดการสถานที่เก็บของ</a>
                     </li>
                     <li  >
                         <a  href="list_device.html"><i class="fa fa-edit fa-3x"></i> การจัดการอุปกรณ์ </a>
-                    </li>				
+                    </li>
 					<li  >
                         <a   href="list_user.html"><i class="fa fa-bolt fa-3x"></i> การจัดการผู้ใช้งาน</a>
-                    </li>	
-                     	
+                    </li>
+
                 </ul>
-               
+
             </div>
-            
-        </nav>  
+
+        </nav>
         <!-- /. NAV SIDE  -->
         <div id="page-wrapper" >
             <div id="page-inner">
                 <div class="row">
-                    <div class="col-md-12">
-                     <h2>Blank Page</h2>   
-                        <h5 id="butt">Welcome Jhon Deo , Love to see you back. </h5>
-                       
-                    </div>
-                </div>
+                    <center><h2>รายการการยืมของนักศึกษา (ที่ยังไม่ได้รับของ)</h2></center>
+					<div class="col-md-12">
+						<table class="table table-hover">
+											<tr>
+												<th>#</th>
+												<th>รหัสการของยืม</th>
+												<th>รหัสนักศึกษา</th>
+												<th>ชื่อ สกุล</th>
+												<th>อาจารย์ผู้รับผิดชอบ </th>
+												<th>ระหว่างวันที่</th>
+												<th>การจัดการ</th>
+											</tr>
+
+											<tr>
+												<td>1</td>
+												<td>60001001</td>
+												<td>58340500036</td>
+												<td>นายภิเษก  ภิญโญธรรมากร</td>
+												<td>อาจารย์ทดสอบ ทดลอง</td>
+												<td>20/6/60 - 1/7/60</td>
+												<td>
+													<a href="admin_borrow.html">
+                                                        <button type="button" class="btn btn-success"><i class="glyphicon glyphicon-floppy-saved"></i></button>
+                                                    </a>
+													<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+												</td>
+
+											</tr>
+
+											<tr id="wrapper2">
+                                                <script>
+                                                    var wrapper = document.getElementById("wrapper2");
+                                                    var l = document.createElement('td');
+                                                    l.innerHTML = '2'
+                                                    wrapper.appendChild(l);
+                                                </script>
+												<td>60001001</td>
+												<td>58340500036</td>
+												<td>นายภิเษก  ภิญโญธรรมากร</td>
+												<td>อาจารย์ทดสอบ ทดลอง</td>
+												<td>20/6/60 - 1/7/60</td>
+												<td>
+													<a href="admin_borrow.html">
+                                                        <script>
+                                                            var b = document.createElement('button');
+                                                            b.setAttribute('content', 'test content');
+                                                            b.setAttribute('class', 'btn btn-success')
+                                                            b.innerHTML = "<i class='glyphicon glyphicon-floppy-saved'></i>";
+                                                            b.setAttribute('id', 'save');
+                                                            wrapper.appendChild(b);
+                                                        </script>
+                                                    </a>
+													<button type="button" class="btn btn-danger"><i class="glyphicon glyphicon-trash"></i></button>
+												</td>
+
+                                            </tr>
+
+										</table>
+					</div>
+				</div>
+
                  <!-- /. ROW  -->
                  <hr />
-               
+
     </div>
              <!-- /. PAGE INNER  -->
             </div>
@@ -148,7 +165,7 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
     <script src="assets/js/jquery.metisMenu.js"></script>
       <!-- CUSTOM SCRIPTS -->
     <script src="assets/js/custom.js"></script>
-    
-   
+
+
 </body>
 </html>
