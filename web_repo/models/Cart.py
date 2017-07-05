@@ -36,6 +36,8 @@ class cart(Base):
 	@property
 	def data_(self):
 		dic = self.__dict__
+		dic['start_date'] = str(start_date)
+		dic['stop_date'] = str(stop_date)
 		dic.pop('owner')
 		dic.pop('teacher')
 		dic.pop('items')
