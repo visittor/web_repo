@@ -69,19 +69,19 @@ class admin_borrow_return(object):
 		print '+++++++++++\n\n'
 		json = self.request.GET
 		print json
-		cart_ = {'id': 1
+		cart_ = {'id': 1,
 				'owner_id': 2,
 				'owner': {'id': 3,
 						'student_id': 4,
 						'first_name': 'dummy_fist_name',
 						'last_name': 'dummy_last_name',
-						'email': 'dummy@dummy.com',}
+						'email': 'dummy@dummy.com',},
 				'teacher_id': 5,
-				'teacher':{“id”: 5
+				'teacher':{'id': 5,
 						'first_name': 'dummy_teacher',
 						'last_name': 'teacher_dummy',
-						'email':  'dummy@dummy.com',}
-				'item': *[ { 'id': 6,
+						'email':  'dummy@dummy.com',},
+				'item': [ { 'id': 6,
 						'name': 'dummy',
 						'main_category':'DM',
 						'sub_category': 'dm',
@@ -89,7 +89,7 @@ class admin_borrow_return(object):
 						'storage': 'dm301',
 						'value': 1,
 						'subject_name': 'dmm301',
-						'note': 'it a dummy',}]
+						'note': 'it a dummy',}],
 				'admin_approve': 0,
 				'teacher_approve': 1,
 				'start_date': '2017-07-05',
@@ -106,10 +106,10 @@ class admin_borrow_return(object):
 	def test_admin_return(self):
 		json = self.request.json_body
 		print json
-		list_cart = [ {'id': 1
+		list_cart = [ {'id': 1,
 				'owner_id': 2,
 				'owner': {'first_name': 'dummy_fist_name',
-						'last_name': 'dummy_last_name',}
+						'last_name': 'dummy_last_name',},
 				'teacher_id': 5,
 				'teacher':{'first_name': 'dummy_teacher',
 						'last_name': 'teacher_dummy',},
@@ -122,10 +122,10 @@ class admin_borrow_return(object):
 				'admin2teacher': '',
 				'teacher2student': '',
 				'teacher2admin': '',},
-				{'id': 1
+				{'id': 1,
 				'owner_id': 2,
 				'owner': {'first_name': 'dummy_fist_name',
-						'last_name': 'dummy_last_name',}
+						'last_name': 'dummy_last_name',},
 				'teacher_id': 5,
 				'teacher':{'first_name': 'dummy_teacher',
 						'last_name': 'teacher_dummy',},
@@ -171,7 +171,7 @@ class admin_borrow_return(object):
 		except Exception as e:
 			return {'exception' : 1}
 
-	@view_config(route_name  = 'admin_delete_borrow_json' request_method = 'POST')
+	@view_config(route_name  = 'admin_delete_borrow_json', request_method = 'POST')
 	def admin_delete_borrow(self):
 		json = self.request.POST
 		cart_id = json["id"]
