@@ -139,7 +139,7 @@ class admin_borrow_return(object):
 				'teacher2student': '',
 				'teacher2admin': '',}, ]
 
-		return {'a' : 'hello_return'}
+		return list_cart
 
 	@view_config(route_name = 'admin_borrow_json')
 	def admin_borrow(self):
