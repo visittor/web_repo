@@ -104,7 +104,7 @@ class admin_borrow_return(object):
 
 	@view_config(route_name = 'test_admin_return_json')
 	def test_admin_return(self):
-		json = self.request.json_body
+		json = self.request.GET
 		print json
 		list_cart = [ {'id': 1,
 				'owner_id': 2,
@@ -388,7 +388,7 @@ class category_type_manager(object):
 		sub_category = json['sub_category']
 		return {'exception' : self.insert_subCat(main_category, sub_category)}
 
-	
+
 
 
 
