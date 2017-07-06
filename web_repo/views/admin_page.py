@@ -258,6 +258,48 @@ class category_type_manager(object):
 			print e 
 			return 1
 
+	def change_subCat(self, main_category, old_name, new_name):
+		category_list = self.category_list
+		try:
+			if category_list.has_key(main_category) and old_name in category_list[main_category]:
+				category_list.remove(old_name)
+				category_list.append(new_name)
+				self.__save_config_file('category', 'main_category', category_list)
+				return 0
+			else:
+				return 1
+		except Exception as e:
+			print e
+			return 1
+
+	def delete_subCat(self, main_category, sub_category):
+		category_list = self.category_list
+		try:
+			if category_list.has_key(main_category) and sub_category in category_list[main_category]:
+				category_list.remove(sub_category)
+				self.__save_config_file('category', 'main_category', category_list)
+				return 0
+			else:
+				return 1
+		except Exception as e:
+			print e 
+			return 1
+
+	def insert_subCat(self, main_category, sub_category):
+		category_list = self.category_list
+		try:	
+			if category_list.has_key(main_category):
+				if sub_category in category_list[main_category]:
+					return 0
+				else:
+					category_list[main_category].append(sub_category)
+					return 1
+			else:
+				return 1
+		except Exception as e:
+			print e 
+			return 1
+
 	@property
 	def category_list(self):
 		with open(self.__file_path) as f:
@@ -314,6 +356,42 @@ class category_type_manager(object):
 		json = self.request.POST
 		name = json["name"]
 		return {"exception" : self.insert_mainCat(name)}
+
+	@view_config(route_name = 'admin_sub_category_json')
+	def show_sub_category(self):
+		sub_category = self.sub_category
+		return sub_category
+
+	@view_config(route_name = 'admin_edit_sub_category_json', request_method = 'POST')
+	def submit_edit_sub_category(self):
+		json = self.request.POST
+		main_category = json["main_category"]
+		old_name = json["old_name"]
+		new_name = json["new_name"]
+		return {'exception' : self.change_subCat(main_category, old_name, new_name)}
+
+	@view_config(route_name = 'admin_delete_sub_Category_json', request_method = 'POST')
+	def submit_delete_sub_category(self):
+		json = self.request.POST
+		main_category = json["main_category"]
+		sub_category = json["sub_category"]
+		return {'exception' : self.delete_subCat(main_category, sub_category)}
+
+	@view_config(route_name = 'admin_insert_sub_category_json', request_method = 'GET')
+	def submit_insert_sub_category_get(self):
+		return self.main_category
+
+	@view_config(route_name = 'admin_insert_sub_category_json', request_method = 'POST')
+	def submit_insert_sub_category_post(self):
+		json = self.request.POST
+		main_category = json['main_category']
+		sub_category = json['sub_category']
+		return {'exception' : self.insert_subCat(main_category, sub_category)}
+
+	
+
+
+
 
 
 
