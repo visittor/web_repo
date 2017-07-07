@@ -24,3 +24,4 @@ test
 *.sqlite
 *.sqlite
 web_repo.sqlite
+*.xml

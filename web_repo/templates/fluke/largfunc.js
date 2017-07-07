@@ -4,7 +4,7 @@
 
 function test_borrow()
 {
-    var url = document.getElementById('url_').innerHTML+"test_admin_return.json";
+    var url = document.getElementById('url_').innerHTML+"admin_borrow.json";
     $.ajax({
         url: url,
         type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
@@ -19,7 +19,7 @@ function test_borrow()
 
 function edit_borrow_admin_button(i)
 {
-    var url = document.getElementById('url_').innerHTML+"test_admin_borrow.json";
+    var url = document.getElementById('url_').innerHTML+"admin_edit_borrow.json";
     $.ajax({
         url: url,
         type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
@@ -34,7 +34,7 @@ function edit_borrow_admin_button(i)
 
 function test_return()
 {
-    var url = document.getElementById('url_').innerHTML+"test_admin_return.json";
+    var url = document.getElementById('url_').innerHTML+"admin_return.json";
     $.ajax({
         url: url,
         type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)

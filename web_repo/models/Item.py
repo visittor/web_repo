@@ -33,15 +33,20 @@ class item(Base):
 	@property
 	def data_(self):
 		dic = self.__dict__
-		dic.pop("in_cart")
-		dic.pop("order")
+
+		dic.pop('_sa_instance_state')
+
+		return  dic
 
 	@property
 	def dict_(self):
 		dic = self.__dict__
-		dic["in_cart"] = in_cart.data_
-		for i in range(0, len(dic["order"])):
-			dic["order"][i] = dic["order"][i].data_
+		dic["in_cart"] = self.in_cart.data_
+		dic["order"] = []
+		for i in self.order:
+			dic["order"].append(i.data_)
+
+		dic.pop('_sa_instance_state')
 
 		return dic
 
@@ -60,13 +65,17 @@ class order_item(Base):
 	@property
 	def data_(self):
 		dic = self.__dict__
-		dic.pop("item")
-		dic.pop("owner")
+
+		dic.pop('_sa_instance_state')
+
 		return dic
 
 	@property
 	def dict_(self):
 		dic = self.__dict__
-		dic["item"] = item.data_
-		dic["owner"] = owner.data_
+		dic["item"] = self.item.data_
+		dic["owner"] = self.owner.data_
+
+		dic.pop('_sa_instance_state')
+
 		return dic

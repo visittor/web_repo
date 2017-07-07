@@ -44,14 +44,19 @@ class admin_borrow_return(object):
 	def get_cart(self, id):
 		if type(id) == str :
 			id = int(id)
-		cart_ = request.dbsession.query(cart).filter_by(id = id).one()
+		cart_ = self.request.dbsession.query(cart).filter_by(id = id).one()
 		return cart_
 
 	def get_cart_data(self, id):
 		if type(id) == str :
 			id = int(id)
 		cart_ = self.get_cart(id)
-		dic = cart.dict_
+		dic = cart_.dict_
+		print "\n", cart_.items, "\n"
+		items = self.request.dbsession.query(item).filter_by(cart_id = id).all()
+		for i in items:
+			dic["items"].append(i.data_)
+		print "\n", dic, "\n"
 		return dic
 
 	def delete_cart(self, id):
@@ -152,7 +157,8 @@ class admin_borrow_return(object):
 	def admin_edit_borrow_get(self):
 		json = self.request.GET
 		cart_id = json["id"]
-		return self.get_cart_data(cart_id)
+		dic = self.get_cart_data(cart_id)
+		return dic
 
 	@view_config(route_name = 'admin_edit_borrow_json', request_method='POST')
 	def admin_edit_borrow_post(self):

@@ -55,17 +55,17 @@ def main(argv=sys.argv):
 
         cart_borrow = cart(admin_approve = 0, teacher_approve = 0, start_date = datetime.datetime.now(), stop_date =datetime.datetime.now() + datetime.timedelta(days=1, hours=23), )
         cart_return = cart(admin_approve = 1, teacher_approve = 0, start_date = datetime.datetime.now(), stop_date =datetime.datetime.now() + datetime.timedelta(days=1, hours=23), )
-        item_ = item(name = 'dummy', main_category = u'การเรียนการสอน', sub_category = 'FRA111', type_ = 'board', storage = 'FRA202', value = 1, subject_name = 'FRA111', )
-
-        dbsession.add(item_)
+        item_1 = item(name = 'dummy1', main_category = u'การเรียนการสอน', sub_category = 'FRA111', type_ = 'board', storage = 'FRA202', value = 1, subject_name = 'FRA111', )
+        item_2 = item(name='dummy2', main_category=u'การเรียนการสอน', sub_category='FRA111', type_='board',
+                     storage='FRA202', value=1, subject_name='FRA111', )
 
         cart_borrow.owner = student_
         cart_borrow.teacher = teacher_
-        cart_borrow.items.append(item_)
+        cart_borrow.items.append(item_1)
 
         cart_return.owner = student_
         cart_return.teacher = teacher_
-        cart_return.items.append(item_)
+        cart_return.items.append(item_2)
 
         dbsession.add(cart_borrow)
         dbsession.add(cart_return)

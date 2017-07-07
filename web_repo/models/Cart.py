@@ -36,19 +36,25 @@ class cart(Base):
 	@property
 	def data_(self):
 		dic = self.__dict__
-		dic['start_date'] = str(start_date)
-		dic['stop_date'] = str(stop_date)
-		dic.pop('owner')
-		dic.pop('teacher')
-		dic.pop('items')
+		dic['start_date'] = str(self.start_date)
+		dic['stop_date'] = str(self.stop_date)
+
+		dic.pop('_sa_instance_state')
+
 		return dic
 
 	@property
 	def dict_(self):
 		dic = self.__dict__
-		dic["owner"] = owner.data_
-		dic["teacher"] = teacher.data_
-		for i in range(0, len(dic["items"])):
-			dic["items"][i] = dic["items"][i].data_
+		dic['start_date'] = str(self.start_date)
+		dic['stop_date'] = str(self.stop_date)
+		dic["owner"] = self.owner.data_
+		dic["teacher"] = self.teacher.data_
+		dic["items"] = []
+		for i in self.items:
+			dic["items"].append(i.data_)
+
+		dic.pop('_sa_instance_state')
+
 		return dic
 

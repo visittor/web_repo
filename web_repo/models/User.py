@@ -27,18 +27,23 @@ class member(Base):
 	@property
 	def data_(self):
 		dic = self.__dict__
-		dic.pop("cart")
-		dic.pop("orders")
+
+		dic.pop('_sa_instance_state')
+
+		print "\n", dic,"\n"
 		return dic
 
 	@property
 	def dict_(self):
 		dic = self.__dict__
-		for i in range(0, len(dic["cart"])):
-			dic["cart"][i] = dic["cart"][i].data_
+		dic["cart"] = []
+		for i in self.cart:
+			dic["cart"].append(i.data_)
+		dic["orders"] = []
+		for i in self.orders:
+			dic["orders"].append(i.data_)
 
-		for i in range(0, len(dic["orders"])):
-			dic["orders"][i] = dic["orders"][i].data_
+		dic.pop('_sa_instance_state')
 
 		return dic
 
@@ -58,12 +63,18 @@ class teacher(Base):
 	@property
 	def data_(self):
 		dic = self.__dict__
-		dic.pop("responsible_cart")
+
+		dic.pop('_sa_instance_state')
+
 		return dic
 
 	@property
 	def dict_(self):
 		dic = self.__dict__
-		for i in range(0,len(dic["responsible_cart"])):
-			dic["responsible_cart"][i] = dic["responsible_cart"][i].data_
+		dic["responsible_cart"] = []
+		for i in self.responsible_cart:
+			dic["responsible_cart"].append(i.data_)
+
+		dic.pop('_sa_instance_state')
+
 		return dic
