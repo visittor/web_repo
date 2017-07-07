@@ -20,9 +20,9 @@ class member(Base):
 	orders = relationship("order_item",cascade="save-update,delete",back_populates = "owner")
 
 	student_id = Column(Integer)
-	first_name = Column(VARCHAR(15))
-	last_name = Column(VARCHAR(15))
-	email = Column(VARCHAR(15))
+	first_name = Column(VARCHAR(30))
+	last_name = Column(VARCHAR(30))
+	email = Column(VARCHAR(30))
 
 	@property
 	def data_(self):
