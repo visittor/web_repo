@@ -23,10 +23,13 @@
     <script>
         $(document).ready(function(){
             $("#borrow").click(function(){
-                test_borrow();
+               cancle_edit_borrow();
             });
             $("#return").click(function(){
-                test_return();
+                cancle_edit_return();
+            });
+            $("#list_category").click(function(){
+                go_main_category();
             });
         });
     </script>
@@ -90,7 +93,7 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
                       </li>  
                   <li  >
                       <li>
-                        <a  href="list_category.html"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
+                        <a  id="list_category"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
                     </li>
                     <li>
                         <a  href="list_subcategory.html"><i class="fa fa-qrcode fa-3x"></i> การจัดการหมวดหมู่ย่อย</a>

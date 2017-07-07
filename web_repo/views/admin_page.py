@@ -195,11 +195,13 @@ class admin_borrow_return(object):
 	def admin_edit_return_get(self):
 		json = self.request.GET
 		cart_id = json["id"]
-		return self.get_cart_data(cart_id)
+		print '\nadmin edit return\n'
+		dic = self.get_cart_data(cart_id)
+		return dic
 
 	@view_config(route_name = 'admin_edit_return_json', request_method = 'POST')
 	def admin_edit_return_post(self):
-		json - self.request.POST
+		json = self.request.POST
 		cart_id = json['id']
 		note = json['note']
 		to_student = json['to_student']
