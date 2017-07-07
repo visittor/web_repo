@@ -22,3 +22,5 @@ test
 *.sqlite
 *.sqlite
 *.sqlite
+*.sqlite
+web_repo.sqlite
