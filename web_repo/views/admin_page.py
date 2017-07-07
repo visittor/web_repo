@@ -488,11 +488,11 @@ class category_type_manager(object):
 		code = json['code']
 		return self.insert_type(name, code)
 
-	@view_config(route_name = 'admin_storage', request_method = 'GET')
+	@view_config(route_name = 'admin_storage_json', request_method = 'GET')
 	def show_storage(self):
 		return self.storage
 
-	@view_config(route_name = 'admin_edit_storage', request_method = 'POST')
+	@view_config(route_name = 'admin_edit_storage_json', request_method = 'POST')
 	def submit_edit_storage(self):
 		json = self.request.POST
 		old_name = json['old_name']

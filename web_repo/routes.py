@@ -28,6 +28,9 @@ def includeme(config):
     config.add_route('admin_delete_type_json', '/admin_delete_type.json')
     config.add_route('admin_insert_type_json', '/admin_insert_type.json')
 
+    config.add_route('admin_storage_json', '/admin_storage.json')
+    config.add_route('admin_edit_storage_json', '/admin_edit_storage.json')
+
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
     
