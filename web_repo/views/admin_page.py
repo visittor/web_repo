@@ -195,7 +195,7 @@ class admin_borrow_return(object):
 	def admin_edit_return_get(self):
 		json = self.request.GET
 		cart_id = json["id"]
-		return self.get_cart_data(id)
+		return self.get_cart_data(cart_id)
 
 	@view_config(route_name = 'admin_edit_return_json', request_method = 'POST')
 	def admin_edit_return_post(self):
@@ -268,8 +268,8 @@ class category_type_manager(object):
 		category_list = self.category_list
 		try:
 			if category_list.has_key(main_category) and old_name in category_list[main_category]:
-				category_list.remove(old_name)
-				category_list.append(new_name)
+				category_list[main_category].remove(old_name)
+				category_list[main_category].append(new_name)
 				self.__save_config_file('category', 'main_category', category_list)
 				return 0
 			else:
@@ -282,7 +282,7 @@ class category_type_manager(object):
 		category_list = self.category_list
 		try:
 			if category_list.has_key(main_category) and sub_category in category_list[main_category]:
-				category_list.remove(sub_category)
+				category_list[main_category].remove(sub_category)
 				self.__save_config_file('category', 'main_category', category_list)
 				return 0
 			else:
@@ -296,15 +296,84 @@ class category_type_manager(object):
 		try:	
 			if category_list.has_key(main_category):
 				if sub_category in category_list[main_category]:
-					return 0
+					return 1
 				else:
 					category_list[main_category].append(sub_category)
-					return 1
+					return 0
 			else:
 				return 1
 		except Exception as e:
 			print e 
 			return 1
+
+	def change_type(self, old_name, new_name, code):
+		type_ = self.type_
+		try:
+			if type_.has_key(old_name):
+				type_.pop(old_name)
+				type_[new_name] = code
+				return 0
+			else:
+				type_[new_name] = code
+				return 0
+		except Exception as e:
+			print e 
+			return 1
+
+	def delete_type(self, name):
+		type_ = self.type_
+		try:
+			if type_.has_key(name):
+				type_[name].pop()
+				return 0
+			else:
+				return 1
+		except Exception as e:
+			print e 
+			return 1
+
+	def insert_type(self, name, code):
+		type_ = self.type_
+		try:
+			if type_.has_key(name):
+				return 1
+			else:
+				type_[name] = code
+				return 0
+		except Exception as e:
+			print e 
+			return 1
+
+	def change_storage(self, old_name, new_name):
+		if not self.delete_storage(old_name) and not self.insert_storage(new_name):
+			return 0
+		else: 
+			return 1
+
+	def delete_storage(self, name):
+		storage = self.storage
+		try:
+			if storage.has_key(name):
+				storage.pop(name)
+				return 0
+			else:
+				return 1
+		except Exception as e:
+			print e 
+			return 1
+
+	def insert_storage(self, name):
+		storage = self.storage
+		try:
+			if storage.has_key(name):
+				return 0
+			else:
+				storage.append(name)
+				return 0
+		except Exception as e:
+			print e 
+			return 1
+
 
 	@property
 	def category_list(self):
@@ -393,6 +462,45 @@ class category_type_manager(object):
 		main_category = json['main_category']
 		sub_category = json['sub_category']
 		return {'exception' : self.insert_subCat(main_category, sub_category)}
+
+	@view_config(route_name = 'admin_type_json', request_method = 'GET')
+	def show_type(self):
+		return self.type_
+
+	@view_config(route_name = 'admin_edit_type_json', request_method = 'POST')
+	def submit_edit_type(Self):
+		json = self.request.POST
+		old_name = json['old_name']
+		new_name = json['new_name']
+		code = json ['code']
+		return {'exception' : self.change_type(old_name, new_name, code)}
+
+	@view_config(route_name = 'admin_delete_type_json', request_method = 'POST')
+	def submit_delete_type(self):
+		json = self.request.POST
+		name = json['name']
+		return { 'exception' : self.delete_type(name)}
+
+	@view_config(route_name = 'admin_insert_type_json', request_method = 'POST')
+	def submit_insert_type(self):
+		json = self.request.POST
+		name = json['name']
+		code = json['code']
+		return self.insert_type(name, code)
+
+	@view_config(route_name = 'admin_storage', request_method = 'GET')
+	def show_storage(self):
+		return self.storage
+
+	@view_config(route_name = 'admin_edit_storage', request_method = 'POST')
+	def submit_edit_storage(self):
+		json = self.request.POST
+		old_name = json['old_name']
+		new_name = json['new_name']
+		return {'exception' : self.change_storage(old_name, new_name)}
+
+
+
 
 
 
