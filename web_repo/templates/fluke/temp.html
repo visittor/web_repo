@@ -22,19 +22,11 @@
 
     <script>
         $(document).ready(function(){
-            $("#butt").click(function(){
-                main();
-//                $("#page-inner").hide();
-//                $.ajax({
-//                    url: ' http://localhost:6543/test_admin_borrow.json',
-//                    type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
-//                    data: {
-//                            requestByAjax: 1,
-//                            },
-//                    dataType: 'json', //หรือ json หรือ xml
-//
-//                    success: edit(response)
-//                });
+            $("#borrow").click(function(){
+                test_borrow();
+            });
+            $("#return").click(function(){
+                test_return();
             });
         });
     </script>
@@ -49,6 +41,7 @@
             <!--}-->
         <!--});-->
     <!--</script>-->
+    <p id = 'url_' hidden>http://localhost:6543/</p>
 
 </head>
 
@@ -87,10 +80,10 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
                         <a href="#"><i class="fa fa-sitemap fa-3x"></i> การให้บริหารนักศึกษา<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a href="list_borrow.html">การยืม</a>
+                                <a id = "borrow">การยืม</a>
                             </li>
                             <li>
-                                <a href="list_takeback.html">การคืน</a>
+                                <a id="return">การคืน</a>
                             </li>
                             
                         </ul>
