@@ -20,6 +20,7 @@ from ..models import MyModel
 from ..models.User import member, teacher
 from ..models.Cart import cart
 from ..models.Item import order_item, item
+from ..models.type import category_type_storage
 
 import datetime
 
@@ -69,5 +70,14 @@ def main(argv=sys.argv):
 
         dbsession.add(cart_borrow)
         dbsession.add(cart_return)
+
+        main_category = category_type_storage(name = 'main_category', list_ = u'{"การเรียนการสอน":["FRA111"], "ค่าย":["ROBOcamp"], "การแข่งขัน":["RObot thailand"], "class project":["FRA231"]}')
+        type_list = category_type_storage(name = 'type_list', list_ = u'{"อิเล็กทรอนิค":"EL", "ไฟฟ้า":"EE", "การช่าง":"TN", "board":"BD"}')
+        storage_list = category_type_storage(name = 'storage_list', list_ = u'["FRA202", "FB202", "FB203", "FB204"]')
+        
+        dbsession.add(main_category)
+        dbsession.add(storage_list)
+        dbsession.add(type_list)
+
 
         
