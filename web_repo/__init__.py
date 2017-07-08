@@ -22,5 +22,7 @@ def main(global_config, **settings):
     config.include('.routes')
     config.include('.security')
     config.add_subscriber(add_cors_headers_response_callback, NewRequest)
+    # config.add_static_view(name='static', path='static')
+    # config.add_static_view("static", "static")
     config.scan()
     return config.make_wsgi_app()

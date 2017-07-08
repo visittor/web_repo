@@ -4,6 +4,7 @@ from pyramid.view import (
     )
 from ..models.Item import item
 from ..models.Cart import cart
+from ..models.type import category_type_storage
 # from ..models.type import category_list, type_list, storage_list
 import transaction
 
@@ -220,14 +221,19 @@ class category_type_manager(object):
 
 	def __init__(self, request):
 		self.request = request
-		self.__file_path = self.request.static_url('web_repo:scripts/category/category.ini')
+		# self.__file_path = self.request.static_url('web_repo:static/category.ini')
+		# self.__file_path = 'web_repo:static/category/category.ini'
+		# self.__file_path = "category.ini"
 
 	def __save_config_file(section, option, value):
-		with open(self.__file_path) as f:
-			cfg = ConfigParser()
-			cfg.readfp(f)
-			cfg.set(section, option, value)
-			cfg.write(f)
+		# with open(self.__file_path) as f:
+		# 	cfg = ConfigParser()
+		# 	cfg.readfp(f)
+		# 	cfg.set(section, option, value)
+		# 	cfg.write(f)
+		category_obj = request.dbsession.query(category_type_storage).filter_by(name = option).one()
+		category_obj.list_ = str(value)
+
 
 	def change_mainCat_name(self, old_name, new_name):
 		category_list = self.category_list
@@ -301,6 +307,7 @@ class category_type_manager(object):
 					return 1
 				else:
 					category_list[main_category].append(sub_category)
+					self.__save_config_file('category', 'main_category', category_list)
 					return 0
 			else:
 				return 1
@@ -314,9 +321,11 @@ class category_type_manager(object):
 			if type_.has_key(old_name):
 				type_.pop(old_name)
 				type_[new_name] = code
+				self.__save_config_file('category', 'type_list', category_list)
 				return 0
 			else:
 				type_[new_name] = code
+				self.__save_config_file('category', 'type_list', category_list)
 				return 0
 		except Exception as e:
 			print e 
@@ -327,6 +336,7 @@ class category_type_manager(object):
 		try:
 			if type_.has_key(name):
 				type_[name].pop()
+				self.__save_config_file('category', 'type_list', category_list)
 				return 0
 			else:
 				return 1
@@ -341,6 +351,7 @@ class category_type_manager(object):
 				return 1
 			else:
 				type_[name] = code
+				self.__save_config_file('category', 'type_list', category_list)
 				return 0
 		except Exception as e:
 			print e 
@@ -357,6 +368,7 @@ class category_type_manager(object):
 		try:
 			if storage.has_key(name):
 				storage.pop(name)
+				self.__save_config_file('category', 'storage_list', category_list)
 				return 0
 			else:
 				return 1
@@ -371,6 +383,7 @@ class category_type_manager(object):
 				return 0
 			else:
 				storage.append(name)
+				self.__save_config_file('category', 'storage_list', category_list)
 				return 0
 		except Exception as e:
 			print e 
@@ -379,16 +392,17 @@ class category_type_manager(object):
 
 	@property
 	def category_list(self):
-		with open(self.__file_path) as f:
-			cfg = ConfigParser()
-			cfg.readfp(f)
-			category_list = eval(cfg.get('category', 'main_category'))
+		# with open(self.__file_path, "r") as f:
+		# 	cfg = ConfigParser()
+		# 	cfg.readfp(f)
+		# 	category_list = eval(cfg.get('category', 'main_category'))
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+		category_list = eval(category_obj.list_)
 		return category_list
 
 	@property
 	def main_category(self):
-		self.category_list
-		return category_list.keys()
+		return self.category_list.keys()
 
 	@property
 	def sub_category(self):
@@ -396,18 +410,22 @@ class category_type_manager(object):
 
 	@property
 	def type_(self):
-		with open(self.__file_path) as f:
-			cfg = ConfigParser()
-			cfg.readfp(f)
-			type_list = eval(cfg.get('category', 'type_list'))
+		# with open(self.__file_path) as f:
+		# 	cfg = ConfigParser()
+		# 	cfg.readfp(f)
+		# 	type_list = eval(cfg.get('category', 'type_list'))
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'type_list').one()
+		type_list = eval(type_obj.list_)
 		return type_list
 
 	@property
 	def storage(self):
-		with open(self.__file_path) as f:
-			cfg = ConfigParser()
-			cfg.readfp(f)
-			storage_list = eval(cfg.get('category', 'storage_list'))
+		# with open(self.__file_path) as f:
+		# 	cfg = ConfigParser()
+		# 	cfg.readfp(f)
+		# 	storage_list = eval(cfg.get('category', 'storage_list'))
+		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
+		storage_list = eval(storage_obj.list_)
 		return storage_list
 
 	@view_config(route_name = 'admin_main_category_json')
