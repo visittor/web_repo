@@ -133,11 +133,12 @@ function edit_return_admin(respond) {
 function call_main_category(respond){
 	$("#page-inner").load("list_category.html", function () {
 		var j = 1;
+		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>การจัดการ</th> </tr>";
 		for( i in respond){
-		inner_detail = inner_detail + "<tr> <td>j</td> <td>i</td> <td> <a><button type='button' onclick='edit_main_category(" + i + ")' class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+		inner_detail = inner_detail + "<tr> <td>j</td> <td>i</td> <td> <a><button type='button' onclick='edit_main_category(" + i + ")' class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' onclick='delete_main_category(" + i + ")' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
 		j++;
 		}
-		inner_detail = inner_detail+"</table>"
+		$("#category_table").html(inner_detail);
     });
 }
 
@@ -145,9 +146,37 @@ function edit_main_category(name)
 {
 	$("#page-inner").load("edit_category.html", function () {
 		var old_name = name;
-		var new_name = document.getElementById("new_name").value;
 		$('#summit_main_category_name').attr("onclick", "").click(function() {
+			var new_name = document.getElementById("new_name").value;
                   send_new_category_name(old_name,new_name);
+		});
+    });
+}
+
+function call_sub_category(respond)
+{
+	$("#page-inner").load("list_subcategory.html", function () {
+		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>ชื่อหมวดหมู่ย่อย</th> <th>การจัดการ</th> </tr> </table>";
+		var k =1;
+		for(i in respond){
+			for(j in respond){
+				inner_detail = inner_detail + "<tr><td>"+ k +"</td><td>"+ i +"</td><td>"+ respond[i] +"</td><td> <a><button type='button' onclick='edit_sub_category(" + i +","+ respond[i] + ")' class='btn btn-warning'>///////////////////////////////////<i class='glyphicon glyphicon-pencil'></i></button></a><button type='button' class='btn btn-danger' onclick='delete_sub_category(" + i +","+ respond[i] + ")' ><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+				k++;
+			}
+		}
+		$("#subcategory_table").html(inner_detail);
+    });
+}
+
+function edit_sub_category(main,sub)
+{
+	$("#page-inner").load("edit_subcategory.html", function () {
+		var main_name = main;
+		var old_name = sub;
+		$('#option_forwhat').html(main_name)
+		$('#summit_sub_category_name').attr("onclick", "").click(function() {
+			var new_name = document.getElementById("new_name").value;
+                  send_new_subcategory_name(main_name,old_name,new_name);
 		});
     });
 }

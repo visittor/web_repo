@@ -8,11 +8,11 @@ function edit_borrow_admin_button(i)
     var url = document.getElementById('url_').innerHTML+"admin_edit_borrow.json";
     $.ajax({
         url: url,
-        type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'get',
         data: {
             id: i,
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:edit_borrow_admin
     });
@@ -24,14 +24,14 @@ function summit_edit_borrow(i)
     var url = document.getElementById('url_').innerHTML+"admin_edit_borrow.json";
     $.ajax({
         url: url,
-        type: 'post', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'post',
         data: {
             id: i,
             note: document.getElementById("note").value,
             to_student: document.getElementById("dm_std").value,
             to_advisor: document.getElementById("dm_tch").value
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success: function(respond){
             if(respond.exception == 1){
@@ -48,11 +48,11 @@ function cancle_edit_borrow()
     var url = document.getElementById('url_').innerHTML+"admin_borrow.json";
     $.ajax({
         url: url,
-        type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'get',
         data: {
             requestByAjax: 1,
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:call_borrow_admin
     });
@@ -65,11 +65,11 @@ function edit_return_admin_button(i)
     alert(url);
     $.ajax({
         url: url,
-        type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'get',
         data: {
             id: i,
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:edit_return_admin
     });
@@ -81,14 +81,14 @@ function summit_edit_return(i)
     var url = document.getElementById('url_').innerHTML+"admin_edit_return.json";
     $.ajax({
         url: url,
-        type: 'post', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'post',
         data: {
             id: i,
             note: document.getElementById("note").value,
             to_student: document.getElementById("dm_std").value,
             to_advisor: document.getElementById("dm_tch").value
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:function (respond) {
             if (respond.exception == 1){
@@ -104,11 +104,11 @@ function cancle_edit_return()
     var url = document.getElementById('url_').innerHTML+"admin_return.json";
     $.ajax({
         url: url,
-        type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'get',
         data: {
             requestByAjax: 1,
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:call_return_admin
     });
@@ -121,11 +121,11 @@ function go_main_category()
     var url = document.getElementById('url_').innerHTML+"admin_main_category.json";
     $.ajax({
         url: url,
-        type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'get',
         data: {
             requestByAjax: 1
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:call_main_category
     });
@@ -137,18 +137,96 @@ function send_new_category_name(a,b)
     var url = document.getElementById('url_').innerHTML+"admin_edit_main_category.json";
     $.ajax({
         url: url,
-        type: 'post', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)
+        type: 'post',
         data: {
             old_name: a,
             new_name: b
         },
-        dataType: 'json', //หรือ json หรือ xml
+        dataType: 'json',
 
         success:function (respond) {
             if (respond.exception == 1){
                 alert('wrong');
             }
             go_main_category();
+        }
+    });
+}
+
+function delete_main_category(name)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_delete_main_category.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: name
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_main_category();
+        }
+    });
+}
+
+function go_sub_category()
+{
+    var url = document.getElementById('url_').innerHTML+"admin_sub_category.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            requestByAjax: 1
+        },
+        dataType: 'json',
+
+        success:call_sub_category
+    });
+}
+
+function send_new_subcategory_name(main,old,new_name)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_edit_sub_category.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            main_category: main,
+            old_name: old,
+            new_name: new_name
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_main_category();
+        }
+    });
+}
+
+function delete_sub_category(main,sub)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_delete_sub_category.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            main_category: main,
+            sub_category: sub
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_sub_category();
         }
     });
 }
