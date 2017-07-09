@@ -145,6 +145,8 @@ function send_new_category_name(a,b)
         dataType: 'json',
 
         success:function (respond) {
+            alert(a);
+            alert(b);
             if (respond.exception == 1){
                 alert('wrong');
             }

@@ -244,7 +244,7 @@ class category_type_manager(object):
 				return 0
 			return 1
 		except Exception as e:
-			print e
+			print '/n*****************************/n',e,'/n******************************/n'
 			return 1
 
 	def delete_mainCat(self, name):
