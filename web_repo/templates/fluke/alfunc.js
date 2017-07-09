@@ -135,10 +135,20 @@ function call_main_category(respond){
 		var j = 1;
 		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>การจัดการ</th> </tr>";
 		for( i in respond){
-		inner_detail = inner_detail + "<tr> <td>"+ j +"</td> <td>" + respond[i] + "</td> <td> <a><button type='button' onclick= \"edit_main_category(' " + respond[i] + " ')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' onclick=\"delete_main_category(' " + respond[i] + " ')\" class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+		inner_detail = inner_detail + "<tr> <td>"+ j +"</td> <td>" + respond[i] + "</td> <td> <a><button type='button' onclick= \"edit_main_category('" + respond[i] + "')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' onclick=\"delete_main_category('" + respond[i] + "')\" class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
 		j++;
 		}
 		$("#category_table").html(inner_detail);
+    });
+}
+
+function add_category()
+{
+	$("#page-inner").load("add_category.html", function () {
+		$('#summit_add_category_button').attr("onclick", "").click(function() {
+			var name_to_add = document.getElementById("category_to_add").value;
+                  summit_add_category(name_to_add);
+		});
     });
 }
 
@@ -156,7 +166,7 @@ function edit_main_category(name)
 function call_sub_category(respond)
 {
 	$("#page-inner").load("list_subcategory.html", function () {
-		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>ชื่อหมวดหมู่ย่อย</th> <th>การจัดการ</th> </tr> </table>";
+		var inner_detail = "<tr> <th>#</th/> <th>ชื่อหมวดหมู่หลัก</th> <th>ชื่อหมวดหมู่ย่อย</th> <th>การจัดการ</th> </tr> </table>";
 		var k =1;
 		for(i in respond){
 			for(j in respond){
@@ -178,5 +188,32 @@ function edit_sub_category(main,sub)
 			var new_name = document.getElementById("new_name").value;
                   send_new_subcategory_name(main_name,old_name,new_name);
 		});
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function call_list_devicetype()
+{
+	$("#page-inner").load("list_devicetype.html", function () {
+
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function call_list_place()
+{
+	$("#page-inner").load("list_place.html", function () {
+
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function call_list_device()
+{
+	$("#page-inner").load("list_device.html", function () {
+
     });
 }

@@ -25,3 +25,5 @@ test
 *.sqlite
 web_repo.sqlite
 *.xml
+.idea/workspace.xml
+

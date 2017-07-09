@@ -131,6 +131,20 @@ function go_main_category()
     });
 }
 
+function summit_add_category(a)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_insert_main_category.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: a
+        },
+        dataType: 'json',
+
+        success:go_main_category
+    });
+}
 
 function send_new_category_name(a,b)
 {
@@ -145,8 +159,8 @@ function send_new_category_name(a,b)
         dataType: 'json',
 
         success:function (respond) {
-            alert(a);
-            alert(b);
+            alert(a+" "+typeof a);
+            alert(b+" "+typeof b);
             if (respond.exception == 1){
                 alert('wrong');
             }
@@ -167,6 +181,7 @@ function delete_main_category(name)
         dataType: 'json',
 
         success:function (respond) {
+            alert(name+" "+typeof name);
             if (respond.exception == 1){
                 alert('wrong');
             }
@@ -229,6 +244,63 @@ function delete_sub_category(main,sub)
                 alert('wrong');
             }
             go_sub_category();
+        }
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function go_list_devicetype()
+{
+    var url = document.getElementById('url_').innerHTML+"admin_type.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            requestByAjax: 1,
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            call_list_devicetype();
+        }
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function go_list_place()
+{
+    var url = document.getElementById('url_').innerHTML+"admin_storage.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            requestByAjax: 1,
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            call_list_place();
+        }
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+
+function go_list_device()
+{
+    var url = document.getElementById('url_').innerHTML+"admin_device.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            requestByAjax: 1,
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            call_list_device();
         }
     });
 }
