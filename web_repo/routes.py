@@ -30,6 +30,10 @@ def includeme(config):
 
     config.add_route('admin_storage_json', '/admin_storage.json')
     config.add_route('admin_edit_storage_json', '/admin_edit_storage.json')
+    config.add_route('admin_delete_storage_json', '/admin_delete_storage.json')
+    config.add_route('admin_insert_storage_json', '/admin_insert_storage.json')
+
+    config.add_route('admin_device_json', '/admin_device.json')
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')

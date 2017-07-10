@@ -134,6 +134,8 @@ function go_main_category()
 
 function send_new_category_name(a,b)
 {
+    alert(a);
+    alert(b);
     var url = document.getElementById('url_').innerHTML+"admin_edit_main_category.json";
     $.ajax({
         url: url,

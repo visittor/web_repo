@@ -45,7 +45,6 @@ class item(Base):
 		dic["order"] = []
 		for i in self.order:
 			dic["order"].append(i.data_)
-
 		dic.pop('_sa_instance_state')
 
 		return dic

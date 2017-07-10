@@ -136,7 +136,7 @@ function call_main_category(respond){
 		var j = 1;
 		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>การจัดการ</th> </tr>";
 		for( i in respond){
-		inner_detail = inner_detail + "<tr> <td>"+ j +"</td> <td>" + respond[i] + "</td> <td> <a><button type='button' onclick= \"edit_main_category(' " + respond[i] + " ')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' onclick=\"delete_main_category(' " + respond[i] + " ')\" class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+		inner_detail = inner_detail + "<tr> <td>"+ j +"</td> <td>" + respond[i] + "</td> <td> <a><button type='button' onclick= \"edit_main_category('" + respond[i] + "')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' onclick=\"delete_main_category(' " + respond[i] + " ')\" class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
 		j++;
 		}
 		$("#category_table").html(inner_detail);

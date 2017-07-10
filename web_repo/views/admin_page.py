@@ -1,3 +1,4 @@
+# -*- coding: utf-8 -*-
 from pyramid.view import (
     view_config,
     view_defaults
@@ -64,11 +65,21 @@ class admin_borrow_return(object):
 		if type(id) == str:
 			id = int(id)
 		try:
-			cart_ = request.dbsession.query(cart).filter_by(id = id).one()
-			request.dbsession.delete(cart_)
+			cart_ = self.request.dbsession.query(cart).filter_by(id = id).one()
+			# request.dbsession.delete(cart_)
+			cart_.admin_approve = -1
 			return 0
 		except Exception as e:
 			return 1
+
+	def search_item(self, **kwargh):
+		q = self.request.dbsession.query(item)
+		for key,value in kwargh.items():
+			if type(value) == str and value != '':
+				q.filter(getattr(item, key) == value)
+			elif type(value) == int and value != -1:
+				q.filter(getattr(item, key) == value)
+		return q.all()
 
 	@view_config(route_name='test_admin_borrow_json')
 	def test_admin_borrow(self):
@@ -216,6 +227,31 @@ class admin_borrow_return(object):
 		except Exception as e:
 			return {'exception' : 1}
 
+	@view_config(route_name = 'admin_device_json', request_method = 'GET')
+	def admin_device_list(self):
+		json = self.request.GET
+		type_ = json["type_"]
+		sub_category = json["sub_category"]
+		storage = json["storage"]
+
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+		sub_category = eval(category_obj.list_)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'type_list').one()
+		type_list = eval(type_obj.list_)
+
+		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
+		storage_list = eval(storage_obj.list_)
+
+		items = self.search_item(**{'type_' : type_, 'sub_category' : sub_category, 'storage' : storage})
+		items_list = []
+		for i in items:
+			dict_ = i.dict_
+			dict_["code_name"] = str(type_list.get(i.type_, 'NULL'))+str(i.id)
+			items_list.append(i.dict_)
+
+		return {"items" : items_list, "type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
+
 @view_defaults( renderer = 'json')
 class category_type_manager(object):
 
@@ -225,26 +261,32 @@ class category_type_manager(object):
 		# self.__file_path = 'web_repo:static/category/category.ini'
 		# self.__file_path = "category.ini"
 
-	def __save_config_file(section, option, value):
+	def __save_config_file(self, section, option, value):
 		# with open(self.__file_path) as f:
 		# 	cfg = ConfigParser()
 		# 	cfg.readfp(f)
 		# 	cfg.set(section, option, value)
 		# 	cfg.write(f)
-		category_obj = request.dbsession.query(category_type_storage).filter_by(name = option).one()
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = option).one()
 		category_obj.list_ = str(value)
 
 
 	def change_mainCat_name(self, old_name, new_name):
 		category_list = self.category_list
 		try:
+			if type(old_name) == unicode:
+				old_name = old_name.encode('utf8')
+			print '\n*****************************\n',category_list,'\n******************************\n'
+			print '\n*****************************\n',[hex(ord(c)) for c in old_name], new_name,'\n******************************\n'
+			print '\n*****************************\n',category_list.keys()[1],'\n******************************\n'
 			if category_list.has_key(old_name):
 				category_list[new_name] = category_list.pop(old_name)
 				self.__save_config_file('category', 'main_category', category_list)
 				return 0
+			print '\n*****************************\n','not has key','\n******************************\n'
 			return 1
 		except Exception as e:
-			print '/n*****************************/n',e,'/n******************************/n'
+			print '\n*****************************\n',e,'\n******************************\n'
 			return 1
 
 	def delete_mainCat(self, name):
@@ -518,6 +560,18 @@ class category_type_manager(object):
 		old_name = json['old_name']
 		new_name = json['new_name']
 		return {'exception' : self.change_storage(old_name, new_name)}
+
+	@view_config(route_name = 'admin_delete_storage_json', request_method = 'POST')
+	def submit_delete_storage(self):
+		json = self.request.POST
+		name = json['name']
+		return {'exception' : self.delete_storage(name)}
+
+	@view_config(route_name = 'admin_insert_storage_json', request_method = 'POST')
+	def submit_insert_storage(self):
+		json = self.request.POST
+		name = json['name']
+		return {'exception' : self.insert_storage(name)}
 
 
 
