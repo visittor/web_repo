@@ -261,8 +261,28 @@ function go_list_devicetype()
         },
         dataType: 'json',
 
+        success:call_list_devicetype
+    });
+}
+
+function send_new_devicetype_name(a,b,c)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_edit_type.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            old_name: a,
+            new_name: b,
+            code: c
+        },
+        dataType: 'json',
+
         success:function (respond) {
-            call_list_devicetype();
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_devicetype();
         }
     });
 }

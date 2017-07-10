@@ -193,10 +193,30 @@ function edit_sub_category(main,sub)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function call_list_devicetype()
+function call_list_devicetype(respond)
 {
 	$("#page-inner").load("list_devicetype.html", function () {
+	    console.log(respond);
+	    var inner_detail = "<tr> <th>#</th> <th>ชื่อประเภทอุปกรณ์</th> <th>ชื่อย่อประเภทอุปกรณ์</th> <th>การจัดการ</th> </tr>"
+        var x = 1;
+        for(i in respond){
+	        console.log(i+respond[i]);
+	        inner_detail = inner_detail + "<tr> <td>"+ x +"</td> <td>"+ i +"</td> <td>"+ respond[i] +"</td> <td> <a><button type='button' class='btn btn-warning' onclick='edit_devicetype("+"\""+ i +"\""+","+"\""+ respond[i] +"\""+")' ><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+            x++;
+        }
+        $("#devicetype_table").html(inner_detail);
+    });
+}
 
+function edit_devicetype(old,code,new_name)
+{
+	$("#page-inner").load("edit_devicetype.html", function () {
+	    document.getElementById("input_code").value = code;
+	    $("#summit_edit_devicetype").attr("onclick", "").click(function () {
+            new_name = document.getElementById("new_devicetype").value;
+            alert(old+' '+new_name+' '+code);
+            send_new_devicetype_name(old,new_name,code);
+        })
     });
 }
 
