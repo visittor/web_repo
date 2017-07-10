@@ -530,7 +530,7 @@ class category_type_manager(object):
 		return self.type_
 
 	@view_config(route_name = 'admin_edit_type_json', request_method = 'POST')
-	def submit_edit_type(Self):
+	def submit_edit_type(self):
 		json = self.request.POST
 		old_name = json['old_name']
 		new_name = json['new_name']
