@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="image/FIBO.jpg">
+
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/navbar-fixed-top.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/tooltip-viewport.css" rel="stylesheet">
+
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.7-dist/album.css" rel="stylesheet">
+    <title>ข้อมูลส่วนตัว</title>
+</head>
+<body>
+
+<nav id="mainNav" class=" navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right ">
+                <li><a class="glyphicon glyphicon-shopping-cart tooltip-bottom" href="rentItem.html" data-toggle="tooltip" data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-calendar tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ระบบจองห้อง"> </a></li>
+                <!--<li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>-->
+                <li><a class="glyphicon glyphicon-user tooltip-bottom" href="personal_infomation.html" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เพิ่มเติม<span class="caret"></span></a>
+                    <ul class="dropdown-menu ">
+                        <li><a href="statusofrent.html">ตรวจสอบสถานะการยืม คืน อุปกรณ์</a></li>
+                        <li><a href=" ">ตรวจสอบสถานะการจองห้อง</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="Additem.html">เพิ่มอุปกรณ์</a></li>
+                    </ul>
+                </li>
+                <li><a class="page-scroll" href=""><b>LOG OUT</b></a></li>
+            </ul>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+<form class="well form-horizontal" action=" " method="post" name="add_project_form" id="add_project_form">
+    <fieldset>
+        <!-- Form Name -->
+
+        <h2>ข้อมูลส่วนตัว</h2>
+        <ul class="nav nav-pills nav-justified">
+            <li class="active"><a data-toggle="tab" href="#home">ข้อมูลส่วนตัว</a></li>
+            <li><a data-toggle="tab" href="#menu1">แก้ไขข้อมูลส่วนตัว</a></li>
+            <li><a data-toggle="tab" href="#menu2">เปลี่ยนรหัสผ่าน</a></li>
+            <li><a data-toggle="tab" href="#menu3">ประวัติการยืม</a></li>
+            <li><a data-toggle="tab" href="#menu4">ประวัติการจองห้อง</a></li>
+        </ul>
+        <br>
+
+        <div class="tab-content">
+            <div id="home" class="tab-pane fade in active">
+
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="image/find_user1.png"/>
+                    </div>
+                    <div class="col-md-10">
+                        <table class="table table-hover">
+                            <tr>
+                                <td><b>ชื่อ - สกุล</b></td>
+                                <td>นายภิเษก ภิญโญธรรมากร</td>
+                            </tr>
+                            <tr>
+                                <td><b>รหัสนักศึกษา</b></td>
+                                <td>58340500036</td>
+                            </tr>
+                            <tr>
+                                <td><b>นักศึกษาชั้นปีที่</b></td>
+                                <td>3</td>
+                            </tr>
+                            <tr>
+                                <td><b>e-mail</b></td>
+                                <td>earthand53@gmail.com</td>
+                            </tr>
+                        </table>
+                    </div>
+
+                </div>
+            </div>
+
+
+            <div id="menu1" class="tab-pane fade">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">สถานะ</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control" name="status" value="${request.user.role}" disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ชื่อผู้ใช้</label>
+                    <div class="col-md-3">
+                        <input type="text" class="form-control" name="username" value="${request.user.user_id}"
+                               disabled>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">รหัสนักศึกษา</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control" name="id" value="${request.user.student_id}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ชื่อ</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control" name="firstname" value="${request.user.First_name}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">นามสกุล</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control" name="lastname" value="${request.user.Last_name}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ชั้นปี</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control" name="year" value="${request.user.year}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">อีเมล</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control" name="mail" value="${request.user.Email}">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">อัพโหลดรูปโปรไฟล์</label>
+                    <div class="col-md-3 ">
+                        <input type="file" name="p_img" class="form-control" >
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-3">
+                        <button type="submit" class="btn btn-warning btn-lg" name="save_profile">บันทึก<span
+                                class="glyphicon glyphicon-floppy-disk"></span></button>
+                        <button type="submit" class="btn btn-warning btn-lg" name="save_profile">ยกเลิก</button>
+                    </div>
+                </div>
+
+            </div>
+            <div id="menu2" class="tab-pane fade">
+                <div class="form-group">
+                    <label class="col-md-4 control-label">รหัสผ่านปัจจุบัน</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">รหัสผ่านใหม่</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label">ยืนยันรหัสผ่านใหม่</label>
+                    <div class="col-md-3 ">
+                        <input type="text" class="form-control">
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label"></label>
+                    <div class="col-md-4">
+                        <button type="submit" class="btn btn-warning btn-lg" name="save_profile">บันทึก<span
+                                class="glyphicon glyphicon-floppy-disk"></span></button>
+                        <button type="submit" class="btn btn-warning btn-lg" name="save_profile">ยกเลิก</button>
+                    </div>
+                </div>
+
+
+            </div>
+
+
+        </div>
+
+
+    </fieldset>
+</form>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"
+        integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n"
+        crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js"
+        integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb"
+        crossorigin="anonymous"></script>
+<script src="bootstrap-3.3.7-dist/js/vendor/holder.min.js"></script>
+<script>
+    $(function () {
+        Holder.addTheme("thumb", {background: "#55595c", foreground: "#eceeef", text: "Thumbnail"});
+    });
+</script>
+<script src="bootstrap-3.3.7-dist/js/bootstrap.min.js"></script>
+<script src="bootstrap-3.3.7-dist/tooltip-viewport.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+
+</body>
+</html>
