@@ -18,6 +18,7 @@ def main(global_config, **settings):
     """
     config = Configurator(settings=settings)
     config.include('pyramid_chameleon')
+    config.include('pyramid_jinja2')
     config.include('.models')
     config.include('.routes')
     config.include('.security')

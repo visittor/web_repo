@@ -11,6 +11,8 @@ from sqlalchemy.orm import relationship
 
 from .meta import Base
 
+import bcrypt
+
 class member(Base):
 	__tablename__ = "member"
 	id = Column(Integer,primary_key = True)
@@ -30,14 +32,14 @@ class member(Base):
 	password_hash = Column(Text)
 
 	def set_password(self, pw):
-        pwhash = bcrypt.hashpw(pw.encode('utf8'), bcrypt.gensalt())
-        self.password_hash = pwhash.decode('utf8')
+		pwhash = bcrypt.hashpw(pw.encode('utf8'), bcrypt.gensalt())
+		self.password_hash = pwhash.decode('utf8')
 
-    def check_password(self, pw):
-        if self.password_hash is not None:
-            expected_hash = self.password_hash.encode('utf8')
-            return bcrypt.checkpw(pw.encode('utf8'), expected_hash)
-        return False
+	def check_password(self, pw):
+		if self.password_hash is not None:
+			expected_hash = self.password_hash.encode('utf8')
+			return bcrypt.checkpw(pw.encode('utf8'), expected_hash)
+		return False
 
 	@property
 	def data_(self):

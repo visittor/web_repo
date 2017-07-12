@@ -1,0 +1,184 @@
+﻿<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <!--Access-Control-Allow-Origin: *-->
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>ระบบบริหารจัดการวัสดุอุปกรณ์ - สถาบันวิทยาการหุ่นยนต์ภาคสนาม มจธ.</title>
+	<!-- BOOTSTRAP STYLES-->
+    <link href="${request.static_url('web_repo:static/fluke/assets/css/bootstrap.css')}" rel="stylesheet" />
+     <!-- FONTAWESOME STYLES-->
+    <link href="${request.static_url('web_repo:static/fluke/assets/css/font-awesome.css')}" rel="stylesheet" />
+        <!-- CUSTOM STYLES-->
+    <link href="${request.static_url('web_repo:static/fluke/assets/css/custom.css')}" rel="stylesheet" />
+     <!-- GOOGLE FONTS-->
+   <link href='http://fonts.googleapis.com/css?family=Open+Sans' rel='stylesheet' type='text/css' />
+
+    <!--[if lt IE 9]>
+    <script src='https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js'></script>
+    <script src='https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js'></script>
+    <![endif]-->
+
+    <!-- Bootstrap Core CSS -->
+    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/css/bootstrap.min.css')}" rel="stylesheet">
+
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+
+    <!-- Custom styles for this template -->
+    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/navbar-fixed-top.css')}" rel="stylesheet">
+    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/tooltip-viewport.css')}" rel="stylesheet">
+
+    <script src="${request.static_url('web_repo:static/fluke/jquery-3.2.1.min.js')}"></script>
+
+    <script type="text/javascript" src="${request.static_url('web_repo:static/fluke/alfunc.js')}"></script>
+    <script type="text/javascript" src="${request.static_url('web_repo:static/fluke/largfunc.js')}"></script>
+
+
+    <script>
+        $(document).ready(function(){
+            $("#borrow").click(function(){
+               cancle_edit_borrow();
+            });
+            $("#return").click(function(){
+                cancle_edit_return();
+            });
+            $("#list_category").click(function(){
+                go_main_category();
+            });
+            $("#list_subcategory").click(function(){
+                go_sub_category();
+            })
+            $("#list_devicetype").click(function(){
+                go_list_devicetype();
+            })
+            $("#list_place").click(function(){
+                go_list_place();
+            })
+            $("#list_device").click(function(){
+                go_list_device();
+            })
+        });
+    </script>
+    <!--<script>-->
+        <!--$.ajax({-->
+            <!--url: 'xxx.html',-->
+            <!--type: 'get', //หรือ post (ค่าเริ่มต้นเป็นแบบ get)-->
+            <!--data: [data],-->
+            <!--dataType: 'html', //หรือ json หรือ xml-->
+            <!--success: function(response){-->
+                <!--//callbackที่เตรียมไว้รันตอนเซิร์ฟเวอร์ตอบกลับมา-->
+            <!--}-->
+        <!--});-->
+    <!--</script>-->
+    <p id = 'url_' hidden>${request.route_url('home')}</p>
+    <p id = 'url_static' hidden>${request.static_url('web_repo:static/')}</p>
+
+</head>
+
+
+<body>
+    <div id="wrapper">
+        <nav class="navbar navbar-default navbar-cls-top " role="navigation" style="margin-bottom: 0">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".sidebar-collapse">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a class="navbar-brand" href="index.html">FIBO admin</a> 
+            </div>
+  <div style="color: white;
+padding: 15px 50px 5px 50px;
+float: right;
+font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระบบ : 30 May 2014 &nbsp; <a href="login.html" class="btn btn-danger square-btn-adjust">Logout</a> </div>
+        </nav>   
+           <!-- /. NAV TOP  -->
+                <nav class="navbar-default navbar-side" role="navigation">
+            <div class="sidebar-collapse">
+                <ul class="nav" id="main-menu">
+				<li class="text-center">
+                    <img src="assets/img/find_user.png" class="user-image img-responsive"/><!-- ใส่รูป -->
+					</li>
+				
+					
+                    <li>
+                        <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> หน้าแรก </a>
+                    </li>
+					
+					 <li>
+                        <a href="#"><i class="fa fa-sitemap fa-3x"></i> การให้บริหารนักศึกษา<span class="fa arrow"></span></a>
+                        <ul class="nav nav-second-level">
+                            <li>
+                                <a id = "borrow">การยืม</a>
+                            </li>
+                            <li>
+                                <a id="return">การคืน</a>
+                            </li>
+                            
+                        </ul>
+                      </li>  
+                  <li  >
+                      <li>
+                        <a  id="list_category"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
+                    </li>
+                    <li>
+                        <a  id="list_subcategory"><i class="fa fa-qrcode fa-3x"></i> การจัดการหมวดหมู่ย่อย</a>
+                    </li>
+						   <li  >
+                        <a  id="list_devicetype"><i class="fa fa-bar-chart-o fa-3x"></i> การจัดการประเภทอุปกรณ์</a>
+                    </li>	
+                      <li  >
+                        <a  id="list_place"><i class="fa fa-table fa-3x"></i> การจัดการสถานที่เก็บของ</a>
+                    </li>
+                    <li  >
+                        <a  id="list_device"><i class="fa fa-edit fa-3x"></i> การจัดการอุปกรณ์ </a>
+                    </li>				
+					<li  >
+                        <a   href="list_user.html"><i class="fa fa-bolt fa-3x"></i> การจัดการผู้ใช้งาน</a>
+                    </li>	
+                     	
+                </ul>
+               
+            </div>
+            
+        </nav>  
+        <!-- /. NAV SIDE  -->
+        <div id="page-wrapper" >
+            <div id="page-inner">
+                <div class="row">
+                    <div class="col-md-12">
+                     <h2>Blank Page</h2>   
+                        <h5 id="butt">Welcome Jhon Deo , Love to see you back. </h5>
+                       
+                    </div>
+                </div>
+                 <!-- /. ROW  -->
+                 <hr />
+               
+    </div>
+             <!-- /. PAGE INNER  -->
+            </div>
+         <!-- /. PAGE WRAPPER  -->
+        </div>
+     <!-- /. WRAPPER  -->
+    <!-- SCRIPTS -AT THE BOTOM TO REDUCE THE LOAD TIME-->
+      <!-- BOOTSTRAP SCRIPTS -->
+    <script src="${request.static_url('web_repo:static/fluke/assets/js/bootstrap.min.js')}"></script>
+    <script src="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/tooltip-viewport.js')}"></script>
+    <!-- METISMENU SCRIPTS -->
+    <script src="${request.static_url('web_repo:static/fluke/assets/js/jquery.metisMenu.js')}"></script>
+      <!-- CUSTOM SCRIPTS -->
+    <script src="${request.static_url('web_repo:static/fluke/assets/js/custom.js')}"></script>
+    <!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+    <script src="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js')}"></script>
+
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
+    <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
+   
+</body>
+</html>
