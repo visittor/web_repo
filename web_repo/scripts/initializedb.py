@@ -17,7 +17,7 @@ from ..models import (
     get_tm_session,
     )
 from ..models import MyModel
-from ..models.User import member, teacher
+from ..models.User import member
 from ..models.Cart import cart
 from ..models.Item import order_item, item
 from ..models.type import category_type_storage
@@ -48,11 +48,17 @@ def main(argv=sys.argv):
     with transaction.manager:
         dbsession = get_tm_session(session_factory, transaction.manager)
 
-        student_ = member(student_id = 58340500012, first_name = 'for test', last_name = 'for test last name', email = 'test@dummy.com')
-        teacher_ = teacher(first_name = 'test first teacher', last_name = 'last name', email = 'teacher@dummy.com')
+        student_ = member(student_id = 58340500012, first_name = 'for test', last_name = 'for test last name', email = 'test@dummy.com', role = 's')
+        student_.set_password('student')
+        # teacher_ = teacher(first_name = 'test first teacher', last_name = 'last name', email = 'teacher@dummy.com', role = 't')
+        teacher_2 = member(student_id = 0000, first_name ='teacher_2', last_name = 'teacher_2_l', email = 'test@dummy.com', role = 't')
+        teacher_2.set_password('teacher')
+        admin_ = member(student_id = 0000, first_name = 'admin_F', last_name = 'admin_L', email = 'test_admin@dummy.com', role = 'a')
+        admin_.set_password('admin')
 
         dbsession.add(student_)
-        dbsession.add(teacher_)
+        dbsession.add(teacher_2)
+        dbsession.add(admin_)
 
         cart_borrow = cart(admin_approve = 0, teacher_approve = 0, start_date = datetime.datetime.now(), stop_date =datetime.datetime.now() + datetime.timedelta(days=1, hours=23), )
         cart_return = cart(admin_approve = 1, teacher_approve = 0, start_date = datetime.datetime.now(), stop_date =datetime.datetime.now() + datetime.timedelta(days=1, hours=23), )
@@ -61,11 +67,11 @@ def main(argv=sys.argv):
                      storage='FRA202', value=1, subject_name='FRA111', )
 
         cart_borrow.owner = student_
-        cart_borrow.teacher = teacher_
+        cart_borrow.teacher = teacher_2
         cart_borrow.items.append(item_1)
 
         cart_return.owner = student_
-        cart_return.teacher = teacher_
+        cart_return.teacher = teacher_2
         cart_return.items.append(item_2)
 
         dbsession.add(cart_borrow)

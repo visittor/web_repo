@@ -25,7 +25,7 @@ class MyAuthenticationPolicy(AuthTktAuthenticationPolicy):
 def get_user(request):
     user_id = request.unauthenticated_userid
     if user_id is not None:
-        user = request.dbsession.query(User).get(user_id)
+        user = request.dbsession.query(member).get(user_id)
         return user
 
 def includeme(config):

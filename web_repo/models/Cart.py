@@ -16,10 +16,10 @@ class cart(Base):
 	id = Column(Integer,primary_key = True)
 
 	owner_id = Column(Integer, ForeignKey("member.id"))
-	owner = relationship("member", back_populates = "cart")
+	teacher_id = Column(Integer,ForeignKey("member.id"))
 
-	teacher_id = Column(Integer,ForeignKey("teacher.id"))
-	teacher = relationship("teacher",back_populates = "responsible_cart")
+	owner = relationship("member", foreign_keys='[cart.owner_id]')
+	teacher = relationship("member", foreign_keys='[cart.teacher_id]')
 
 	items = relationship("item",back_populates = "in_cart")
 

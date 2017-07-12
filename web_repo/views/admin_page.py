@@ -15,7 +15,7 @@ except ImportError:
 	from configParser import ConfigParser #ver. > 3
 
 
-@view_defaults(renderer='../templates/fluke/temp.pt')
+@view_defaults(renderer='../templates/fluke/temp.pt', permission = 'access')
 class admin_home(object):
 	def __init__(self, request):
 		self.request = request
@@ -25,7 +25,7 @@ class admin_home(object):
 		return {'a' : 'hello'}
 
 
-@view_defaults(renderer='json')
+@view_defaults(renderer='json', permission = 'access')
 class admin_borrow_return(object):
 
 	def __init__(self, request):
@@ -250,7 +250,7 @@ class admin_borrow_return(object):
 
 		return {"items" : items_list, "type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
 
-@view_defaults( renderer = 'json')
+@view_defaults( renderer = 'json', permission = 'access')
 class category_type_manager(object):
 
 	def __init__(self, request):
