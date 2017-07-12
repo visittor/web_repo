@@ -41,7 +41,8 @@ class item(Base):
 	@property
 	def dict_(self):
 		dic = self.__dict__
-		dic["in_cart"] = self.in_cart.data_
+		print "\n",dic,"\n"
+		dic["in_cart"] =self.in_cart.data_
 		dic["order"] = []
 		for i in self.order:
 			dic["order"].append(i.data_)

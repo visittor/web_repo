@@ -19,7 +19,7 @@ function edit_borrow_admin_button(i)
 }
 
 
-function summit_edit_borrow(i)
+function submit_edit_borrow(i)
 {
     var url = document.getElementById('url_').innerHTML+"admin_edit_borrow.json";
     $.ajax({
@@ -76,7 +76,7 @@ function edit_return_admin_button(i)
 }
 
 
-function summit_edit_return(i)
+function submit_edit_return(i)
 {
     var url = document.getElementById('url_').innerHTML+"admin_edit_return.json";
     $.ajax({
@@ -131,7 +131,7 @@ function go_main_category()
     });
 }
 
-function summit_add_category(a)
+function submit_add_category(a)
 {
     var url = document.getElementById('url_').innerHTML+"admin_insert_main_category.json";
     $.ajax({
@@ -205,8 +205,24 @@ function go_sub_category()
     });
 }
 
+function add_subcategory()
+{
+    var url = document.getElementById('url_').innerHTML+"admin_insert_sub_category.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            requestByAjax: 1
+        },
+        dataType: 'json',
+
+        success:call_add_subcategory
+    });
+}
+
 function send_new_subcategory_name(main,old,new_name)
 {
+    alert(main+","+old+","+new_name);
     var url = document.getElementById('url_').innerHTML+"admin_edit_sub_category.json";
     $.ajax({
         url: url,
@@ -222,14 +238,15 @@ function send_new_subcategory_name(main,old,new_name)
             if (respond.exception == 1){
                 alert('wrong');
             }
-            go_main_category();
+            go_sub_category();
         }
     });
 }
 
 function delete_sub_category(main,sub)
 {
-    var url = document.getElementById('url_').innerHTML+"admin_delete_sub_category.json";
+    var url = document.getElementById('url_').innerHTML+"admin_delete_sub_Category.json";
+    console.log(main + ',' + sub);
     $.ajax({
         url: url,
         type: 'post',
@@ -300,8 +317,46 @@ function go_list_place()
         },
         dataType: 'json',
 
+        success:call_list_place
+    });
+}
+
+function send_new_place_name(a,b) {
+    var url = document.getElementById('url_').innerHTML+"admin_edit_storage.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            old_name: a,
+            new_name: b
+        },
+        dataType: 'json',
+
         success:function (respond) {
-            call_list_place();
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_place();
+        }
+    });
+}
+
+function delete_list_place(del_name)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_delete_storage.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: del_name,
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_place();
         }
     });
 }
@@ -319,8 +374,24 @@ function go_list_device()
         },
         dataType: 'json',
 
-        success:function (respond) {
-            call_list_device();
-        }
+        success: call_list_device
+    });
+}
+
+function search_item(a,b,c)
+{
+    console.log(a+','+b+','+c);
+    var url = document.getElementById('url_').innerHTML+"admin_device.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            type_: a,
+            sub_category: b,
+            storage: c
+        },
+        dataType: 'json',
+
+        success: call_list_device
     });
 }

@@ -91,9 +91,9 @@ function edit_borrow_admin(respond) {
 		}
 		inner_detail = inner_detail+"</table>"
 		$("#inner_request").html(inner_detail);
-		$('#summit_edit').attr("onclick", "").click(function() {
+		$('#submit_edit').attr("onclick", "").click(function() {
 			var id_cart = respond.id;
-                  summit_edit_borrow(id_cart);
+                  submit_edit_borrow(id_cart);
 		});
 		$('#cancle_edit').attr("onclick", "").click(function() {
                   cancle_edit_borrow();
@@ -117,9 +117,9 @@ function edit_return_admin(respond) {
 		}
 		inner_detail = inner_detail+"</table>"
 		$("#inner_request").html(inner_detail);
-		$('#summit_edit').attr("onclick", "").click(function() {
+		$('#submit_edit').attr("onclick", "").click(function() {
 			var id_cart = respond.id;
-                  summit_edit_return(id_cart);
+                  submit_edit_return(id_cart);
 		});
 		$('#cancle_edit').attr("onclick", "").click(function() {
                   cancle_edit_return();
@@ -145,9 +145,9 @@ function call_main_category(respond){
 function add_category()
 {
 	$("#page-inner").load("add_category.html", function () {
-		$('#summit_add_category_button').attr("onclick", "").click(function() {
+		$('#submit_add_category_button').attr("onclick", "").click(function() {
 			var name_to_add = document.getElementById("category_to_add").value;
-                  summit_add_category(name_to_add);
+                  submit_add_category(name_to_add);
 		});
     });
 }
@@ -156,7 +156,7 @@ function edit_main_category(name)
 {
 	$("#page-inner").load("edit_category.html", function () {
 		var old_name = name;
-		$('#summit_main_category_name').attr("onclick", "").click(function() {
+		$('#submit_main_category_name').attr("onclick", "").click(function() {
 			var new_name = document.getElementById("new_name").value;
                   send_new_category_name(old_name,new_name);
 		});
@@ -166,15 +166,28 @@ function edit_main_category(name)
 function call_sub_category(respond)
 {
 	$("#page-inner").load("list_subcategory.html", function () {
-		var inner_detail = "<tr> <th>#</th/> <th>ชื่อหมวดหมู่หลัก</th> <th>ชื่อหมวดหมู่ย่อย</th> <th>การจัดการ</th> </tr> </table>";
+		console.log(respond);
+		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>ชื่อหมวดหมู่ย่อย</th> <th>การจัดการ</th> </tr>";
 		var k =1;
 		for(i in respond){
-			for(j in respond){
-				inner_detail = inner_detail + "<tr><td>"+ k +"</td><td>"+ i +"</td><td>"+ respond[i] +"</td><td> <a><button type='button' onclick=\"edit_sub_category('" + i +","+ respond[i] + "')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a><button type='button' class='btn btn-danger' onclick=\"delete_sub_category('" + i +","+ respond[i] + "')\" ><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+			for(j in respond[i]){
+				inner_detail = inner_detail + "<tr><td>"+ k +"</td><td>"+ i +"</td><td>"+ respond[i] +"</td><td> <a><button type='button' onclick=\"edit_sub_category('" + i + "'" + "," + "'" + respond[i] + "')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a><button type='button' class='btn btn-danger' onclick=\"delete_sub_category('" + i + "'" + "," + "'" + respond[i] + "')\" ><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
 				k++;
 			}
 		}
 		$("#subcategory_table").html(inner_detail);
+    });
+}
+
+function call_add_subcategory(respond)
+{
+	$("#page-inner").load("add_subcategory.html", function (){
+		console.log(respond);
+		var list_main =  "<option>โปรดเลือกหมวดหมูหลัก</option>";
+		for(i in respond){
+			list_main = list_main + "<option>"+respond[i]+"</option>";
+		}
+		$("#select_main").html(list_main);
     });
 }
 
@@ -184,12 +197,31 @@ function edit_sub_category(main,sub)
 		var main_name = main;
 		var old_name = sub;
 		$('#option_forwhat').html(main_name)
-		$('#summit_sub_category_name').attr("onclick", "").click(function() {
-			var new_name = document.getElementById("new_name").value;
-                  send_new_subcategory_name(main_name,old_name,new_name);
+		$('#new_name').on('keypress', function (e) {
+			 if(e.which == 13){
+
+				//Disable textbox to prevent multiple submit
+				$('#new_name').attr("disabled", "disabled");
+
+				//Do Stuff, submit, etc..
+				var new_name = document.getElementById("new_name").value;
+				e.preventDefault();
+				$('#new_name').removeAttr("disabled");
+				send_new_subcategory_name(main_name,old_name,new_name);
+         	}
+  		 });
+		$('#submit_subcategory_name').attr("onclick", "").click(function() {
+				var new_name = document.getElementById("new_name").value;
+				send_new_subcategory_name(main_name,old_name,new_name);
 		});
+		// $('#submit_sub_category_name').attr("onclick", "onclick_submit_sub_category_name("+main_name+","+old_name+")")
     });
 }
+
+// function onclick_submit_sub_category_name(main_name, old_name) {
+// 	new_name  = document.getElementById("new_name").value;
+// 	send_new_subcategory_name(main_name,old_name,new_name);
+// }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
@@ -212,7 +244,7 @@ function edit_devicetype(old,code,new_name)
 {
 	$("#page-inner").load("edit_devicetype.html", function () {
 	    document.getElementById("input_code").value = code;
-	    $("#summit_edit_devicetype").attr("onclick", "").click(function () {
+	    $("#submit_edit_devicetype").attr("onclick", "").click(function () {
             new_name = document.getElementById("new_devicetype").value;
             alert(old+' '+new_name+' '+code);
             send_new_devicetype_name(old,new_name,code);
@@ -222,18 +254,61 @@ function edit_devicetype(old,code,new_name)
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function call_list_place()
+function call_list_place(respond)
 {
+	console.log(respond)
 	$("#page-inner").load("list_place.html", function () {
+		var inner_detail = "<tr> <th>#</th> <th>ชื่อสถานที่เก็บอุปกรณ์</th> <th>การจัดการ</th> </tr>"
+		for(i in respond){
+			inner_detail = inner_detail + "<tr> <td>" + (parseInt(i)+1) + "</td> <td>" + respond[i] + "</td> <td> <a><button type='button' class='btn btn-warning' onclick=\"call_edit_place("+ "'" + respond[i] + "'" +")\"><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' class='btn btn-danger' onclick=\"delete_list_place(" + "'" + respond[i] + "'" + ")\"><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>"
+		}
+		$("#table_list_place").html(inner_detail);
+    });
+}
 
+function call_edit_place(old_name)
+{
+	$("#page-inner").load("edit_place.html", function () {
+		$("#submit_new_place").attr("onclick", "").click(function () {
+			var new_name = document.getElementById("new_name").value;
+			send_new_place_name(old_name,new_name)
+		})
     });
 }
 
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
-function call_list_device()
+function call_list_device(respond)
 {
+	console.log(respond)
 	$("#page-inner").load("list_device.html", function () {
-
+		inner_type = "<option value = ''>ประเภทอุปกรณ์</option>";
+		inner_category = "<option value = ''>หมวดหมู่ย่อย</option>";
+		inner_place = "<option value = ''>สถานที่เก็บ</option>";
+		x = 0;
+		for(i in respond.type_list){
+			inner_type = inner_type + "<option value = '" + i + "'>" + i + "</option>"
+		}
+		for(j in respond.sub_category){
+			inner_category = inner_category + "<option value = '" + j + "'>" + j + "</option>"
+		}
+		for(k in respond.storage){
+			inner_place = inner_place + "<option value = '" + respond.storage[k] + "'>" + respond.storage[k] + "</option>"
+			x++
+		}
+		$("#select_type").html(inner_type);
+		$("#select_category").html(inner_category);
+		$("#select_place").html(inner_place);
+		inner_detail = document.getElementById("big_table").innerHTML;
+		for(l in respond.items){
+			inner_detail = inner_detail + "<tr> <td>"+ (parseInt(l)+1) +"</td> <td> " + respond.items[l].code_name + " </td> <td>" + respond.items[l].name + "</td> <td>" + respond.items[l].type_ + "</td> <td>" + respond.items[l].sub_category + "</td> <td>" + respond.items[l].storage + "</td> <td> <a><button type='button' class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>"
+		}
+		$("#big_table").html(inner_detail);
+		$("#search_button").attr("onclick","").click(function () {
+			type = document.getElementById("select_type").value;
+			sub_cat = document.getElementById("select_category").value;
+			storage = document.getElementById("select_place").value;
+			search_item(type,sub_cat,storage);
+        })
     });
 }

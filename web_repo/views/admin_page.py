@@ -72,13 +72,11 @@ class admin_borrow_return(object):
 		except Exception as e:
 			return 1
 
-	def search_item(self, **kwargh):
-		q = self.request.dbsession.query(item)
-		for key,value in kwargh.items():
-			if type(value) == str and value != '':
-				q.filter(getattr(item, key) == value)
-			elif type(value) == int and value != -1:
-				q.filter(getattr(item, key) == value)
+	def search_item(self, kwargh):
+		for i,j in kwargh.items():
+			if j == '':
+				kwargh.pop(i)
+		q = self.request.dbsession.query(item).filter_by(**kwargh)
 		return q.all()
 
 	@view_config(route_name='test_admin_borrow_json')
@@ -230,9 +228,9 @@ class admin_borrow_return(object):
 	@view_config(route_name = 'admin_device_json', request_method = 'GET')
 	def admin_device_list(self):
 		json = self.request.GET
-		type_ = json["type_"]
-		sub_category = json["sub_category"]
-		storage = json["storage"]
+		type_json = json.get("type_", ''.decode('utf8'))
+		sub_category_json = json.get("sub_category", ''.decode('utf8'))
+		storage_json = json.get("storage", ''.decode('utf8'))
 
 		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
 		sub_category = eval(category_obj.list_)
@@ -243,12 +241,12 @@ class admin_borrow_return(object):
 		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
 		storage_list = eval(storage_obj.list_)
 
-		items = self.search_item(**{'type_' : type_, 'sub_category' : sub_category, 'storage' : storage})
+		items = self.search_item({'type_' : type_json, 'sub_category' : sub_category_json, 'storage' : storage_json})
 		items_list = []
 		for i in items:
 			dict_ = i.dict_
 			dict_["code_name"] = str(type_list.get(i.type_, 'NULL'))+str(i.id)
-			items_list.append(i.dict_)
+			items_list.append(dict_)
 
 		return {"items" : items_list, "type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
 
@@ -274,11 +272,6 @@ class category_type_manager(object):
 	def change_mainCat_name(self, old_name, new_name):
 		category_list = self.category_list
 		try:
-			if type(old_name) == unicode:
-				old_name = old_name.encode('utf8')
-			print '\n*****************************\n',category_list,'\n******************************\n'
-			print '\n*****************************\n',[hex(ord(c)) for c in old_name], new_name,'\n******************************\n'
-			print '\n*****************************\n',category_list.keys()[1],'\n******************************\n'
 			if category_list.has_key(old_name):
 				category_list[new_name] = category_list.pop(old_name)
 				self.__save_config_file('category', 'main_category', category_list)
@@ -321,11 +314,13 @@ class category_type_manager(object):
 				category_list[main_category].remove(old_name)
 				category_list[main_category].append(new_name)
 				self.__save_config_file('category', 'main_category', category_list)
+				print "\n", "return 0", "\n"
 				return 0
 			else:
+				print "\n", "not has key or not have old name","\n"
 				return 1
 		except Exception as e:
-			print e
+			print "\n",e,"\n"
 			return 1
 
 	def delete_subCat(self, main_category, sub_category):
@@ -363,14 +358,14 @@ class category_type_manager(object):
 			if type_.has_key(old_name):
 				type_.pop(old_name)
 				type_[new_name] = code
-				self.__save_config_file('category', 'type_list', category_list)
+				self.__save_config_file('category', 'type_list', type_)
 				return 0
 			else:
 				type_[new_name] = code
-				self.__save_config_file('category', 'type_list', category_list)
+				self.__save_config_file('category', 'type_list', type_)
 				return 0
 		except Exception as e:
-			print e 
+			print "\n",e,"\n"
 			return 1
 
 	def delete_type(self, name):
@@ -378,7 +373,7 @@ class category_type_manager(object):
 		try:
 			if type_.has_key(name):
 				type_[name].pop()
-				self.__save_config_file('category', 'type_list', category_list)
+				self.__save_config_file('category', 'type_list', type_)
 				return 0
 			else:
 				return 1
@@ -393,7 +388,7 @@ class category_type_manager(object):
 				return 1
 			else:
 				type_[name] = code
-				self.__save_config_file('category', 'type_list', category_list)
+				self.__save_config_file('category', 'type_list', type_)
 				return 0
 		except Exception as e:
 			print e 
@@ -408,27 +403,28 @@ class category_type_manager(object):
 	def delete_storage(self, name):
 		storage = self.storage
 		try:
-			if storage.has_key(name):
-				storage.pop(name)
-				self.__save_config_file('category', 'storage_list', category_list)
+			if name in storage:
+				storage.remove(name)
+				self.__save_config_file('category', 'storage_list', storage)
 				return 0
 			else:
+				print "\n", "delete storage dont have key", "\n"
 				return 1
 		except Exception as e:
-			print e 
+			print "\n",e,"\n"
 			return 1
 
 	def insert_storage(self, name):
 		storage = self.storage
 		try:
-			if storage.has_key(name):
+			if name in storage:
 				return 0
 			else:
 				storage.append(name)
-				self.__save_config_file('category', 'storage_list', category_list)
+				self.__save_config_file('category', 'storage_list', storage)
 				return 0
 		except Exception as e:
-			print e 
+			print "\n", e, "\n"
 			return 1
 
 
@@ -478,20 +474,20 @@ class category_type_manager(object):
 	@view_config(route_name = 'admin_edit_main_category_json', request_method = 'POST')
 	def submit_edit_main_category(self):
 		json = self.request.POST
-		old_name = json["old_name"]
-		new_name = json["new_name"]
+		old_name = json["old_name"].encode('utf8')
+		new_name = json["new_name"].encode('utf8')
 		return {"exception" : self.change_mainCat_name(old_name, new_name)}
 
 	@view_config(route_name = 'admin_delete_main_category_json', request_method = 'POST')
 	def submit_delete_main_category(self):
 		json = self.request.POST
-		name = json["name"]
+		name = json["name"].encode('utf8')
 		return {"exception" : self.delete_mainCat(name)}
 
 	@view_config(route_name = 'admin_insert_main_category_json', request_method = 'POST')
 	def submit_insert_main_category(self):
 		json = self.request.POST
-		name = json["name"]
+		name = json["name"].encode('utf8')
 		return {"exception" : self.insert_mainCat(name)}
 
 	@view_config(route_name = 'admin_sub_category_json')
@@ -502,16 +498,17 @@ class category_type_manager(object):
 	@view_config(route_name = 'admin_edit_sub_category_json', request_method = 'POST')
 	def submit_edit_sub_category(self):
 		json = self.request.POST
-		main_category = json["main_category"]
-		old_name = json["old_name"]
-		new_name = json["new_name"]
+		print "\n", "am here", "\n"
+		main_category = json["main_category"].encode('utf8')
+		old_name = json["old_name"].encode('utf8')
+		new_name = json["new_name"].encode('utf8')
 		return {'exception' : self.change_subCat(main_category, old_name, new_name)}
 
 	@view_config(route_name = 'admin_delete_sub_Category_json', request_method = 'POST')
 	def submit_delete_sub_category(self):
 		json = self.request.POST
-		main_category = json["main_category"]
-		sub_category = json["sub_category"]
+		main_category = json["main_category"].encode('utf8')
+		sub_category = json["sub_category"].encode('utf8')
 		return {'exception' : self.delete_subCat(main_category, sub_category)}
 
 	@view_config(route_name = 'admin_insert_sub_category_json', request_method = 'GET')
@@ -521,8 +518,8 @@ class category_type_manager(object):
 	@view_config(route_name = 'admin_insert_sub_category_json', request_method = 'POST')
 	def submit_insert_sub_category_post(self):
 		json = self.request.POST
-		main_category = json['main_category']
-		sub_category = json['sub_category']
+		main_category = json['main_category'].encode('utf8')
+		sub_category = json['sub_category'].encode('utf8')
 		return {'exception' : self.insert_subCat(main_category, sub_category)}
 
 	@view_config(route_name = 'admin_type_json', request_method = 'GET')
@@ -532,22 +529,22 @@ class category_type_manager(object):
 	@view_config(route_name = 'admin_edit_type_json', request_method = 'POST')
 	def submit_edit_type(self):
 		json = self.request.POST
-		old_name = json['old_name']
-		new_name = json['new_name']
-		code = json ['code']
+		old_name = json['old_name'].encode('utf8')
+		new_name = json['new_name'].encode('utf8')
+		code = json ['code'].encode('utf8')
 		return {'exception' : self.change_type(old_name, new_name, code)}
 
 	@view_config(route_name = 'admin_delete_type_json', request_method = 'POST')
 	def submit_delete_type(self):
 		json = self.request.POST
-		name = json['name']
+		name = json['name'].encode('utf8')
 		return { 'exception' : self.delete_type(name)}
 
 	@view_config(route_name = 'admin_insert_type_json', request_method = 'POST')
 	def submit_insert_type(self):
 		json = self.request.POST
-		name = json['name']
-		code = json['code']
+		name = json['name'].encode('utf8')
+		code = json['code'].encode('utf8')
 		return self.insert_type(name, code)
 
 	@view_config(route_name = 'admin_storage_json', request_method = 'GET')
@@ -557,20 +554,20 @@ class category_type_manager(object):
 	@view_config(route_name = 'admin_edit_storage_json', request_method = 'POST')
 	def submit_edit_storage(self):
 		json = self.request.POST
-		old_name = json['old_name']
-		new_name = json['new_name']
+		old_name = json['old_name'].encode('utf8')
+		new_name = json['new_name'].encode('utf8')
 		return {'exception' : self.change_storage(old_name, new_name)}
 
 	@view_config(route_name = 'admin_delete_storage_json', request_method = 'POST')
 	def submit_delete_storage(self):
 		json = self.request.POST
-		name = json['name']
+		name = json['name'].encode('utf8')
 		return {'exception' : self.delete_storage(name)}
 
 	@view_config(route_name = 'admin_insert_storage_json', request_method = 'POST')
 	def submit_insert_storage(self):
 		json = self.request.POST
-		name = json['name']
+		name = json['name'].encode('utf8')
 		return {'exception' : self.insert_storage(name)}
 
 
