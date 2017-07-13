@@ -276,6 +276,19 @@ class admin_borrow_return(object):
 		device_id = json["id"]
 		return {'exception' : self.delete_item(device_id)}
 
+	@view_config(route_name = 'admin_add_device_json', request_method = 'GET')
+	def admin_device_list(self):
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+		sub_category = eval(category_obj.list_)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'type_list').one()
+		type_list = eval(type_obj.list_)
+
+		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
+		storage_list = eval(storage_obj.list_)
+
+		return {"type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
+
 	@view_config(route_name = 'admin_add_device_json', request_method = 'POST')
 	def admin_add_device(self):
 		json = self.request.POST
@@ -313,7 +326,7 @@ class admin_borrow_return(object):
 		else:
 			print "\nno type in database\n"
 			return {"exception" : 1}
-		
+	
 
 	
 
