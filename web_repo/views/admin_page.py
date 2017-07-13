@@ -70,6 +70,7 @@ class admin_borrow_return(object):
 			cart_.admin_approve = -1
 			return 0
 		except Exception as e:
+			print "\n",e,"\n"
 			return 1
 
 	def search_item(self, kwargh):
@@ -87,7 +88,15 @@ class admin_borrow_return(object):
 			self.request.dbsession.delete(item_)
 			return 0
 		except Exception as e:
+			print "\n",e,"\n"
 			return 1
+
+	def create_item(self, **kwargh):
+		try:
+			item_ = item(kwargh)
+			self.request.dbsession.add(item_)
+		except Exception as e:
+			print "\n", e,"\n"
 
 	@view_config(route_name='test_admin_borrow_json')
 	def test_admin_borrow(self):
@@ -274,7 +283,37 @@ class admin_borrow_return(object):
 		main_category = json["main_category"]
 		sub_category = json["sub_category"]
 		type_ = json["type_"]
+		storage = json["storage"]
 		note = json["note"]
+
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+		sub_category_list = eval(category_obj.list_)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'type_list').one()
+		type_list = eval(type_obj.list_)
+
+		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
+		storage_list = eval(storage_obj.list_)
+
+		if type_list.has_key(type_):
+			if sub_category_list.has_key(main_category):
+				if sub_category in sub_category_list[main_category]
+					if storage in storage_list:
+						kwargh = {"main_category" : main_category, "sub_category" : sub_category, "type_" : type_, "storage" : storage, "note" : note}
+						return {"exception" : self.create_item(**kwargh)}
+					else:
+						print "\nno storage in database\n"
+						return {"exception" : 1}
+				else:
+					print "\nno sub_category in database\n"
+					return {"exception" : 1}
+			else:
+				print "\nno main_Category in database\n"
+				return {"exception" : 1}
+		else:
+			print "\nno type in database\n"
+			return {"exception" : 1}
+		
 
 	
 
