@@ -75,7 +75,7 @@ class admin_borrow_return(object):
 
 	def search_item(self, kwargh):
 		for i,j in kwargh.items():
-			if type(j) == str and j == '':
+			if type(j) == unicode and j == '':
 				kwargh.pop(i)
 			elif type(j) == int and j == -1:
 				kwargh.pop(i)
@@ -297,7 +297,7 @@ class admin_borrow_return(object):
 
 		if type_list.has_key(type_):
 			if sub_category_list.has_key(main_category):
-				if sub_category in sub_category_list[main_category]
+				if sub_category in sub_category_list[main_category]:
 					if storage in storage_list:
 						kwargh = {"main_category" : main_category, "sub_category" : sub_category, "type_" : type_, "storage" : storage, "note" : note}
 						return {"exception" : self.create_item(**kwargh)}

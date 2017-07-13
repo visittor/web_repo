@@ -190,33 +190,6 @@
                         </script>
                     </div>
                 </div>
-                <div class="col-md-3 ">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal">เพิ่มรายการ</button>
-                </div>
-                <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h3 class="modal-title" id="exampleModalLabel"></h3>
-                            </div>
-                            <div class="modal-body">
-                                <center>
-                                <form>
-                                    <div class="row">
-                                        <div class="col-md-6 col-md-offset-3">
-                                            <input class="form-control" placeholder="เพิ่มรายวิชา ชื่อกิจกรรม ชื่อการแข่งขัน">
-                                            <br><button class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> บันทึก</button>
-                                            <button class="btn btn-danger">ยกเลิก</button>
-                                    </div>
-                                    </div>
-
-                                </form>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
-                </div>
             </div>
             <div class="form-group">
                 <label class="col-md-2 control-label">เลือกประเภท</label>
@@ -229,34 +202,22 @@
                         </select>
                     </div>
                 </div>
-                <div class="col-md-3">
-                    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#Modal2" >เพิ่มประเภท</button>
-                </div>
-                <div class="modal fade bs-example-modal-sm" id="Modal2" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
-                    <div class="modal-dialog modal-lg" role="document">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
-                                <h3 class="modal-title" id="exampleModalLabe2"></h3>
-                            </div>
-                            <div class="modal-body">
-                                <center>
-                                    <form>
-                                        <div class="row">
-                                            <div class="col-md-6 col-md-offset-3">
-                                                <input class="form-control" placeholder="ประเภทที่จะเพิ่ม">
-                                                <br><button class="btn btn-success"><span class="glyphicon glyphicon-floppy-disk"></span> บันทึก</button>
-                                                <button class="btn btn-danger">ยกเลิก</button>
-                                            </div>
-                                        </div>
-                                    </form>
-                                </center>
-                            </div>
-                        </div>
-                    </div>
 
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-2 control-label">เลือกที่เก็บ</label>
+                <div class="col-md-5 ">
+                    <div class="input-group">
+                        <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
+                        <select class="form-control">
+                            <option>Arduino</option>
+                            <option>Raspberry Pi</option>
+                        </select>
+                    </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="col-md-2 control-label">หมายเหตุ</label>
                 <div class="col-md-5 ">
@@ -266,6 +227,7 @@
                     </div>
                 </div>
             </div>
+
             <div class="form-group">
                 <label class="col-md-2 control-label">อัพโหลดรูป</label>
                 <div class="col-md-7 ">
@@ -275,11 +237,6 @@
                 </div>
             </div>
 
-            <!-- Success message -->
-            <div class="alert alert-success" role="alert" id="success_message">Success <i
-                    class="glyphicon glyphicon-thumbs-up"></i> Thanks for contacting us, we will get back to you shortly.
-            </div>
-
             <!-- Button -->
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
@@ -287,6 +244,7 @@
                     <button type="submit" class="btn btn-success btn-lg"><span
                             class="glyphicon glyphicon-floppy-disk"></span> บันทึก</button>
                     <button type="submit" class="btn btn-danger btn-lg">ยกเลิก</button>
+            </div>
             </div>
 
         </fieldset>
