@@ -74,10 +74,20 @@ class admin_borrow_return(object):
 
 	def search_item(self, kwargh):
 		for i,j in kwargh.items():
-			if j == '':
+			if type(j) == str and j == '':
+				kwargh.pop(i)
+			elif type(j) == int and j == -1:
 				kwargh.pop(i)
 		q = self.request.dbsession.query(item).filter_by(**kwargh)
 		return q.all()
+
+	def delete_item(self, item_id):
+		try:
+			item_ = self.request.dbsession.query(item).filter_by(id = item_id).one()
+			self.request.dbsession.delete(item_)
+			return 0
+		except Exception as e:
+			return 1
 
 	@view_config(route_name='test_admin_borrow_json')
 	def test_admin_borrow(self):
@@ -221,6 +231,7 @@ class admin_borrow_return(object):
 			cart_.admin2student = to_student
 			cart_.admin2teacher = to_advisor
 			cart_.student_note =  note
+			cart_.admin_approve = 2
 			return {'exception' : 0}
 		except Exception as e:
 			return {'exception' : 1}
@@ -249,6 +260,23 @@ class admin_borrow_return(object):
 			items_list.append(dict_)
 
 		return {"items" : items_list, "type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
+
+	@view_config(route_name = 'admin_delete_device_json', request_method = 'POST')
+	def admin_delete_device(self):
+		json = self.request.POST
+		device_id = json["id"]
+		return {'exception' : self.delete_item(device_id)}
+
+	@view_config(route_name = 'admin_add_device_json', request_method = 'POST')
+	def admin_add_device(self):
+		json = self.request.POST
+		name = json["name"]
+		main_category = json["main_category"]
+		sub_category = json["sub_category"]
+		type_ = json["type_"]
+		note = json["note"]
+
+	
 
 @view_defaults( renderer = 'json', permission = 'access')
 class category_type_manager(object):
