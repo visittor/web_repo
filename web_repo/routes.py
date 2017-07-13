@@ -44,6 +44,7 @@ def includeme(config):
 
     config.add_route('admin_device_json', '/admin_device.json', factory = admin_page_factory)
     config.add_route('admin_delete_device_json', '/admin_delete_device.json', factory = admin_page_factory)
+    config.add_route('admin_add_device_json', '/admin_add_device.json', factory = admin_page_factory)
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
