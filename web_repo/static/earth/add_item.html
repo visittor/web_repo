@@ -21,7 +21,6 @@
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
     <![endif]-->
-
 <div class="container">
 
     <form class="well form-horizontal" action=" " method="post" name="add_project_form" id="add_project_form" >
@@ -36,7 +35,7 @@
                 <div class="col-md-5 ">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
-                        <input name="P_N" class="form-control" type="text">
+                        <input id="new_item_name" class="form-control" type="text">
                     </div>
                 </div>
             </div>
@@ -45,7 +44,7 @@
                 <div class="col-md-5 ">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <input name="Year" class="form-control" type="text">
+                        <input value="1" class="form-control" type="text" disabled>
                     </div>
                 </div>
 
@@ -58,12 +57,7 @@
                 <div class="col-md-5 ">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                        <select class="form-control" name="category" id="category">
-                            <option value="">เลือกหมวดหมู่หลัก</option>
-                            <option value="Class Project">Class Project</option>
-                            <option value="Camp">ค่าย</option>
-                            <option value="Competition">การแข่งขัน</option>
-                            <option value="Normal Activity">กิจกรรมทั่วไป</option>
+                        <select class="form-control" id="list_category_edit">
                         </select>
                     </div>
                 </div>
@@ -72,15 +66,7 @@
             <div class="form-group">
                 <label class="col-md-2 control-label"></label>
                 <div class="col-md-5 ">
-                    <div class="input-group">
-                        <span class="input-group-addon"><i class="glyphicon glyphicon-pencil"></i></span>
-                         <select class="form-control" name="category" id="category">
-                            <option value="">เลือกหมวดหมู่หลัก</option>
-                            <option value="Class Project">Class Project</option>
-                            <option value="Camp">ค่าย</option>
-                            <option value="Competition">การแข่งขัน</option>
-                            <option value="Normal Activity">กิจกรรมทั่วไป</option>
-                        </select>
+                    <div id="div_sub_category" class="input-group">
                     </div>
                 </div>
             </div>
@@ -89,9 +75,7 @@
                 <div class="col-md-5 ">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-                        <select class="form-control">
-                            <option>Arduino</option>
-                            <option>Raspberry Pi</option>
+                        <select id="type_list" class="form-control">
                         </select>
                     </div>
                 </div>
@@ -103,9 +87,7 @@
                 <div class="col-md-5 ">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-info-sign"></i></span>
-                        <select class="form-control">
-                            <option>Arduino</option>
-                            <option>Raspberry Pi</option>
+                        <select id="storage_list" class="form-control">
                         </select>
                     </div>
                 </div>
@@ -116,7 +98,7 @@
                 <div class="col-md-5 ">
                     <div class="input-group">
                         <span class="input-group-addon"><i class="glyphicon glyphicon-question-sign"></i></span>
-                        <textarea class="form-control" name="Calibration"rows="3"></textarea>
+                        <textarea id="note" class="form-control" name="Calibration"rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -134,9 +116,9 @@
             <div class="form-group">
                 <label class="col-md-4 control-label"></label>
                 <div class="col-md-4">
-                    <button type="submit" class="btn btn-success btn-lg"><span
+                    <button onclick="submit_add_item()" type="button" class="btn btn-success btn-lg"><span
                             class="glyphicon glyphicon-floppy-disk"></span> บันทึก</button>
-                    <button type="submit" class="btn btn-danger btn-lg">ยกเลิก</button>
+                    <button onclick="go_list_device()" type="button" class="btn btn-danger btn-lg">ยกเลิก</button>
             </div>
             </div>
 

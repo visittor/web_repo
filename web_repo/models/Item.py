@@ -42,7 +42,7 @@ class item(Base):
 	def dict_(self):
 		dic = self.__dict__
 		print "\n",dic,"\n"
-		dic["in_cart"] =self.in_cart.data_
+		dic["in_cart"] =self.in_cart.data_ if self.in_cart is not None else {}
 		dic["order"] = []
 		for i in self.order:
 			dic["order"].append(i.data_)

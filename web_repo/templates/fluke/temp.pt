@@ -1,9 +1,10 @@
 ﻿<!DOCTYPE html>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
-    <!--Access-Control-Allow-Origin: *-->
+    <!--?Access-Control-Allow-Origin: *-->
     <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.5" />
+
     <title>ระบบบริหารจัดการวัสดุอุปกรณ์ - สถาบันวิทยาการหุ่นยนต์ภาคสนาม มจธ.</title>
 	<!-- BOOTSTRAP STYLES-->
     <link href="${request.static_url('web_repo:static/fluke/assets/css/bootstrap.css')}" rel="stylesheet" />
@@ -161,6 +162,6 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
 
     <script src="http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js"></script>
     <script src="http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js"></script>
-   
+
 </body>
 </html>
