@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>จองห้อง</title>
+    <link rel="icon" href="images/FIBO.jpg">
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css'>
+    <link rel='stylesheet prefetch' href='http://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css'>
+    <link rel='stylesheet prefetch' href='http://cdnjs.cloudflare.com/ajax/libs/jquery.bootstrapvalidator/0.5.0/css/bootstrapValidator.min.css'>
+
+
+    <!-- library of header-->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <!-- Bootstrap Core CSS -->
+    <link href="bootstrap-3.3.7-dist/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Custom Fonts -->
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800'
+          rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic'
+          rel='stylesheet' type='text/css'>
+    <!-- Custom styles for this template -->
+    <link href="bootstrap-3.3.7-dist/navbar-fixed-top.css" rel="stylesheet">
+    <link href="bootstrap-3.3.7-dist/tooltip-viewport.css" rel="stylesheet">
+    <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+    <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+
+    <![endif]-->
+    <style type="text/css">
+        h2 {
+            font-size: 150%
+        }
+    </style>
+    <!-- <style type="text/css">
+         body { background-color:#ff9900;  }
+     </style>
+     -->
+    <script language="javascript" type="text/javascript">
+        <!--
+        function listboxchange1(p_index) {
+
+            //Clear Current options in subcategory1
+            document.add_project_form.subcategory1.options.length = 0;
+
+
+            switch (p_index) {
+
+                case "Class Project":
+                    document.add_project_form.subcategory1.options[0] = new Option("เลือกรายวิชา", "");
+
+                    document.add_project_form.subcategory1.options[1] = new Option("FRA241", "FRA241");
+
+                    document.add_project_form.subcategory1.options[2] = new Option("FRA221", "FRA241");
+
+                    break;
+
+                case "Camp":
+                    document.add_project_form.subcategory1.options[0] = new Option("เลือกชื่อค่าย", "");
+
+                    document.add_project_form.subcategory1.options[1] = new Option("FIBO Robocamp#6", "FIBO Robocamp#6");
+
+                    document.add_project_form.subcategory1.options[2] = new Option("FIBOLian4", "FIBOLian4");
+
+                    break;
+
+                case "Competition":
+                    document.add_project_form.subcategory1.options[0] = new Option("เลือกชื่อการแข่งขัน", "");
+
+                    document.add_project_form.subcategory1.options[1] = new Option("ABU2017", "ABU2017");
+
+                    document.add_project_form.subcategory1.options[2] = new Option("ABU2016", "ABU2016");
+
+                    break;
+
+                case "Normal Activity":
+                    document.add_project_form.subcategory1.options[0] = new Option("เลือกกิจกรรมทั่วไป", "");
+
+                    document.add_project_form.subcategory1.options[1] = new Option("FIBOอาสา", "FIBOอาสา");
+
+                    document.add_project_form.subcategory1.options[2] = new Option("Open house 2016", "Open house 2016");
+
+                    break;
+
+            }
+            return true;
+        }
+        //-->
+    </script>
+    <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
+
+    <!--Font Awesome (added because you use icons in your prepend/append)-->
+    <link rel="stylesheet" href="https://formden.com/static/cdn/font-awesome/4.4.0/css/font-awesome.min.css" />
+
+    <!-- Inline CSS based on choices in "Settings" tab -->
+    <style>.bootstrap-iso .formden_header h2, .bootstrap-iso .formden_header p, .bootstrap-iso form{font-family: Arial, Helvetica, sans-serif; color: black}.bootstrap-iso form button, .bootstrap-iso form button:hover{color: white !important;} .asteriskField{color: red;}</style>
+
+
+</head>
+<!--Header-->
+<body id="page-top" >
+
+<nav id="mainNav" class=" navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1">
+                <span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right">
+                <li><a class="glyphicon glyphicon-plus" href="Additem.html" data-toggle="tooltip" data-placement="bottom" title="เพิ่มอุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-shopping-cart tooltip-bottom" href="rentItem.html" data-toggle="tooltip" data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-calendar tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ระบบจองห้อง"> </a></li>
+                <li><a class="glyphicon glyphicon-tag tooltip-bottom" href="statusofrent.html" data-toggle="tooltip" data-placement="bottom" title="สถานะการยืม คืน"> </a></li>
+                <li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>
+                <li><a class="glyphicon glyphicon-user tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                <li><a class="page-scroll" href=""><b>LOG OUT</b></a></li>
+            </ul>
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+<!--Header-->
+
+
+<div class="container">
+
+    <br>
+    <form class="well form-horizontal" action=" " method="post" name="room" id="room" onsubmit="return ValidateForm(); true">
+        <fieldset>
+
+            <ol class="breadcrumb">
+                <h2>
+                    <center>จองห้อง</center>
+                </h2>
+            </ol>
+
+
+
+
+
+            <div class="form-group">
+
+        <div class="col-md-2 ">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
+                <select class="form-control" name="Room" id="Room" onchange="javascript: listboxchange1(this.options[this.selectedIndex].value);">
+                    <option value="">เลือกห้อง</option>
+                    <option value="Room301">FB301</option>
+                    <option value="Room305">FB305</option>
+                    <option value="Room306">FB306</option>
+                    <option value="Room401">FB401</option>
+                    <option value="Room402">FB402</option>
+                    <option value="Room403">FB403</option>
+                </select>
+            </div>
+        </div>
+    </div>
+
+    <div class="col-md-2 ">
+
+    </div>
+
+
+    <div class="col-md-10 ">
+        <div class="btn-group" role="group" aria-label="...">
+
+            <button type="button" class="btn btn-default">08.30-09.30</button>
+            <button type="button" class="btn btn-default">09.30-10.30</button>
+            <button type="button" class="btn btn-default">10.30-11.30</button>
+            <button type="button" class="btn btn-default">11.30-12.30</button>
+            <button type="button" class="btn btn-default">12.30-13.30</button>
+            <button type="button" class="btn btn-default">13.30-14.30</button>
+            <button type="button" class="btn btn-default">14.30-15.30</button>
+            <button type="button" class="btn btn-default">15.30-16.30</button>
+            <button type="button" class="btn btn-default">16.30-17.30</button>
+
+
+        </div>
+    </div>
+
+
+
+
+    <div class="row">
+
+        <div class="col-md-4">
+            <br>
+            <br>
+
+        </div>
+        <div class="col-md-2">
+            <br>
+            <br>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">จองห้องใช้งาน</button>
+
+            </div>
+        </div>
+        <div class="col-md-6">
+            <br>
+            <br>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">จองห้องสอบวิทยานิพนท์</button>
+
+            </div>
+        </div>
+    </div>
+
+    <br>
+    <br>
+
+
+    <!--start calendar-->
+
+
+    <div class="row">
+        <div class="col-md-2 >
+            <form method="post">
+
+                <div class="form-group ">
+
+                    <label class="control-label " for="date">
+                        วันที่สอบ
+                    </label>
+                    <div class="input-group">
+                        <div class="input-group-addon">
+                            <i class="fa fa-calendar">
+                            </i>
+                        </div>
+                        <input class="form-control" id="date" name="date" placeholder="MM/DD/YYYY" type="text"/>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div>
+                        <button class="btn btn-primary " name="submit" type="submit">
+                            ยืนยัน
+                        </button>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+
+    <div class="form-group">
+        <br>
+
+        <div class="col-sm-1 ">
+
+        </div>
+
+        <div class="col-md-3 ">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-list-alt"></i></span>
+                <select class="form-control" name="Test" id="Test" onchange="javascript: listboxchange1(this.options[this.selectedIndex].value);">
+                    <option value="">ประเภทการสอบ</option>
+                    <option value="Test1">สอบรายงาน</option>
+                    <option value="Test2">สอบรายงานความก้าวหน้า</option>
+                    <option value="Test3">สอบเสนอโครงร่าง</option>
+                    <option value="Test4">สอบเสนอหัวข้อ</option>
+                    <option value="Test5">สอบจบ</option>
+
+                </select>
+            </div>
+        </div>
+
+
+        <div class="col-md-3 ">
+            <div class="input-group">
+                <span class="input-group-addon"><i class="glyphicon glyphicon-file"></i></span>
+                <input type="text" class="form-control" placeholder="ชื่อวิทยานิพนท์">
+            </div>
+        </div>
+
+    </div>
+
+    </div>
+
+
+
+
+<div class="row">
+    <div class="col-md-3 ">
+
+    </div>
+
+    <div class="col-md-3 ">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <select class="form-control" name="Teacher" id="Teacher" onchange="javascript: listboxchange1(this.options[this.selectedIndex].value);">
+                <option value="">อาจารย์ที่ปรึกษา(หลัก)</option>
+                <option value="Teacher1">รศ.ดร.สยาม เจริญเสียง</option>
+                <option value="Teacher2">ดร.อาบทิพย์ ธีรวงศ์กิจ</option>
+                <option value="Teacher3">ดร.สุภชัย วงศ์บุณย์ยง</option>
+                <option value="Teacher4">ดร.ปิติวุฒญ์ ธีรกิตติกุล</option>
+                <option value="Teacher5">ดร.สุริยา นัฎสุภัตพงศ์</option>
+                <option value="Teacher6">ดร.ปราการเกียรติ ยังคง</option>
+                <option value="Teacher7">ดร.อรพคี จูฉิม</option>
+                <option value="Teacher8">ผศ.ดร.ถวิดา มณีวรรณ์</option>
+                <option value="Teacher9">ผศ.ดร.เอกชัย เป็งวัง</option>
+                <option value="Teacher10">ดรใวราสิณี ฉายแสงมงคล</option>
+                <option value="Teacher11">นายบวรศักดิ์ สกุลเกื้อกูลสุข</option>
+                <option value="Teacher12">นายธนัชชา ชูพจน์เจริญ</option>
+
+
+            </select>
+        </div>
+    </div>
+    <div class="col-md-3 ">
+        <div class="input-group">
+            <span class="input-group-addon"><i class="glyphicon glyphicon-user"></i></span>
+            <select class="form-control" name="Teachersec" id="Teachersec" onchange="javascript: listboxchange1(this.options[this.selectedIndex].value);">
+                <option value="">อาจารย์ที่ปรึกษา(รอง)</option>
+                <option value="Teachersec1">รศ.ดร.สยาม เจริญเสียง</option>
+                <option value="Teachersec2">ดร.อาบทิพย์ ธีรวงศ์กิจ</option>
+                <option value="Teachersec3">ดร.สุภชัย วงศ์บุณย์ยง</option>
+                <option value="Teachersec4">ดร.ปิติวุฒญ์ ธีรกิตติกุล</option>
+                <option value="Teachersec5">ดร.สุริยา นัฎสุภัตพงศ์</option>
+                <option value="Teachersec6">ดร.ปราการเกียรติ ยังคง</option>
+                <option value="Teachersec7">ดร.อรพคี จูฉิม</option>
+                <option value="Teachersec8">ผศ.ดร.ถวิดา มณีวรรณ์</option>
+                <option value="Teachersec9">ผศ.ดร.เอกชัย เป็งวัง</option>
+                <option value="Teachersec10">ดรใวราสิณี ฉายแสงมงคล</option>
+                <option value="Teachersec11">นายบวรศักดิ์ สกุลเกื้อกูลสุข</option>
+                <option value="Teachersec12">นายธนัชชา ชูพจน์เจริญ</option>
+
+
+            </select>
+        </div>
+    </div>
+
+    </fieldset>
+    </form>
+</div>
+
+
+
+
+    </div>
+<!--end body-->
+
+
+
+<!-- /.container -->
+<script src='http://cdnjs.cloudflare.com/ajax/libs/jquery/2.1.3/jquery.min.js'></script>
+<script src='http://cdnjs.cloudflare.com/ajax/libs/bootstrap-validator/0.4.5/js/bootstrapvalidator.min.js'></script>
+<script src='bootstrap-3.3.7-dist/js/bootstrap.min.js'></script>
+<script src="bootstrap-3.3.7-dist/tooltip-viewport.js"></script>
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js"></script>
+<!-- Include jQuery -->
+<script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+
+<!-- Include Date Range Picker -->
+<script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/js/bootstrap-datepicker.min.js"></script>
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-datepicker/1.4.1/css/bootstrap-datepicker3.css"/>
+
+<script>
+    $(document).ready(function(){
+        var date_input=$('input[name="date"]'); //our date input has the name "date"
+        var container=$('.bootstrap-iso form').length>0 ? $('.bootstrap-iso form').parent() : "body";
+        date_input.datepicker({
+            format: 'mm/dd/yyyy',
+            container: container,
+            todayHighlight: true,
+            autoclose: true,
+        })
+    })
+</script>
+
+
+
+
+</body>
+</html>
