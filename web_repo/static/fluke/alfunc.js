@@ -77,7 +77,7 @@ function call_return_admin(respond)
 
 
 function edit_borrow_admin(respond) {
-	var url_static = document.getElementById('url_static').innerHTML+"edit_borrow_admin.html";
+	var url_static = document.getElementById('url_static').innerHTML+"fluke/edit_borrow_admin.html";
 	$("#page-inner").load(url_static, function () {
 		$("#owner_full_name").html(respond.owner.first_name+" "+respond.owner.last_name);
 		$("#owner_id").html(respond.owner.student_id);
@@ -104,7 +104,7 @@ function edit_borrow_admin(respond) {
 
 function edit_return_admin(respond)
 {
-	var url_static = document.getElementById('url_static').innerHTML+"flukeedit_borrow_admin.html";
+	var url_static = document.getElementById('url_static').innerHTML+"fluke/edit_borrow_admin.html";
 	$("#page-inner").load(url_static, function () {
 		$("#owner_full_name").html(respond.owner.first_name+" "+respond.owner.last_name);
 		$("#owner_id").html(respond.owner.student_id);
@@ -176,7 +176,7 @@ function call_sub_category(respond)
 		var k =1;
 		for(i in respond){
 			for(j in respond[i]){
-				inner_detail = inner_detail + "<tr><td>"+ k +"</td><td>"+ i +"</td><td>"+ respond[i] +"</td><td> <a><button type='button' onclick=\"edit_sub_category('" + i + "'" + "," + "'" + respond[i] + "')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a><button type='button' class='btn btn-danger' onclick=\"delete_sub_category('" + i + "'" + "," + "'" + respond[i] + "')\" ><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+				inner_detail = inner_detail + "<tr><td>"+ k +"</td><td>"+ i +"</td><td>"+ respond[i][j] +"</td><td> <a><button type='button' onclick=\"edit_sub_category('" + i + "'" + "," + "'" + respond[i][j] + "')\" class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a><button type='button' class='btn btn-danger' onclick=\"delete_sub_category('" + i + "'" + "," + "'" + respond[i][j] + "')\" ><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
 				k++;
 			}
 		}
@@ -189,12 +189,19 @@ function call_add_subcategory(respond)
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/add_subcategory.html";
 	$("#page-inner").load(url_static, function (){
 		console.log(respond);
-		var list_main =  "<option>โปรดเลือกหมวดหมูหลัก</option>";
+		var list_main =  "<option value=''>โปรดเลือกหมวดหมูหลัก</option>";
 		for(i in respond){
-			list_main = list_main + "<option>"+respond[i]+"</option>";
+			list_main = list_main + "<option value='" + respond[i] + "'>"+respond[i]+"</option>";
 		}
 		$("#select_main").html(list_main);
+		$('#submit_add_subcategory_button').attr("onclick", "").click(function() {
+		alert('Press');
+			var name_to_add = document.getElementById("new_subcategory").value;
+			var main_category_to_add = document.getElementById("select_main").value;
+                  submit_add_subcategory(main_category_to_add, name_to_add);
+		});
     });
+
 }
 
 function edit_sub_category(main,sub)
@@ -241,7 +248,7 @@ function call_list_devicetype(respond)
         var x = 1;
         for(i in respond){
 	        console.log(i+respond[i]);
-	        inner_detail = inner_detail + "<tr> <td>"+ x +"</td> <td>"+ i +"</td> <td>"+ respond[i] +"</td> <td> <a><button type='button' class='btn btn-warning' onclick='edit_devicetype("+"\""+ i +"\""+","+"\""+ respond[i] +"\""+")' ><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
+	        inner_detail = inner_detail + "<tr> <td>"+ x +"</td> <td>"+ i +"</td> <td>"+ respond[i] +"</td> <td> <a><button type='button' class='btn btn-warning' onclick='edit_devicetype("+"\""+ i +"\""+","+"\""+ respond[i] +"\""+")' ><i class='glyphicon glyphicon-pencil'></i></button></a> <button onclick=\"delete_device_type('"+ i +"')\" type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
             x++;
         }
         $("#devicetype_table").html(inner_detail);
@@ -258,6 +265,20 @@ function edit_devicetype(old,code,new_name)
             alert(old+' '+new_name+' '+code);
             send_new_devicetype_name(old,new_name,code);
         })
+    });
+}
+
+function call_add_devicetype()
+{
+	var url_static = document.getElementById('url_static').innerHTML+"fluke/add_devicetype.html";
+	$("#page-inner").load(url_static, function () {
+	    $("#submit_add_devicetype").attr("onclick", "").click(function () {
+            new_type = document.getElementById("new_type").value;
+            new_code = document.getElementById("new_code").value;
+            alert(new_type+' '+new_code);
+            add_devicetype(new_type,new_code);
+        })
+
     });
 }
 
@@ -283,6 +304,17 @@ function call_edit_place(old_name)
 		$("#submit_new_place").attr("onclick", "").click(function () {
 			var new_name = document.getElementById("new_name").value;
 			send_new_place_name(old_name,new_name)
+		})
+    });
+}
+
+function call_add_place()
+{
+	var url_static = document.getElementById('url_static').innerHTML+"fluke/add_place.html";
+	$("#page-inner").load(url_static, function () {
+		$("#submit_add_new_place").attr("onclick", "").click(function () {
+			var new_place = document.getElementById("new_place").value;
+			send_add_place(new_place)
 		})
     });
 }
@@ -313,7 +345,7 @@ function call_list_device(respond)
 		$("#select_place").html(inner_place);
 		inner_detail = document.getElementById("big_table").innerHTML;
 		for(l in respond.items){
-			inner_detail = inner_detail + "<tr> <td>"+ (parseInt(l)+1) +"</td> <td> " + respond.items[l].code_name + " </td> <td>" + respond.items[l].name + "</td> <td>" + respond.items[l].type_ + "</td> <td>" + respond.items[l].sub_category + "</td> <td>" + respond.items[l].storage + "</td> <td> <a><button type='button' class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>"
+			inner_detail = inner_detail + "<tr> <td>"+ (parseInt(l)+1) +"</td> <td> " + respond.items[l].code_name + " </td> <td>" + respond.items[l].name + "</td> <td>" + respond.items[l].type_ + "</td> <td>" + respond.items[l].sub_category + "</td> <td>" + respond.items[l].storage + "</td> <td> <a><button type='button' class='btn btn-warning'><i class='glyphicon glyphicon-pencil'></i></button></a> <button onclick='delete_items("+ respond.items[l].id +")' type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>"
 		}
 		$("#big_table").html(inner_detail);
 		$("#search_button").attr("onclick","").click(function () {
@@ -325,11 +357,48 @@ function call_list_device(respond)
     });
 }
 
-function call_add_item()
+function call_add_item(respond)
 {
 	console.log('on call_add_iem');
 	var url_static = document.getElementById('url_static').innerHTML+"earth/add_item.html";
 	$("#page-inner").load( url_static, function () {
-		// console.log(respond)
+		var main_category_list = "<option value=''>เลือกหมวดหมู่หลัก</option>";
+		for(i in respond.sub_category){
+			main_category_list = main_category_list + "<option value='"+ i +"'>"+ i +"</option>";
+		}
+		$("#list_category_edit").html(main_category_list);
+		var in_type_list = '<option value="">เลือกประเภท</option>';;
+		for(i in respond.type_list){
+			in_type_list = in_type_list +"<option value='" + i + "'>" + i + "</option>"
+		}
+		$("#type_list").html(in_type_list);
+		var in_storage_list = '<option value="">เลือกที่เก็บ</option>';
+		for(i in respond.storage){
+			in_storage_list = in_storage_list + "<option value='" + respond.storage[i] + "'>" + respond.storage[i] + "</option>"
+		}
+		$("#storage_list").html(in_storage_list);
+		$("#list_category_edit").attr('onChange', '').change( function() {
+			alert('change');
+			main_category = document.getElementById("list_category_edit").value;
+			console.log(main_category_list + ' ' + respond.sub_category[main_category]);
+			list_sub_category = respond.sub_category[main_category];
+			$("#div_sub_category").html("<span class='input-group-addon'><i class='glyphicon glyphicon-pencil'></i></span> <select class='form-control' id='sub_category_edit'> ");
+			var in_sub_category = " <option value=''>เลือกหมวดหมู่ย่อย</option>";
+			for (i in list_sub_category) {
+				in_sub_category = in_sub_category + "<option value='" + list_sub_category[i] + "'>" + list_sub_category[i] + "</option>";
+			}
+			console.log(in_sub_category);
+			$("#sub_category_edit").html(in_sub_category);
+		});
     });
+}
+
+function submit_add_item() {
+    var new_name = document.getElementById("new_item_name").value;
+    var main_cat = document.getElementById("list_category_edit").value;
+    var sub_cat = document.getElementById("sub_category_edit").value;
+    var type = document.getElementById("type_list").value;
+    var storage = document.getElementById("storage_list").value;
+    var note = document.getElementById("note").value;
+    add_item(new_name,main_cat,sub_cat,type,storage,note);
 }

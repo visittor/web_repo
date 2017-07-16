@@ -49,7 +49,7 @@ class cart(Base):
 		dic['start_date'] = str(self.start_date)
 		dic['stop_date'] = str(self.stop_date)
 		dic["owner"] = self.owner.data_
-		dic["teacher"] = self.teacher.data_
+		dic["teacher"] = self.teacher.data_ if self.teacher is not None else {}
 		dic["items"] = []
 		for i in self.items:
 			dic["items"].append(i.data_)

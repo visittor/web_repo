@@ -265,6 +265,28 @@ function delete_sub_category(main,sub)
     });
 }
 
+function submit_add_subcategory(a, b)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_insert_sub_category.json";
+    console.log(a + ',' + b);
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            main_category: a,
+            sub_category: b
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_sub_category();
+        }
+    });
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function go_list_devicetype()
@@ -292,6 +314,47 @@ function send_new_devicetype_name(a,b,c)
             old_name: a,
             new_name: b,
             code: c
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_devicetype();
+        }
+    });
+}
+
+function add_devicetype(a, b)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_insert_type.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: a,
+            code: b
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_devicetype();
+        }
+    });
+}
+
+function delete_device_type(a)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_delete_type.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: a
         },
         dataType: 'json',
 
@@ -361,6 +424,26 @@ function delete_list_place(del_name)
     });
 }
 
+function send_add_place(a)
+{
+       var url = document.getElementById('url_').innerHTML+"admin_insert_storage.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: a,
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_place();
+        }
+    });
+}
+
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 
 function go_list_device()
@@ -399,7 +482,7 @@ function search_item(a,b,c)
 function go_add_item()
 {
     console.log('on go_add_iem');
-    var url = document.getElementById('url_').innerHTML+"admin_device.json";
+    var url = document.getElementById('url_').innerHTML+"admin_add_device.json";
     $.ajax({
         url: url,
         type: 'get',
@@ -409,5 +492,51 @@ function go_add_item()
         dataType: 'json',
 
         success: call_add_item
+    });
+}
+
+function add_item(a, b, c, d, e, f)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_add_device.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            name: a,
+            main_category: b,
+            sub_category: c,
+            type_: d,
+            storage: e,
+            note: f
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_device();
+        }
+    });
+}
+
+function delete_items(a)
+{
+    alert(a);
+    var url = document.getElementById('url_').innerHTML+"admin_delete_device.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            id: a,
+        },
+        dataType: 'json',
+
+        success:function (respond) {
+            if (respond.exception == 1){
+                alert('wrong');
+            }
+            go_list_device()
+        }
     });
 }

@@ -43,6 +43,13 @@ def includeme(config):
     config.add_route('admin_insert_storage_json', '/admin_insert_storage.json', factory = admin_page_factory)
 
     config.add_route('admin_device_json', '/admin_device.json', factory = admin_page_factory)
+    config.add_route('admin_delete_device_json', '/admin_delete_device.json', factory = admin_page_factory)
+    config.add_route('admin_add_device_json', '/admin_add_device.json', factory = admin_page_factory)
+
+    config.add_route('order_item_json', '/order_item.json')
+    config.add_route('search_item_json', '/search_item.json')
+    config.add_route('delete_order_json', '/delete_order.json')
+    config.add_route('view_order_detail_json', '/view_order_detail.json')
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')

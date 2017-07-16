@@ -13,29 +13,29 @@
     <link href="https://fonts.googleapis.com/css?family=Kaushan+Script" rel="stylesheet">
 
     <!-- Animate.css -->
-    <link rel="stylesheet" href="css/animate.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/animate.css')}">
     <!-- Icomoon Icon Fonts-->
-    <link rel="stylesheet" href="css/icomoon.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/icomoon.css')}">
     <!-- Themify Icons-->
-    <link rel="stylesheet" href="css/themify-icons.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/themify-icons.css')}">
     <!-- Bootstrap  -->
-    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/bootstrap.css')}">
 
     <!-- Magnific Popup -->
-    <link rel="stylesheet" href="css/magnific-popup.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/magnific-popup.css')}">
 
     <!-- Bootstrap DateTimePicker -->
-    <link rel="stylesheet" href="css/bootstrap-datetimepicker.min.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/bootstrap-datetimepicker.min.css')}">
 
     <!-- Owl Carousel  -->
-    <link rel="stylesheet" href="css/owl.carousel.min.css">
-    <link rel="stylesheet" href="css/owl.theme.default.min.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/owl.carousel.min.css')}">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/owl.theme.default.min.css')}">
 
     <!-- Theme style  -->
-    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="${request.static_url('web_repo:static/login/css/style.css')}">
 
     <!-- Modernizr JS -->
-    <script src="js/modernizr-2.6.2.min.js"></script>
+    <script src="${request.static_url('web_repo:static/login/js/modernizr-2.6.2.min.js')}"></script>
     <!-- FOR IE9 below -->
     <!--[if lt IE 9]>
     <script src="js/respond.min.js"></script>
@@ -62,7 +62,7 @@
 
         </div>
     </nav>
-    <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(images/img_bg_1.jpg)" data-stellar-background-ratio="0.5">
+    <header id="gtco-header" class="gtco-cover gtco-cover-md" role="banner" style="background-image: url(${request.static_url('web_repo:static/login/images/img_bg_1.jpg')}" data-stellar-background-ratio="0.5">
         <div class="overlay"></div>
         <div class="gtco-container">
             <div class="row">
@@ -71,7 +71,7 @@
 
                     <div class="row row-mt-15em">
                         <div class="col-md-6 mt-text animate-box" data-animate-effect="fadeInUp">
-                            <center><img src="images/FIBO.jpg" class="img-responsive img-rounded" alt="Responsive image" width="125" height="141"></center>
+                            <center><img src="${request.static_url('web_repo:static/login/images/FIBO.jpg')}" class="img-responsive img-rounded" alt="Responsive image" width="125" height="141"></center>
                             <center><br><span class="intro-text-small"><a href="http://fibo.kmutt.ac.th/" target="_blank">Insititute of Filed roBotic</a></span></center>
                                 <center><h2 class="cursive-font">สถาบันวิทยาการหุ่นยนต์ภาคสนาม</h2></center>
 
@@ -95,7 +95,7 @@
                                                 <div class="row form-group">
                                                     <div class="col-md-12">
                                                         <label >รหัสผ่าน</label>
-                                                        <input type="text" name="password" class="form-control">
+                                                        <input type="password" name="password" class="form-control">
                                                     </div>
                                                 </div>
 
@@ -130,31 +130,31 @@
 </div>
 
 <!-- jQuery -->
-<script src="js/jquery.min.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/jquery.min.js')}"></script>
 <!-- jQuery Easing -->
-<script src="js/jquery.easing.1.3.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/jquery.easing.1.3.js')}"></script>
 <!-- Bootstrap -->
-<script src="js/bootstrap.min.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/bootstrap.min.js')}"></script>
 <!-- Waypoints -->
-<script src="js/jquery.waypoints.min.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/jquery.waypoints.min.js')}"></script>
 <!-- Carousel -->
-<script src="js/owl.carousel.min.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/owl.carousel.min.js')}"></script>
 <!-- countTo -->
-<script src="js/jquery.countTo.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/jquery.countTo.js')}"></script>
 
 <!-- Stellar Parallax -->
-<script src="js/jquery.stellar.min.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/jquery.stellar.min.js')}"></script>
 
 <!-- Magnific Popup -->
-<script src="js/jquery.magnific-popup.min.js"></script>
-<script src="js/magnific-popup-options.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/jquery.magnific-popup.min.js')}"></script>
+<script src="${request.static_url('web_repo:static/login/js/magnific-popup-options.js')}"></script>
 
-<script src="js/moment.min.js"></script>
-<script src="js/bootstrap-datetimepicker.min.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/moment.min.js')}"></script>
+<script src="${request.static_url('web_repo:static/login/js/bootstrap-datetimepicker.min.js')}"></script>
 
 
 <!-- Main -->
-<script src="js/main.js"></script>
+<script src="${request.static_url('web_repo:static/login/js/main.js')}"></script>
 
 </body>
 </html>

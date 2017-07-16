@@ -70,14 +70,38 @@ class admin_borrow_return(object):
 			cart_.admin_approve = -1
 			return 0
 		except Exception as e:
+			print "\n",e,"\n"
 			return 1
 
 	def search_item(self, kwargh):
 		for i,j in kwargh.items():
-			if j == '':
+			if type(j) == unicode and j == '':
 				kwargh.pop(i)
-		q = self.request.dbsession.query(item).filter_by(**kwargh)
+			elif type(j) == int and j == -1:
+				kwargh.pop(i)
+		if len(kwargh) > 0:
+			q = self.request.dbsession.query(item).filter_by(**kwargh)
+		else:
+			q = self.request.dbsession.query(item)
 		return q.all()
+
+	def delete_item(self, item_id):
+		try:
+			item_ = self.request.dbsession.query(item).filter_by(id = item_id).one()
+			self.request.dbsession.delete(item_)
+			return 0
+		except Exception as e:
+			print "\n",e,"\n"
+			return 1
+
+	def create_item(self,kwargh):
+		try:
+			item_ = item(**kwargh)
+			self.request.dbsession.add(item_)
+			return 0
+		except Exception as e:
+			print "\n", e,"\n"
+			return  1
 
 	@view_config(route_name='test_admin_borrow_json')
 	def test_admin_borrow(self):
@@ -221,6 +245,7 @@ class admin_borrow_return(object):
 			cart_.admin2student = to_student
 			cart_.admin2teacher = to_advisor
 			cart_.student_note =  note
+			cart_.admin_approve = 2
 			return {'exception' : 0}
 		except Exception as e:
 			return {'exception' : 1}
@@ -242,13 +267,78 @@ class admin_borrow_return(object):
 		storage_list = eval(storage_obj.list_)
 
 		items = self.search_item({'type_' : type_json, 'sub_category' : sub_category_json, 'storage' : storage_json})
+		print "\nfuckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n"
 		items_list = []
 		for i in items:
 			dict_ = i.dict_
-			dict_["code_name"] = str(type_list.get(i.type_, 'NULL'))+str(i.id)
+			dict_["code_name"] = str(type_list.get(i.type_.encode('utf8'), 'NULL'))+str(i.id)
 			items_list.append(dict_)
 
 		return {"items" : items_list, "type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
+
+	@view_config(route_name = 'admin_delete_device_json', request_method = 'POST')
+	def admin_delete_device(self):
+		json = self.request.POST
+		print "\n", json,"\n"
+		device_id = json["id"]
+		return {'exception' : self.delete_item(device_id)}
+
+	@view_config(route_name = 'admin_add_device_json', request_method = 'GET')
+	def admin_add_device_get(self):
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+		sub_category = eval(category_obj.list_)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'type_list').one()
+		type_list = eval(type_obj.list_)
+
+		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
+		storage_list = eval(storage_obj.list_)
+		print "\nwtffffffffffffffffffffffffffffff\n"
+
+		return {"type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
+
+	@view_config(route_name = 'admin_add_device_json', request_method = 'POST')
+	def admin_add_device_post(self):
+		json = self.request.POST
+		name = json["name"].encode('utf8')
+		main_category = json["main_category"].encode('utf8')
+		sub_category = json["sub_category"].encode('utf8')
+		type_ = json["type_"].encode('utf8')
+		storage = json["storage"].encode('utf8')
+		note = json["note"].encode('utf8')
+
+		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+		sub_category_list = eval(category_obj.list_)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'type_list').one()
+		type_list = eval(type_obj.list_)
+
+		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
+		storage_list = eval(storage_obj.list_)
+
+		if type_list.has_key(type_):
+			if sub_category_list.has_key(main_category):
+				if sub_category in sub_category_list[main_category]:
+					if storage in storage_list:
+						kwargh = {"name":name.decode('utf8'),"main_category" : main_category.decode('utf8'), "sub_category" : sub_category.decode('utf8'), "type_" : type_.decode('utf8'), "storage" : storage.decode('utf8'), "note" : note.decode('utf8')}
+						return {"exception" : self.create_item(kwargh)}
+					else:
+						print "\nno storage in database\n"
+						return {"exception" : 1}
+				else:
+					print "\nno sub_category in database\n"
+					return {"exception" : 1}
+			else:
+				print "\nno main_Category in database\n"
+				return {"exception" : 1}
+		else:
+			print "\nno type in database\n"
+			print "\n", type_list, "\n"
+			print "\n", type_, "\n"
+			return {"exception" : 1}
+	
+
+	
 
 @view_defaults( renderer = 'json', permission = 'access')
 class category_type_manager(object):
@@ -372,13 +462,14 @@ class category_type_manager(object):
 		type_ = self.type_
 		try:
 			if type_.has_key(name):
-				type_[name].pop()
+				type_.pop(name)
 				self.__save_config_file('category', 'type_list', type_)
 				return 0
 			else:
+				print "\nno key\n"
 				return 1
 		except Exception as e:
-			print e 
+			print "\n", e, "\n"
 			return 1
 
 	def insert_type(self, name, code):
