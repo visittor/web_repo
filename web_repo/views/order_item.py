@@ -6,6 +6,7 @@ from pyramid.view import (
 from ..models.Item import order_item, item 
 from ..models.Cart import cart
 from ..models.User import member
+from ..models.type import category_type_storage
 import datetime
 
 @view_defaults(renderer='json')
@@ -116,6 +117,9 @@ class order_item_view(object):
 
 		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
 		sub_category = eval(category_obj.list_)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name='type_list').one()
+		type_list = eval(type_obj.list_)
 
 		items = self.search_item({'sub_category' : sub_category_json})
 
