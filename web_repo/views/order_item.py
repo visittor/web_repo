@@ -4,6 +4,8 @@ from pyramid.view import (
     )
 
 from ..models.Item import order_item, item 
+from ..models.Cart import cart
+from ..models.User import member
 import datetime
 
 @view_defaults(renderer='json')
@@ -14,7 +16,7 @@ class order_item_view(object):
 
 	def create_order(self, item_id):
 		try:
-			item_ self.request.dbsession.query(item).filter_by(id = item_id).one()
+			item_ = self.request.dbsession.query(item).filter_by(id = item_id).one()
 			if item_.cart_id is None and self.request.dbsession.query(order_item).filter_by(user_id = self.request.user.id, item_id = item_id).one_or_none() is None:
 				order = order_item()
 				order.item_id = item_id
@@ -58,6 +60,48 @@ class order_item_view(object):
 		q = self.request.dbsession.query(item).filter_by(**kwargh)
 		return q.all()
 
+	def create_cart(self, teacher_name, start_date, stop_date, note):
+		to_return = 0
+		try:
+			start_date = datetime.datetime.strptime(start_date, "%d-%m-%Y")
+			stop_date = datetime.datetime.strptime(stop_date, "%d-%m-%Y")
+			cart_ =  cart(admin_approve = 0, teacher_approve = 0)
+			cart_.owner = self.request.user
+			teacher_first_name = teacher_name.split()[0]
+			teacher_last_name = teacher_name.split()[1]
+			teacher_ = self.request.dbsession.query(member).filter_by(first_name = teacher_first_name, last_name = teacher_last_name).one()
+			cart_.teacher = teacher_
+			cart_.student_note = note
+
+			order_items = self.request.dbsession.query(order_item).filter_by(user_id = self.request.user.id).all()
+			for order in order_items:
+				item_ = self.request.dbsession.query(item).filter_by(id = order.item_id).one_or_none()
+				if item_ is not None:
+					cart_.item.append(item_)
+					if self.delete_order_by_item_id(item_.id) == 1:
+						print "\n can't delete order somehow \n"
+						to_return = 1
+				else: 
+					print "\nno item in database\n"
+					to_return = 1
+
+			self.request.dbsession.add(cart_)
+			return to_return
+		except Exception as e:
+			print "\n", e,"\n"
+			return 1
+
+
+	def delete_order_by_item_id(self, item_id):
+		try:
+			order_items = self.request.dbsession.query(order_item).filter_by(item_id = item_id).all()
+			for order in order_items:
+				self.request.dbsession.delete(order)
+			return 0
+		except Exception as e:
+			print "\n", e," 'at class order_item.order_item_view.delete_order_by_item_id\n"
+			return 1
+
 	@view_config(route_name = 'order_item_json', request_method='POST')
 	def user_order_item(self):
 		json = self.request.POST
@@ -96,13 +140,18 @@ class order_item_view(object):
 				"owner" : self.request.user.dict_,
 				"item" : items}
 
-	# @view_config(route_name = 'confirm_order_json', request_method = 'POST')
-	# def user_confirm_order(self):
-	# 	json = self.request.POST
-	# 	teacher_name = json["teacher_name"]
-	# 	start_date = json["start_date"]
-	# 	stop_date = json["stop_date"]
-	# 	datetime.datetime.strptime(string_date, "%Y-%m-%d %H:%M:%S.%f")
+	@view_config(route_name = 'confirm_order_json', request_method = 'POST')
+	def user_confirm_order(self):
+		json = self.request.POST
+		teacher_name = json["teacher_name"]
+		start_date = json["start_date"]
+		stop_date = json["stop_date"]
+		note = json["note"]
+		return {"exception" : self.create_cart(teacher_name, start_date, stop_date, note)}
+
+
+		
+
 		
 
 

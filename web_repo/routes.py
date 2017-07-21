@@ -50,6 +50,7 @@ def includeme(config):
     config.add_route('search_item_json', '/search_item.json')
     config.add_route('delete_order_json', '/delete_order.json')
     config.add_route('view_order_detail_json', '/view_order_detail.json')
+    config.add_route('confirm_order_json', '/confirm_order.json')
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
