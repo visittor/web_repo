@@ -11,6 +11,7 @@ def includeme(config):
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('admin_home', '/admin', factory = admin_page_factory)
+    config.add_route('user_home', '/user',, factory = user_page_foctory)
 
     config.add_route('test_admin_borrow_json', '/test_admin_borrow.json')
     config.add_route('test_admin_return_json', '/test_admin_return.json')
@@ -46,11 +47,11 @@ def includeme(config):
     config.add_route('admin_delete_device_json', '/admin_delete_device.json', factory = admin_page_factory)
     config.add_route('admin_add_device_json', '/admin_add_device.json', factory = admin_page_factory)
 
-    config.add_route('order_item_json', '/order_item.json')
-    config.add_route('search_item_json', '/search_item.json')
-    config.add_route('delete_order_json', '/delete_order.json')
-    config.add_route('view_order_detail_json', '/view_order_detail.json')
-    config.add_route('confirm_order_json', '/confirm_order.json')
+    config.add_route('order_item_json', '/order_item.json', factory = user_page_foctory)
+    config.add_route('search_item_json', '/search_item.json', factory = user_page_foctory)
+    config.add_route('delete_order_json', '/delete_order.json', factory = user_page_foctory)
+    config.add_route('view_order_detail_json', '/view_order_detail.json', factory = user_page_foctory)
+    config.add_route('confirm_order_json', '/confirm_order.json', factory = user_page_foctory)
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
@@ -66,3 +67,15 @@ class admin_page_resource(object):
 
     def __acl__(self):
         return [(Allow, 'role:a', 'access')]
+
+def user_page_foctory(request):
+    return user_page_resource()
+
+class user_page_resource(object):
+
+    def __init__(self):
+        pass
+
+    def __acl__(self):
+        return [(Allow, 'role:s', 'access'),
+                (Allow, 'role:t', 'access'),]

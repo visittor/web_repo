@@ -9,7 +9,7 @@ from ..models.User import member
 from ..models.type import category_type_storage
 import datetime
 
-@view_defaults(renderer='json')
+@view_defaults(renderer='json', , permission = 'access')
 class order_item_view(object):
 
 	def __init__(self, request):
@@ -153,9 +153,14 @@ class order_item_view(object):
 		note = json["note"]
 		return {"exception" : self.create_cart(teacher_name, start_date, stop_date, note)}
 
+@view_defaults(renderer='../templates/earth/rentitem_main.pt', permission = 'access')
+class user_home(object):
+	def __init__(self, request):
+		self.request = request
 
-		
-
+	@view_config(route_name = 'user_home')
+	def user_home(self):
+		return {'a' : 'hello'}
 		
 
 

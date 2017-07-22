@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <link rel="icon" href="image/FIBO.jpg">
+
+    <title>หน้ายืมคืนอุปกรณ์</title>
+
+    <!-- Bootstrap core CSS -->
+    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/css/bootstrap.min.css')}" rel="stylesheet">
+    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/navbar-fixed-top.css')}" rel="stylesheet">
+    <!--<link href="bootstrap-3.3.7-dist/tooltip-viewport.css" rel="stylesheet">-->
+
+    <script src="${request.static_url('web_repo:static/earth/jquery-3.2.1.min.js')}"></script>
+    <!--<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js"></script>-->
+    <script type="text/javascript" src="${request.static_url('web_repo:static/earth/transmitter.js')}"></script>
+    <script type="text/javascript" src="${request.static_url('web_repo:static/earth/editor.js')}"></script>
+
+    <!-- Custom styles for this template -->
+    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/album.css')}" rel="stylesheet">
+
+    <script>
+        $(document).ready(function(){
+            var jq = $.noConflict();
+            request_list_device_from_container('','');
+            $('#search_button').attr("onclick", "").click(function() {
+                a = $('#select_category').val() ;
+                b = $('#select_subcategory').val();
+                request_list_device_from_container(a, b);
+            });
+        });
+    </script>
+    <p id = 'url_' hidden>${request.route_url('home')}</p>
+    <p id = 'url_static' hidden>${request.static_url('web_repo:static/')}
+<!--     <p id = 'url_' hidden>http://localhost:6543/</p> -->
+
+</head>
+
+
+
+<body>
+
+<nav id="mainNav" class=" navbar-inverse navbar-fixed-top ">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+            </button>
+            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav navbar-right ">
+                <li><a class="glyphicon glyphicon-shopping-cart " href="rentItem.html"  data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
+                <li><a class="glyphicon glyphicon-calendar " href=""  data-placement="bottom" title="ระบบจองห้อง"> </a></li>
+                <!--<li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>-->
+                <li><a class="glyphicon glyphicon-user " href="personal_infomation.html"  data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เพิ่มเติม<span class="caret"></span></a>
+                    <ul class="dropdown-menu ">
+                        <li><a href="statusofrent.html">ตรวจสอบสถานะการยืม คืน อุปกรณ์</a></li>
+                        <li><a href=" ">ตรวจสอบสถานะการจองห้อง</a></li>
+                        <li role="separator" class="divider"></li>
+                        <li><a href="Additem.html">เพิ่มอุปกรณ์</a></li>
+                    </ul>
+                </li>
+                <li><a class="page-scroll" href=""><b>LOG OUT</b></a></li>
+            </ul>
+
+        </div>
+        <!-- /.navbar-collapse -->
+    </div>
+    <!-- /.container-fluid -->
+</nav>
+
+
+    <div class="container">
+        <h1>ระบบยืม คืน อุปกรณ์</h1>
+        <p class="lead text-muted">การยืมของจะต้องเลือกหมวดหมู่หลักให้ตรงกับที่นักศึกษาจะทำการยืมของชิ้นนั้นโดยที่มีหมวดหมู่หลักจำนวน 5 หมวดหมู่หลักคือ
+            <br>1.Class project
+            <br>2.ค่าย
+            <br>3.การแข่งขัน
+            <br>4.กิจกรรมทั่วไป
+            <br>5.การเรียนการสอน</p>
+        <p>
+        <div class="col-md-3">
+            <div class="input-group ">
+                <input type="text" class="form-control " placeholder="Search for...">
+                <span class="input-group-btn">
+                    <button class="btn btn-info " type="button">Go!</button>
+                </span>
+            </div>
+        </div>
+        <form id="form1" name="form1" method="post" action="insertarticle.asp" onsubmit="return ValidateForm(); true">
+            <div class="row">
+                <div class="col-md-2">
+                    <select class="form-control" name="category" id="select_category">
+                        <option value="">เลือกหมวดหมู่หลัก</option>
+                    </select>
+                </div>
+
+                <div class="col-md-3">
+                        <select class="form-control" name="select_subcategory" id="select_subcategory">
+                            <option value="">เลือกหมวดหมู่หลักก่อน</option>
+                        </select>
+                </div>
+                <div class="col-md-1">
+                    <button id="search_button" class="btn btn-info " type="button">Go!</button>
+                </div>
+                <div class="col-md-2">
+                    <a href="approveItem.html"><button class="btn btn-primary btn-lg" type="button">อุปกรณ์ที่ยืม <span class="badge">4</span></button></a>
+                </div>
+            </div>
+        </form>
+
+        </p>
+    </div>
+
+
+<div class="album text-muted">
+    <div id="div_item_container" class="container">
+
+         <div id='card_row' class='row'>
+
+         </div>
+
+    </div>
+    <nav aria-label="...">
+        <ul class="pager">
+            <li><a href="#">Previous</a></li>
+            <li><a href="#">Next</a></li>
+        </ul>
+    </nav>
+</div>
+
+<footer class="text-muted">
+    <div id="rent_item_container" class="container">
+        <p align="right">
+            <a href="#">Back to top</a>
+        </p>
+        <p align="center">สถาบันวิทยาการหุ่นยนต์ภาคสนาม</p>
+        <p align="center">Insitute of FIeld roBOtic</p>
+    </div>
+</footer>
+
+<!-- Bootstrap core JavaScript
+================================================== -->
+<!-- Placed at the end of the document so the pages load faster -->
+
+<script src="https://code.jquery.com/jquery-3.1.1.slim.min.js" integrity="sha384-A7FZj7v+d/sdmMqp/nOQwliLvUsJfDHW+k9Omg/a/EheAdgtzNs3hpfag6Ed950n" crossorigin="anonymous"></script>
+<script>window.jQuery || document.write('<script src="../../assets/js/vendor/jquery.min.js"><\/script>')</script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tether/1.4.0/js/tether.min.js" integrity="sha384-DztdAPBWPRXSA/3eYEEUWrWCy7G5KFbe8fFjk5JAIxUYHKkDx6Qin1DkWx51bBrb" crossorigin="anonymous"></script>
+<script src="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/js/vendor/holder.min.js')}"></script>
+<script>
+    $(function () {
+        Holder.addTheme("thumb", { background: "#55595c", foreground: "#eceeef", text: "Thumbnail" });
+    });
+</script>
+<script src="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/js/bootstrap.min.js')}"></script>
+<!--<script src="bootstrap-3.3.7-dist/tooltip-viewport.js"></script>-->
+<!-- IE10 viewport hack for Surface/desktop Windows 8 bug -->
+<script src="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/js/ie10-viewport-bug-workaround.js')}"></script>
+
+</body>
+</html>
