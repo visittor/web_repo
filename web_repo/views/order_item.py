@@ -52,6 +52,13 @@ class order_item_view(object):
 				print "\n", e,"\n"
 		return items
 
+	def get_teacher(self):
+		teachers = self.request.dbsession(member).filter_by(role = 't').all()
+		teachers_list = []
+		for teacher_ in teachers:
+			teachers_list.append(teacher_.dict_)
+		return teachers_list
+
 	def search_item(self, kwargh):
 		for i,j in kwargh.items():
 			if type(j) == unicode and j == '':
@@ -140,8 +147,10 @@ class order_item_view(object):
 	@view_config(route_name = 'view_order_detail_json', request_method = 'GET')
 	def user_view_order_detail(self):
 		items = self.get_all_ordered_item()
+		teachers = self.get_teacher()
 		return {"owner_id" : self.request.user.id,
 				"owner" : self.request.user.dict_,
+				"teacher" : teachers,
 				"item" : items}
 
 	@view_config(route_name = 'confirm_order_json', request_method = 'POST')
