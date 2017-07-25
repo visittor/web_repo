@@ -55,9 +55,9 @@ class admin_borrow_return(object):
 		cart_ = self.get_cart(id)
 		dic = cart_.dict_
 		print "\n", cart_.items, "\n"
-		items = self.request.dbsession.query(item).filter_by(cart_id = id).all()
-		for i in items:
-			dic["items"].append(i.data_)
+		# items = self.request.dbsession.query(item).filter_by(cart_id = id).all()
+		# for i in items:
+		# 	dic["items"].append(i.data_)
 		print "\n", dic, "\n"
 		return dic
 
@@ -246,6 +246,7 @@ class admin_borrow_return(object):
 			cart_.admin2teacher = to_advisor
 			cart_.student_note =  note
 			cart_.admin_approve = 2
+			self.request.dbsession.delete(cart_)
 			return {'exception' : 0}
 		except Exception as e:
 			return {'exception' : 1}

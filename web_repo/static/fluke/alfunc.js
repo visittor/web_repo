@@ -87,7 +87,7 @@ function edit_borrow_admin(respond) {
 		$("#stop_borrow_date").html(respond.stop_date);
 		var inner_detail = "<table class='table table-hover'> <tr> <th>#</th> <th>รหัสอุปกรณ์</th> <th>ชื่ออุปกรณ์</th> <th>จำนวน</th> <th>โมดูล / ที่มา</th> <th>สถานที่เก็บ</th> </tr>"
 		for( i in respond.items){
-		inner_detail = inner_detail + "<tr> <td><input type='checkbox' value='' /></td> <td>"+ respond.items[i].id +"</td> <td>"+ respond.items[i].name +"</td> <td>"+ respond.items[i].value +"</td> <td>"+ respond.items[i].subject_name +"</td> <td>"+ respond.items[i].storage +"</td> <tr>"
+		inner_detail = inner_detail + "<tr> <td><input type='checkbox' value='' /></td> <td>"+ respond.items[i].id +"</td> <td>"+ respond.items[i].name +"</td> <td>1</td> <td>"+ respond.items[i].sub_category +"</td> <td>"+ respond.items[i].storage +"</td> <tr>"
 		}
 		inner_detail = inner_detail+"</table>"
 		$("#inner_request").html(inner_detail);

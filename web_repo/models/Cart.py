@@ -35,7 +35,7 @@ class cart(Base):
 
 	@property
 	def data_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 		dic['start_date'] = str(self.start_date)
 		dic['stop_date'] = str(self.stop_date)
 
@@ -45,7 +45,7 @@ class cart(Base):
 
 	@property
 	def dict_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 		dic['start_date'] = str(self.start_date)
 		dic['stop_date'] = str(self.stop_date)
 		dic["owner"] = self.owner.data_

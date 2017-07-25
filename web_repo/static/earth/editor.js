@@ -23,28 +23,24 @@ function call_list_device_from_container(respond)
 				$('#select_subcategory').append("<option value='" + list_sub_category[i] + "'>" + list_sub_category[i] + "</option>");
 			}
 		});
-
-    $.get("rentitem_container.html", function(data){
+    var url_static = document.getElementById('url_static').innerHTML+"/earth/rentitem_container.html"
+    $.get(url_static, function(data){
         document.getElementById('card_row').innerHTML = '';
         for(i in respond.items){
             $("#card_row").append(data);
             $('#outer_status_').attr('id','outer_status_'+i);
             $('#inner_status_').attr('id','inner_status_'+i);
             $('#borrow_button_').attr('id','borrow_button_'+i);
+            $('#borrow_button_').attr('value',respond.items[i].id);
             $('#item_name_').attr('id','item_name_'+i);
             $('#main_category_').attr('id','main_category_'+i);
             $('#storage_').attr('id','storage_'+i);
             $('#note_').attr('id','note_'+i);
-
+            $('#choose_button_').attr('id','choose_button_'+i);
             if(!respond.items[i].cart_id){
-
+                $('#choose_button_'+i).html("<button type='button' class='btn btn-primary' onclick='send_borrow_request("+ respond.items[i].id +")'>เลือก</button>")
                 $('#outer_status_'+i).html("<a class='label label-success glyphicon glyphicon-time'>Available</a>");
                 $('#inner_status_'+i).html("<a class='label label-success glyphicon glyphicon-time'>Available</a>");
-                $('#borrow_button_'+i).attr("onclick", "").click(function() {
-                  send_borrow_request(respond.items[i].id);
-                  // console.log('งสรา้งละนะ อิอิ');
-		});
-
             }
 
             else{
@@ -92,5 +88,26 @@ function call_order_detail(respond)
 
 function delete_order(id)
 {
-    $("#"+id).delete();
+    $("#"+id).remove();
+}
+
+function save_order()
+{
+    var teacher_name = $("#teacher_list").val();
+    var start_date = $("#start_date").val();
+    var stop_date = $("#stop_date").val();
+    var note = $("#student_note").val();
+    console.log("teacher id = "+teacher_name+typeof teacher_name+"\nstart date = "+start_date+typeof start_date+"\nstop date = "+stop_date+typeof stop_date)
+    if(teacher_name == ""){
+        alert("กรุณาเลือกชื่ออาจารย์");
+    }
+    else if(start_date == ""){
+        alert("กรุณาเลือกวันยืมอุปกรณ์");
+    }
+    else if(stop_date == ""){
+        alert("กรุณาเลือกวันคืนอุปกรณ์")
+    }
+    else {
+        send_save_order(teacher_name, start_date, stop_date, note);
+    }
 }

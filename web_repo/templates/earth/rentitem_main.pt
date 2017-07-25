@@ -33,9 +33,9 @@
             });
         });
     </script>
-    <!--<p id = 'url_' hidden>${request.route_url('home')}</p>-->
-    <!--<p id = 'url_static' hidden>${request.static_url('web_repo:static/')}-->
-    <p id = 'url_' hidden>http://localhost:6543/</p>
+    <p id = 'url_' hidden>${request.route_url('home')}</p>
+    <p id = 'url_static' hidden>${request.static_url('web_repo:static/')}</p>
+    <!--?<p id = 'url_' hidden>http://localhost:6543/</p>-->
 
 </head>
 
@@ -112,7 +112,7 @@
                     <button id="search_button" class="btn btn-info " type="button">Go!</button>
                 </div>
                 <div class="col-md-2">
-                    <a href="approveItem.html"><button class="btn btn-primary btn-lg" type="button">อุปกรณ์ที่ยืม <span class="badge">4</span></button></a>
+                    <a href="${request.route_url('user_check_item')}" target="blank"><button class="btn btn-primary btn-lg" type="button">อุปกรณ์ที่ยืม <span class="badge">4</span></button></a>
                 </div>
             </div>
         </form>

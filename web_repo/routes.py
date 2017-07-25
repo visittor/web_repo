@@ -11,7 +11,8 @@ def includeme(config):
     config.add_static_view('static', 'static', cache_max_age=3600)
     config.add_route('home', '/')
     config.add_route('admin_home', '/admin', factory = admin_page_factory)
-    config.add_route('user_home', '/user',, factory = user_page_foctory)
+    config.add_route('user_home', '/user', factory = user_page_foctory)
+    config.add_route('user_check_item', '/user_check_item', factory = user_page_foctory)
 
     config.add_route('test_admin_borrow_json', '/test_admin_borrow.json')
     config.add_route('test_admin_return_json', '/test_admin_return.json')

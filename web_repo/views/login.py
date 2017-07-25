@@ -25,6 +25,8 @@ def login(request):
         if user is not None and user.check_password(password):
             headers = remember(request, user.id)
             print "\nsuccess\n"
+            if user.role == 's':
+                next_url = request.route_url('user_home')
             return HTTPFound(location=next_url, headers=headers)
         print "\nFail\n"
         message = 'Failed login'

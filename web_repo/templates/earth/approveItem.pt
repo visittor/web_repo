@@ -28,6 +28,9 @@
     <!--[if lt IE 9]-->
     <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
     <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+    <script src="${request.static_url('web_repo:static/earth/jquery-3.2.1.min.js')}"></script>
+    <script type="text/javascript" src="${request.static_url('web_repo:static/earth/transmitter.js')}"></script>
+    <script type="text/javascript" src="${request.static_url('web_repo:static/earth/editor.js')}"></script>
 
     <p id = 'url_' hidden>${request.route_url('home')}</p>
     <p id = 'url_static' hidden>${request.static_url('web_repo:static/')}</p>
@@ -185,7 +188,7 @@
                         <h3 class="panel-title">หมายเหตุ / บันทึกเพิ่มเติม</h3>
                     </div>
                     <div class="panel-body">
-                        <textarea class="form-control" rows="3"></textarea>
+                        <textarea id="student_note" class="form-control" rows="3"></textarea>
                     </div>
                 </div>
             </div>
@@ -211,7 +214,7 @@
             </div>
             <br>
             <center>
-                <button type="button" class="btn btn-success btn-lg"><i class="glyphicon glyphicon-ok"></i> บันทึก</button>
+                <button type="button" class="btn btn-success btn-lg" onclick="save_order()"><i class="glyphicon glyphicon-ok"></i> บันทึก</button>
                 <button type="button" class="btn btn-danger btn-lg"><i class="glyphicon glyphicon-remove"></i> ยกเลิก</button>
             </center>
         </div>
@@ -223,7 +226,7 @@
     <!-- /. PAGE INNER  -->
 </div>
 <!-- /. PAGE WRAPPER  -->
-</div>
+
 <!-- /. WRAPPER  -->
 
 

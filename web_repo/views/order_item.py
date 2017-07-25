@@ -9,7 +9,7 @@ from ..models.User import member
 from ..models.type import category_type_storage
 import datetime
 
-@view_defaults(renderer='json', , permission = 'access')
+@view_defaults(renderer='json', permission = 'access')
 class order_item_view(object):
 
 	def __init__(self, request):
@@ -18,14 +18,18 @@ class order_item_view(object):
 	def create_order(self, item_id):
 		try:
 			item_ = self.request.dbsession.query(item).filter_by(id = item_id).one()
-			if item_.cart_id is None and self.request.dbsession.query(order_item).filter_by(user_id = self.request.user.id, item_id = item_id).one_or_none() is None:
+			print "\n", item_.cart_id,"\n"
+			if item_.in_cart is None and self.request.dbsession.query(order_item).filter_by(user_id = self.request.user.id, item_id = item_id).one_or_none() is None:
 				order = order_item()
 				order.item_id = item_id
 				order.user_id = self.request.user.id
 				self.request.dbsession.add(order)
 				return 0
+			elif item_.in_cart is not None:
+				print "\nthis item is already in other cart. \n"
+				return 1
 			else:
-				print "\nthis item is already in other cart or this user already order this item. \n"
+				print "\nthis user already order this item. \n"
 				return 1
 		except Exception as e:
 			print "\n", e,"\n"
@@ -50,11 +54,16 @@ class order_item_view(object):
 				items.append(self.request.dbsession.query(item).filter_by(id = i.item_id).one().dict_)
 			except Exception as e:
 				print "\n", e,"\n"
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name='type_list').one()
+		type_list = eval(type_obj.list_)
+		for i in items:
+			i["code_name"] = str(type_list.get(i["type_"], 'NULL'))+str(i["id"])
 		return items
 
 	def get_teacher(self):
-		teachers = self.request.dbsession(member).filter_by(role = 't').all()
+		teachers = self.request.dbsession.query(member).filter_by(role = 't').all()
 		teachers_list = []
+		print "\nhere\n"
 		for teacher_ in teachers:
 			teachers_list.append(teacher_.dict_)
 		return teachers_list
@@ -68,24 +77,23 @@ class order_item_view(object):
 		q = self.request.dbsession.query(item).filter_by(**kwargh)
 		return q.all()
 
-	def create_cart(self, teacher_name, start_date, stop_date, note):
+	def create_cart(self, teacher_id, start_date, stop_date, note):
 		to_return = 0
 		try:
-			start_date = datetime.datetime.strptime(start_date, "%d-%m-%Y")
-			stop_date = datetime.datetime.strptime(stop_date, "%d-%m-%Y")
+			start_date = datetime.datetime.strptime(start_date, "%Y-%m-%d")
+			stop_date = datetime.datetime.strptime(stop_date, "%Y-%m-%d")
 			cart_ =  cart(admin_approve = 0, teacher_approve = 0)
 			cart_.owner = self.request.user
-			teacher_first_name = teacher_name.split()[0]
-			teacher_last_name = teacher_name.split()[1]
-			teacher_ = self.request.dbsession.query(member).filter_by(first_name = teacher_first_name, last_name = teacher_last_name).one()
+			teacher_ = self.request.dbsession.query(member).filter_by(id = teacher_id).one()
 			cart_.teacher = teacher_
 			cart_.student_note = note
-
+			cart_.start_date = start_date
+			cart_.stop_date = stop_date
 			order_items = self.request.dbsession.query(order_item).filter_by(user_id = self.request.user.id).all()
 			for order in order_items:
 				item_ = self.request.dbsession.query(item).filter_by(id = order.item_id).one_or_none()
 				if item_ is not None:
-					cart_.item.append(item_)
+					cart_.items.append(item_)
 					if self.delete_order_by_item_id(item_.id) == 1:
 						print "\n can't delete order somehow \n"
 						to_return = 1
@@ -148,19 +156,22 @@ class order_item_view(object):
 	def user_view_order_detail(self):
 		items = self.get_all_ordered_item()
 		teachers = self.get_teacher()
+		user_list = self.request.user.dict_
+		print "\nin user_view_order_detail\n"
+		print "\n",teachers,"\n"
 		return {"owner_id" : self.request.user.id,
-				"owner" : self.request.user.dict_,
+				"owner" : user_list,
 				"teacher" : teachers,
 				"item" : items}
 
 	@view_config(route_name = 'confirm_order_json', request_method = 'POST')
 	def user_confirm_order(self):
 		json = self.request.POST
-		teacher_name = json["teacher_name"]
+		teacher_id = json["teacher_id"]
 		start_date = json["start_date"]
 		stop_date = json["stop_date"]
 		note = json["note"]
-		return {"exception" : self.create_cart(teacher_name, start_date, stop_date, note)}
+		return {"exception" : self.create_cart(teacher_id, start_date, stop_date, note)}
 
 @view_defaults(renderer='../templates/earth/rentitem_main.pt', permission = 'access')
 class user_home(object):
@@ -170,6 +181,16 @@ class user_home(object):
 	@view_config(route_name = 'user_home')
 	def user_home(self):
 		return {'a' : 'hello'}
-		
+
+@view_defaults(renderer = '../templates/earth/approveItem.pt', permission = 'access')
+class check_order(object):
+	def __init__(self, request):
+		self.request = request
+
+	@view_config(route_name = 'user_check_item')
+	def check_order(self):
+		print "\nsomething wrong\n"
+		return  {'a' : 'hello'}
+
 
 

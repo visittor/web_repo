@@ -23,6 +23,7 @@ function request_list_device_from_container(a, b)
 function send_borrow_request(a) {
     // console.log('อย่นี่นะ')
     var url = document.getElementById('url_').innerHTML+"order_item.json";
+    console.log(a);
     $.ajax({
         url: url,
         type: 'post',
@@ -77,8 +78,33 @@ function send_delete_order(a)
                 alert('something wrong');
             }
             else{
-                alert('เรียบร้อย')
+                alert('เรียบร้อย');
                 delete_order(a);
+            }
+        }
+    });
+}
+
+function send_save_order(a, b, c, d)
+{
+    var url = document.getElementById('url_').innerHTML+"confirm_order.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            teacher_id: a,
+            start_date: b,
+            stop_date: c,
+            note: d
+        },
+        dataType: 'json',
+
+        success: function(respond){
+            if(respond.exception == 1){
+                alert('something wrong');
+            }
+            else{
+                alert('Done!')
             }
         }
     });

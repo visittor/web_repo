@@ -43,7 +43,7 @@ class member(Base):
 
 	@property
 	def data_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 
 		dic.pop('_sa_instance_state')
 
@@ -52,13 +52,13 @@ class member(Base):
 
 	@property
 	def dict_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 		dic["cart"] = []
 		for i in self.cart:
 			dic["cart"].append(i.data_)
 		dic["responsible_cart"] = []
 		for i in self.responsible_cart:
-			doc["responsible_cart"].append(i.data_)
+			dic["responsible_cart"].append(i.data_)
 		dic["orders"] = []
 		for i in self.orders:
 			dic["orders"].append(i.data_)

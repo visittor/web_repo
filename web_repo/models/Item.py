@@ -32,7 +32,7 @@ class item(Base):
 
 	@property
 	def data_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 
 		dic.pop('_sa_instance_state')
 
@@ -40,7 +40,7 @@ class item(Base):
 
 	@property
 	def dict_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 		print "\n",dic,"\n"
 		dic["in_cart"] =self.in_cart.data_ if self.in_cart is not None else {}
 		dic["order"] = []
@@ -64,7 +64,7 @@ class order_item(Base):
 
 	@property
 	def data_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 
 		dic.pop('_sa_instance_state')
 
@@ -72,7 +72,7 @@ class order_item(Base):
 
 	@property
 	def dict_(self):
-		dic = self.__dict__
+		dic = self.__dict__.copy()
 		dic["item"] = self.item.data_
 		dic["owner"] = self.owner.data_
 
