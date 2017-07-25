@@ -1,6 +1,9 @@
 /**
  * Created by PHURINPAT on 16/7/2560.
  */
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* Rent Item */
+
 function call_list_device_from_container(respond)
 {
     var x = 1;
@@ -68,4 +71,26 @@ function call_list_device_from_container(respond)
         // $("#card_row").html(data)
 
     });
+}
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* Approve Item */
+
+function call_order_detail(respond)
+{
+    console.log(respond);
+    $('#user_name').html(respond.owner.first_name + " " + respond.owner.last_name);
+    $('#user_id').html(respond.owner.id);
+    $('#user_years').html(1);
+    for(i in respond.teacher){
+        $("#teacher_list").append("<option value='"+ respond.teacher[i].id +"'>"+ respond.teacher[i].first_name +" "+ respond.teacher[i].first_name +"</option>")
+    }
+
+    for(j in respond.item){
+        $("#item_table").append("<tr id='"+respond.item[j].id+"'><td id='"+respond.item[j].id+"'>"+respond.item[j].code_name+"</td> <td id='"+respond.item[j].id+"'>"+respond.item[j].name+"</td> <td id='"+respond.item[j].id+"'>1</td> <td id='"+respond.item[j].id+"'>"+respond.item[j].sub_category+"</td> <td id='"+respond.item[j].id+"'>"+respond.item[j].storage+"</td> <td id='"+respond.item[j].id+"'><button id='"+respond.item[j].id+"' onclick='send_delete_order(" + respond.item[j].id + ")' type='button' class='close' data-dismiss='modal' aria-label='Close'><span id='"+respond.item[j].id+"' aria-hidden='true'>&times;</span></button></td> <tr id='"+respond.item[j].id+"'>")
+    }
+}
+
+function delete_order(id)
+{
+    $("#"+id).delete();
 }
