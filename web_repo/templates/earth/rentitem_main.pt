@@ -68,7 +68,7 @@
                         <li><a href="Additem.html">เพิ่มอุปกรณ์</a></li>
                     </ul>
                 </li>
-                <li><a class="page-scroll" href=""><b>LOG OUT</b></a></li>
+                <li><a class="page-scroll" href="${request.route_url('logout')}"><b>LOG OUT</b></a></li>
             </ul>
 
         </div>

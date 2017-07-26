@@ -32,7 +32,7 @@ function call_borrow_admin(respond)
 												"<td>"+respond[j].start_date + "-" + respond[j].stop_date +"</td>"+
 												"<td>"+
 													"<a><button type='button' class='btn btn-success' onclick='edit_borrow_admin_button("+ respond[j].id +")'><i class='glyphicon glyphicon-floppy-saved'></i></button></a>"+
-													"<button type='button' class='btn btn-danger'><i class='glyphicon glyphicon-trash'></i></button>"+
+													"<button type='button' class='btn btn-danger' onclick='delete_borrow_list_admin("+ respond[j].id +")'><i class='glyphicon glyphicon-trash'></i></button>"+
 												"</td>"+
 											"</tr>"
     }

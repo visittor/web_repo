@@ -10,7 +10,7 @@ function edit_borrow_admin_button(i)
         url: url,
         type: 'get',
         data: {
-            id: i,
+            id: i
         },
         dataType: 'json',
 
@@ -18,6 +18,20 @@ function edit_borrow_admin_button(i)
     });
 }
 
+function delete_borrow_list_admin(a)
+{
+    var url = document.getElementById('url_').innerHTML+"admin_delete_borrow.json";
+    $.ajax({
+        url: url,
+        type: 'post',
+        data: {
+            id: a
+        },
+        dataType: 'json',
+
+        success:cancle_edit_borrow
+    });
+}
 
 function submit_edit_borrow(i)
 {
@@ -50,7 +64,7 @@ function cancle_edit_borrow()
         url: url,
         type: 'get',
         data: {
-            requestByAjax: 1,
+            requestByAjax: 1
         },
         dataType: 'json',
 
@@ -67,7 +81,7 @@ function edit_return_admin_button(i)
         url: url,
         type: 'get',
         data: {
-            id: i,
+            id: i
         },
         dataType: 'json',
 
@@ -106,7 +120,7 @@ function cancle_edit_return()
         url: url,
         type: 'get',
         data: {
-            requestByAjax: 1,
+            requestByAjax: 1
         },
         dataType: 'json',
 
