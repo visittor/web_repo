@@ -18,8 +18,10 @@ class item(Base):
 
 	cart_id = Column(Integer,ForeignKey("cart.id"))
 	in_cart = relationship("cart",back_populates = "items")
+	cart_history = relationship("item_history_pointer", back_populates = "item")
 
 	order = relationship("order_item",cascade = "delete",back_populates = "item")
+
 
 	name = Column(VARCHAR(15))
 	main_category = Column(VARCHAR(15))

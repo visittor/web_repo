@@ -18,8 +18,10 @@ class member(Base):
 	id = Column(Integer,primary_key = True)
 
 	cart = relationship("cart",cascade="save-update",back_populates = "owner", foreign_keys='[cart.owner_id]')
+	history_cart = relationship("cart_history", back_populates = "owner", foreign_keys='[cart_history.owner_id]')
 
 	responsible_cart = relationship("cart",back_populates = "teacher", foreign_keys='[cart.teacher_id]')
+	history_responsible_cart = relationship("cart_history", back_populates = "teacher", foreign_keys='[cart_history.teacher_id]')
 
 	orders = relationship("order_item",cascade="save-update,delete",back_populates = "owner")
 
