@@ -192,5 +192,14 @@ class check_order(object):
 		print "\nsomething wrong\n"
 		return  {'a' : 'hello'}
 
+@view_defaults(renderer = 'json', permission = 'access')
+class Cart_status(object):
+	"""docstring for Cart_status"""
+	def __init__(self, request):
+		self.request = request
 
+	@view_config(route_name = 'user_all_cart_json')
+	def sent_cart_status(self):
+		cart_list = [ i.dict_ for i in self.request.dbsession.query(cart).filter_by(owner_id = self.request.user.id).all()]
+		return cart_list
 

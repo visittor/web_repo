@@ -54,6 +54,8 @@ def includeme(config):
     config.add_route('view_order_detail_json', '/view_order_detail.json', factory = user_page_foctory)
     config.add_route('confirm_order_json', '/confirm_order.json', factory = user_page_foctory)
 
+    config.add_route('user_all_cart_json', '/user_all_cart.json', factory = user_page_foctory)
+
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
 
