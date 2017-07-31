@@ -267,12 +267,14 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="col-md-2 control-label">อัพโหลดรูป</label>
-                <div class="col-md-7 ">
-                    <div class="input-group">
-                        <input id="image_input" type="file" name="p_img" class="form-control" >
+                <form action="/save_image" method="post" accept-charset="utf-8" enctype="multipart/form-data">
+                    <label class="col-md-2 control-label">อัพโหลดรูป</label>
+                    <div class="col-md-7 ">
+                        <div class="input-group">
+                            <input id="image_input" type="file" name="p_img" class="form-control" >
+                        </div>
                     </div>
-                </div>
+                </form>
             </div>
 
             <!-- Success message -->
@@ -287,6 +289,7 @@
                     <button type="submit" class="btn btn-success btn-lg"><span
                             class="glyphicon glyphicon-floppy-disk"></span> บันทึก</button>
                     <button type="submit" class="btn btn-danger btn-lg">ยกเลิก</button>
+                </div>
             </div>
 
         </fieldset>

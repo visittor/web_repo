@@ -17,10 +17,12 @@ from ..models import (
     get_tm_session,
     )
 from ..models import MyModel
+from ..models.Cart_history import cart_history, item_history_pointer
 from ..models.User import member
 from ..models.Cart import cart
 from ..models.Item import order_item, item
 from ..models.type import category_type_storage
+
 
 import datetime
 

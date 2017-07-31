@@ -11,17 +11,17 @@ from sqlalchemy.orm import relationship
 
 from .meta import Base
 
-class cart_history(object):
+class cart_history(Base):
 	__tablename__ = "cart_history"
 	id = Column(Integer,primary_key = True)
 
 	owner_id = Column(Integer, ForeignKey("member.id"))
 	teacher_id = Column(Integer,ForeignKey("member.id"))
 
-	owner = relationship("member", foreign_keys='[cart_history.owner_id]')
-	teacher = relationship("member", foreign_keys='[cart_history.teacher_id]')
+	# owner = relationship("member", back_populates = "history_cart", foreign_keys='[cart_history.owner_id]')
+	# teacher = relationship("member", back_populates = "history_responsible_cart", foreign_keys='[cart_history.teacher_id]')
 
-	items = relationship("item_history_pointer",back_populates = "cart_history")
+	# items = relationship("item_history_pointer",back_populates = "cart_history")
 
 	admin_approve = Column(Integer)
 	teacher_approve = Column(Integer)
@@ -62,12 +62,12 @@ class cart_history(object):
 
 		return dic
 
-class item_history_pointer(object):
+class item_history_pointer(Base):
 	__tablename__ = "item_history_pointer"
 	id = Column(Integer, primary_key = True)
 
 	item_id = Column(Integer,ForeignKey("item.id"))
-	item = relationship("item",back_populates = "order")
+	# item = relationship("item",back_populates = "order")
 
 	cart_history_id = Column(Integer,ForeignKey("cart_history.id"))
-	cart_history = relationship("cart_history",back_populates = "items")
+	# cart_history = relationship("cart_history",back_populates = "items")
