@@ -378,7 +378,7 @@ function call_add_item(respond)
 		}
 		$("#storage_list").html(in_storage_list);
 		$("#list_category_edit").attr('onChange', '').change( function() {
-			alert('change');
+			console.log('Change!');
 			main_category = document.getElementById("list_category_edit").value;
 			console.log(main_category_list + ' ' + respond.sub_category[main_category]);
 			list_sub_category = respond.sub_category[main_category];
@@ -400,5 +400,10 @@ function submit_add_item() {
     var type = document.getElementById("type_list").value;
     var storage = document.getElementById("storage_list").value;
     var note = document.getElementById("note").value;
-    add_item(new_name,main_cat,sub_cat,type,storage,note);
+    var formdata = new FormData();
+    // var img = $("#image_inpur").files;
+	formdata.append('photo', $("#image_input")[0].files[0]);
+	console.log(formdata);
+	// var send_pic = JSON.stringify($("#image_input")[0].files[0]);
+    add_item(new_name,main_cat,sub_cat,type,storage,note,formdata);
 }

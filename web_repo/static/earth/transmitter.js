@@ -104,8 +104,26 @@ function send_save_order(a, b, c, d)
                 alert('something wrong');
             }
             else{
-                alert('Done!')
+                alert('Done!');
             }
         }
+    });
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* Rent Status */
+
+function request_rent_status()
+{
+    var url = document.getElementById('url_').innerHTML+"user_all_cart.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            request_order_detail: 1
+        },
+        dataType: 'json',
+
+        success:call_rent_status
     });
 }

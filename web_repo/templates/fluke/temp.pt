@@ -27,8 +27,8 @@
           rel='stylesheet' type='text/css'>
 
     <!-- Custom styles for this template -->
-    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/navbar-fixed-top.css')}" rel="stylesheet">
-    <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/tooltip-viewport.css')}" rel="stylesheet">
+    <!--?<link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/navbar-fixed-top.css')}" rel="stylesheet">-->
+    <!--?<link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/tooltip-viewport.css')}" rel="stylesheet">-->
 
     <script src="${request.static_url('web_repo:static/fluke/assets/js/jquery-3.2.1.min.js')}"></script>
 
@@ -94,39 +94,39 @@ font-size: 16px;"> แสดงชื่อผู้เข้าใช้ระ�
 				
 					
                     <li>
-                        <a  href="index.html"><i class="fa fa-dashboard fa-3x"></i> หน้าแรก </a>
+                        <a  href="#"><i class="fa fa-dashboard fa-3x"></i> หน้าแรก </a>
                     </li>
 					
 					 <li>
                         <a href="#"><i class="fa fa-sitemap fa-3x"></i> การให้บริหารนักศึกษา<span class="fa arrow"></span></a>
                         <ul class="nav nav-second-level">
                             <li>
-                                <a id = "borrow">การยืม</a>
+                                <a href="#" id = "borrow">การยืม</a>
                             </li>
                             <li>
-                                <a id="return">การคืน</a>
+                                <a href="#" id="return">การคืน</a>
                             </li>
                             
                         </ul>
                       </li>  
                   <li  >
                       <li>
-                        <a  id="list_category"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
+                        <a href="#" id="list_category"><i class="fa fa-desktop fa-3x"></i> การจัดการหมวดหมู่หลัก</a>
                     </li>
                     <li>
-                        <a  id="list_subcategory"><i class="fa fa-qrcode fa-3x"></i> การจัดการหมวดหมู่ย่อย</a>
+                        <a href="#" id="list_subcategory"><i class="fa fa-qrcode fa-3x"></i> การจัดการหมวดหมู่ย่อย</a>
                     </li>
 						   <li  >
-                        <a  id="list_devicetype"><i class="fa fa-bar-chart-o fa-3x"></i> การจัดการประเภทอุปกรณ์</a>
+                        <a href="#" id="list_devicetype"><i class="fa fa-bar-chart-o fa-3x"></i> การจัดการประเภทอุปกรณ์</a>
                     </li>	
                       <li  >
-                        <a  id="list_place"><i class="fa fa-table fa-3x"></i> การจัดการสถานที่เก็บของ</a>
+                        <a href="#" id="list_place"><i class="fa fa-table fa-3x"></i> การจัดการสถานที่เก็บของ</a>
                     </li>
                     <li  >
-                        <a  id="list_device"><i class="fa fa-edit fa-3x"></i> การจัดการอุปกรณ์ </a>
+                        <a href="#" id="list_device"><i class="fa fa-edit fa-3x"></i> การจัดการอุปกรณ์ </a>
                     </li>				
 					<li  >
-                        <a   href="list_user.html"><i class="fa fa-bolt fa-3x"></i> การจัดการผู้ใช้งาน</a>
+                        <a   href="#"><i class="fa fa-bolt fa-3x"></i> การจัดการผู้ใช้งาน</a>
                     </li>	
                      	
                 </ul>

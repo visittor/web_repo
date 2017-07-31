@@ -44,37 +44,39 @@
 <body>
 
 <nav id="mainNav" class=" navbar-inverse navbar-fixed-top ">
-    <div class="container-fluid">
-        <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
-            </button>
-            <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
-        </div>
+    <div id="inner_page">
+        <div class="container-fluid">
+            <!-- Brand and toggle get grouped for better mobile display -->
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1"><span class="sr-only">Toggle navigation</span> Menu <i class="fa fa-bars"></i>
+                </button>
+                <a class="navbar-brand page-scroll" href="#page-top">ชื่อของผู้ใช้งาน</a>
+            </div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav navbar-right ">
-                <li><a class="glyphicon glyphicon-shopping-cart " href="rentItem.html"  data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
-                <li><a class="glyphicon glyphicon-calendar " href=""  data-placement="bottom" title="ระบบจองห้อง"> </a></li>
-                <!--<li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>-->
-                <li><a class="glyphicon glyphicon-user " href="personal_infomation.html"  data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เพิ่มเติม<span class="caret"></span></a>
-                    <ul class="dropdown-menu ">
-                        <li><a href="statusofrent.html">ตรวจสอบสถานะการยืม คืน อุปกรณ์</a></li>
-                        <li><a href=" ">ตรวจสอบสถานะการจองห้อง</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="Additem.html">เพิ่มอุปกรณ์</a></li>
-                    </ul>
-                </li>
-                <li><a class="page-scroll" href="${request.route_url('logout')}"><b>LOG OUT</b></a></li>
-            </ul>
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav navbar-right ">
+                    <li><a class="glyphicon glyphicon-shopping-cart " href="rentItem.html"  data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
+                    <li><a class="glyphicon glyphicon-calendar " href=""  data-placement="bottom" title="ระบบจองห้อง"> </a></li>
+                    <!--<li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>-->
+                    <li><a class="glyphicon glyphicon-user " href="personal_infomation.html"  data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เพิ่มเติม<span class="caret"></span></a>
+                        <ul class="dropdown-menu ">
+                            <li><a onclick="request_rent_status()">ตรวจสอบสถานะการยืม คืน อุปกรณ์</a></li>
+                            <li><a href=" ">ตรวจสอบสถานะการจองห้อง</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="Additem.html">เพิ่มอุปกรณ์</a></li>
+                        </ul>
+                    </li>
+                    <li><a class="page-scroll" href="${request.route_url('logout')}"><b>LOG OUT</b></a></li>
+                </ul>
 
+            </div>
+            <!-- /.navbar-collapse -->
         </div>
-        <!-- /.navbar-collapse -->
+        <!-- /.container-fluid -->
     </div>
-    <!-- /.container-fluid -->
 </nav>
 
 

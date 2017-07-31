@@ -509,21 +509,24 @@ function go_add_item()
     });
 }
 
-function add_item(a, b, c, d, e, f)
+function add_item(a, b, c, d, e, f, g)
 {
     var url = document.getElementById('url_').innerHTML+"admin_add_device.json";
     $.ajax({
         url: url,
         type: 'post',
+        // processData: false,
+        // contentType: false,
         data: {
             name: a,
             main_category: b,
             sub_category: c,
             type_: d,
             storage: e,
-            note: f
+            note: f,
+            item_photo: g
         },
-        dataType: 'json',
+        dataType: 'xml',
 
         success:function (respond) {
             if (respond.exception == 1){

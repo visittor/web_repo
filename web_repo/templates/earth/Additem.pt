@@ -270,7 +270,7 @@
                 <label class="col-md-2 control-label">อัพโหลดรูป</label>
                 <div class="col-md-7 ">
                     <div class="input-group">
-                        <input type="file" name="p_img" class="form-control" >
+                        <input id="image_input" type="file" name="p_img" class="form-control" >
                     </div>
                 </div>
             </div>

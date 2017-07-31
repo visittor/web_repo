@@ -23,7 +23,7 @@ function call_list_device_from_container(respond)
 				$('#select_subcategory').append("<option value='" + list_sub_category[i] + "'>" + list_sub_category[i] + "</option>");
 			}
 		});
-    var url_static = document.getElementById('url_static').innerHTML+"/earth/rentitem_container.html"
+    var url_static = document.getElementById('url_static').innerHTML+"/earth/rentitem_container.html";
     $.get(url_static, function(data){
         document.getElementById('card_row').innerHTML = '';
         for(i in respond.items){
@@ -110,4 +110,39 @@ function save_order()
     else {
         send_save_order(teacher_name, start_date, stop_date, note);
     }
+}
+
+////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
+/* Rent Status */
+
+function call_rent_status(respond)
+{
+    var url_static = document.getElementById('url_static').innerHTML+"/earth/rent_status.html";
+    $.get(url_static, function(data){
+        $("#inner_page").html(data);
+        var counter = 1 ;
+        var status = '';
+        for(i in respond){
+            if(respond[i].teacher_approve && respond[i].admin_approve){
+                status = "เรียบร้อย";
+            }
+            else if(respond[i].teacher_approve || respond.admin_approve){
+                status = "ติดต่อเจ้าหน้าที่";
+            }
+            else{
+                status = "รอตรวจสอบโดยอาจารย์ที่ปรึกษา";
+            }
+            $("#rent_status_table").append("<tr>"+
+                    "<td>" + counter + "</td>"+
+                    "<td>" + respond[i].id + "</td>"+
+                    "<td>" + respond[i].owner_id + "</td>"+
+                    "<td>" + respond[i].owner.first_name + " " + respond[i].owner.last_name + "</td>"+
+                    "<td>" + "อาจารย์" + respond[i].teacher.first_name + " " + respond[i].teacher.last_name + "</td>"+
+                    "<td>" + respond[i].start_date + respond[i].stop_date + "</td>"+
+                    "<td>" + status + "</td>"+
+                    "<td><button class='btn btn-info ' type='button'>รายละเอียด</button></td>"+
+                "</tr>");
+            counter++;
+        }
+    });
 }
