@@ -6,6 +6,8 @@ from pyramid.view import (
 from ..models.Item import item
 from ..models.Cart import cart
 from ..models.type import category_type_storage
+from ..models.Cart_history import cart_history, item_history_pointer
+from ..scripts import util
 # from ..models.type import category_list, type_list, storage_list
 import transaction
 
@@ -34,13 +36,13 @@ class admin_borrow_return(object):
 	@property
 	def borrow_list(self):
 		a = []
-		a = self.request.dbsession.query(cart).filter_by(admin_approve = 0).all()
+		a = self.request.dbsession.query(cart).filter_by(admin_approve = 0, teacher_approve = 1).all()
 		return a
 
 	@property
 	def wait_return(self):
 		a = []
-		a = self.request.dbsession.query(cart).filter_by(admin_approve = 1).all()
+		a = self.request.dbsession.query(cart).filter_by(admin_approve = 1, teacher_approve = 1).all()
 		return a
 
 	def get_cart(self, id):
@@ -246,8 +248,7 @@ class admin_borrow_return(object):
 			cart_.admin2teacher = to_advisor
 			cart_.student_note =  note
 			cart_.admin_approve = 2
-			self.request.dbsession.delete(cart_)
-			return {'exception' : 0}
+			return {'exception' : create_cart_history(cart_, self.request)}
 		except Exception as e:
 			return {'exception' : 1}
 
@@ -268,7 +269,6 @@ class admin_borrow_return(object):
 		storage_list = eval(storage_obj.list_)
 
 		items = self.search_item({'type_' : type_json, 'sub_category' : sub_category_json, 'storage' : storage_json})
-		print "\nfuckkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkkk\n"
 		items_list = []
 		for i in items:
 			dict_ = i.dict_
@@ -294,7 +294,6 @@ class admin_borrow_return(object):
 
 		storage_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'storage_list').one()
 		storage_list = eval(storage_obj.list_)
-		print "\nwtffffffffffffffffffffffffffffff\n"
 
 		return {"type_list" :type_list, "sub_category" : sub_category, "storage" : storage_list}
 

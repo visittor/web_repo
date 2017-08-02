@@ -124,27 +124,27 @@ class order_item_view(object):
 		item_id = json["id"]
 		return {"exception" : self.create_order(item_id)}
 
-	@view_config(route_name = 'search_item_json', request_method = 'GET')
-	def user_search_item(self):
-		json = self.request.GET
-		main_category_json = json["main_category"]
-		sub_category_json = json["sub_category"]
+	# @view_config(route_name = 'search_item_json', request_method = 'GET')
+	# def user_search_item(self):
+	# 	json = self.request.GET
+	# 	main_category_json = json["main_category"]
+	# 	sub_category_json = json["sub_category"]
 
-		category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
-		sub_category = eval(category_obj.list_)
+	# 	category_obj = self.request.dbsession.query(category_type_storage).filter_by(name = 'main_category').one()
+	# 	sub_category = eval(category_obj.list_)
 
-		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name='type_list').one()
-		type_list = eval(type_obj.list_)
+	# 	type_obj = self.request.dbsession.query(category_type_storage).filter_by(name='type_list').one()
+	# 	type_list = eval(type_obj.list_)
 
-		items = self.search_item({'sub_category' : sub_category_json})
+	# 	items = self.search_item({'sub_category' : sub_category_json})
 
-		items_list = []
-		for i in items:
-			dict_ = i.dict_
-			dict_["code_name"] = str(type_list.get(i.type_, 'NULL'))+str(i.id)
-			items_list.append(dict_)
+	# 	items_list = []
+	# 	for i in items:
+	# 		dict_ = i.dict_
+	# 		dict_["code_name"] = str(type_list.get(i.type_, 'NULL'))+str(i.id)
+	# 		items_list.append(dict_)
 
-		return {"items" : items_list, "sub_category" : sub_category}
+	# 	return {"items" : items_list, "sub_category" : sub_category}
 
 	@view_config(route_name = 'delete_order_json', request_method = 'POST')
 	def user_delete_order(self):
@@ -197,6 +197,10 @@ class Cart_status(object):
 	"""docstring for Cart_status"""
 	def __init__(self, request):
 		self.request = request
+
+	@view_config(renderer = '../templates/earth/rentitem_template.pt', route_name = 'user_all_cart')
+	def user_all_cart(self):
+		return {'a' : 'hello'}
 
 	@view_config(route_name = 'user_all_cart_json')
 	def sent_cart_status(self):

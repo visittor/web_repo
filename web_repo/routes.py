@@ -12,7 +12,10 @@ def includeme(config):
     config.add_route('home', '/')
     config.add_route('admin_home', '/admin', factory = admin_page_factory)
     config.add_route('user_home', '/user', factory = user_page_foctory)
+    config.add_route('teacher_home', '/teacher_home', factory = teacher_page_foctory)
     config.add_route('user_check_item', '/user_check_item', factory = user_page_foctory)
+
+    config.add_route('search_item_json', '/search_item.json')
 
     config.add_route('test_admin_borrow_json', '/test_admin_borrow.json')
     config.add_route('test_admin_return_json', '/test_admin_return.json')
@@ -49,12 +52,15 @@ def includeme(config):
     config.add_route('admin_add_device_json', '/admin_add_device.json', factory = admin_page_factory)
 
     config.add_route('order_item_json', '/order_item.json', factory = user_page_foctory)
-    config.add_route('search_item_json', '/search_item.json', factory = user_page_foctory)
     config.add_route('delete_order_json', '/delete_order.json', factory = user_page_foctory)
     config.add_route('view_order_detail_json', '/view_order_detail.json', factory = user_page_foctory)
     config.add_route('confirm_order_json', '/confirm_order.json', factory = user_page_foctory)
 
     config.add_route('user_all_cart_json', '/user_all_cart.json', factory = user_page_foctory)
+    config.add_route('user_all_cart', '/user_all_cart', factory = user_page_foctory)
+
+    config.add_route('teacher_all_cart', '/teacher_all_cart', factory = teacher_page_foctory)
+    config.add_route('teacher_all_cart_json', '/teacher_all_cart.json', factory = teacher_page_foctory)
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')
@@ -82,3 +88,15 @@ class user_page_resource(object):
     def __acl__(self):
         return [(Allow, 'role:s', 'access'),
                 (Allow, 'role:t', 'access'),]
+
+def teacher_page_foctory(request):
+    return user_page_resource()
+
+class teacher_page_resource(object):
+
+    def __init__(self):
+        pass
+
+    def __acl__(self):
+        return [(Allow, 'role:t', 'access'),]
+

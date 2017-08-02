@@ -113,9 +113,9 @@ function send_save_order(a, b, c, d)
 ////////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
 /* Rent Status */
 
-function request_rent_status()
+function request_rent_status(url)
 {
-    var url = document.getElementById('url_').innerHTML+"user_all_cart.json";
+    // var url = document.getElementById('url_').innerHTML+"user_all_cart.json";
     $.ajax({
         url: url,
         type: 'get',

@@ -119,7 +119,7 @@ function call_rent_status(respond)
 {
     var url_static = document.getElementById('url_static').innerHTML+"/earth/rent_status.html";
     $.get(url_static, function(data){
-        $("#inner_page").html(data);
+        $("#inner_container").html(data);
         var counter = 1 ;
         var status = '';
         for(i in respond){
