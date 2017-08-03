@@ -33,6 +33,17 @@ def create_cart_history(cart_, request):
 		print "\n", e,"\n"
 		return 1
 
+def get_cart_data(id):
+	if type(id) == str :
+		id = int(id)
+	cart_ = self.get_cart(id)
+	dic = cart_.dict_
+	# print "\n", cart_.items, "\n"
+	# items = self.request.dbsession.query(item).filter_by(cart_id = id).all()
+	# for i in items:
+	# 	dic["items"].append(i.data_)
+	return dic
+
 def search_item(request, kwargh):
 	for i,j in kwargh.items():
 		if type(j) == unicode and j == '':

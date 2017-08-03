@@ -58,9 +58,12 @@ def includeme(config):
 
     config.add_route('user_all_cart_json', '/user_all_cart.json', factory = user_page_foctory)
     config.add_route('user_all_cart', '/user_all_cart', factory = user_page_foctory)
+    config.add_route('user_cart_info_json', '/user_cart_info.json', factory = user_page_foctory)
 
     config.add_route('teacher_all_cart', '/teacher_all_cart', factory = teacher_page_foctory)
     config.add_route('teacher_all_cart_json', '/teacher_all_cart.json', factory = teacher_page_foctory)
+    config.add_route('teacher_cart_info_json', '/teacher_cart_info.json', factory = teacher_page_foctory)
+    config.add_route('teacher_approve_item_json', '/teacher_approve_item.json', factory = teacher_page_foctory)
 
     config.add_route('login', '/login')
     config.add_route('logout', '/logout')

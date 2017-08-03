@@ -7,6 +7,7 @@ from ..models.Item import order_item, item
 from ..models.Cart import cart
 from ..models.User import member
 from ..models.type import category_type_storage
+from ..scripts import util
 import datetime
 
 @view_defaults(renderer='json', permission = 'access')
@@ -205,5 +206,11 @@ class Cart_status(object):
 	@view_config(route_name = 'user_all_cart_json')
 	def sent_cart_status(self):
 		cart_list = [ i.dict_ for i in self.request.dbsession.query(cart).filter_by(owner_id = self.request.user.id).all()]
-		return cart_list
+		return cart_list 
 
+	@view_config(route_name = 'user_cart_info_json')
+	def cart_info(self):
+		json = self.request.GET
+		id = json["id"]
+		dic_ = get_cart_data(id)
+		return dict_
