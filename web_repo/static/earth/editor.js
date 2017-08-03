@@ -7,7 +7,7 @@
 function call_list_device_from_container(respond)
 {
     var x = 1;
-    console.log(respond);
+    // console.log(respond);
     $('#select_category').html('<option value="">เลือกหมวดหมู่หลัก</option>');
     $('#select_subcategory').html('<option value="">เลือกหมวดหมู่หลักก่อน</option>');
     for(i in respond.sub_category){
@@ -15,10 +15,10 @@ function call_list_device_from_container(respond)
     }
 
     $("#select_category").attr('onChange', '').change( function() {
-			console.log('change');
+			// console.log('change');
 			main_category = document.getElementById("select_category").value;
 			list_sub_category = respond.sub_category[main_category];
-			console.log(list_sub_category);
+			// console.log(list_sub_category);
 			for (i in list_sub_category) {
 				$('#select_subcategory').append("<option value='" + list_sub_category[i] + "'>" + list_sub_category[i] + "</option>");
 			}
@@ -73,7 +73,7 @@ function call_list_device_from_container(respond)
 
 function call_order_detail(respond)
 {
-    console.log(respond);
+    // console.log(respond);
     $('#user_name').html(respond.owner.first_name + " " + respond.owner.last_name);
     $('#user_id').html(respond.owner.id);
     $('#user_years').html(1);
@@ -97,7 +97,7 @@ function save_order()
     var start_date = $("#start_date").val();
     var stop_date = $("#stop_date").val();
     var note = $("#student_note").val();
-    console.log("teacher id = "+teacher_name+typeof teacher_name+"\nstart date = "+start_date+typeof start_date+"\nstop date = "+stop_date+typeof stop_date)
+    // console.log("teacher id = "+teacher_name+typeof teacher_name+"\nstart date = "+start_date+typeof start_date+"\nstop date = "+stop_date+typeof stop_date)
     if(teacher_name == ""){
         alert("กรุณาเลือกชื่ออาจารย์");
     }

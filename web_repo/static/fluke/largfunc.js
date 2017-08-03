@@ -49,7 +49,7 @@ function submit_edit_borrow(i)
 
         success: function(respond){
             if(respond.exception == 1){
-                alert('something wrong');
+                alert('Something wrong');
             }
             cancle_edit_borrow();
         }
@@ -76,7 +76,6 @@ function cancle_edit_borrow()
 function edit_return_admin_button(i)
 {
     var url = document.getElementById('url_').innerHTML+"admin_edit_return.json";
-    alert(url);
     $.ajax({
         url: url,
         type: 'get',
@@ -106,7 +105,7 @@ function submit_edit_return(i)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             cancle_edit_return();
         }
@@ -173,10 +172,8 @@ function send_new_category_name(a,b)
         dataType: 'json',
 
         success:function (respond) {
-            alert(a+" "+typeof a);
-            alert(b+" "+typeof b);
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_main_category();
         }
@@ -195,9 +192,8 @@ function delete_main_category(name)
         dataType: 'json',
 
         success:function (respond) {
-            alert(name+" "+typeof name);
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_main_category();
         }
@@ -236,7 +232,6 @@ function add_subcategory()
 
 function send_new_subcategory_name(main,old,new_name)
 {
-    alert(main+","+old+","+new_name);
     var url = document.getElementById('url_').innerHTML+"admin_edit_sub_category.json";
     $.ajax({
         url: url,
@@ -250,7 +245,7 @@ function send_new_subcategory_name(main,old,new_name)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_sub_category();
         }
@@ -260,7 +255,7 @@ function send_new_subcategory_name(main,old,new_name)
 function delete_sub_category(main,sub)
 {
     var url = document.getElementById('url_').innerHTML+"admin_delete_sub_Category.json";
-    console.log(main + ',' + sub);
+    // console.log(main + ',' + sub);
     $.ajax({
         url: url,
         type: 'post',
@@ -282,7 +277,7 @@ function delete_sub_category(main,sub)
 function submit_add_subcategory(a, b)
 {
     var url = document.getElementById('url_').innerHTML+"admin_insert_sub_category.json";
-    console.log(a + ',' + b);
+    // console.log(a + ',' + b);
     $.ajax({
         url: url,
         type: 'post',
@@ -294,7 +289,7 @@ function submit_add_subcategory(a, b)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_sub_category();
         }
@@ -333,7 +328,7 @@ function send_new_devicetype_name(a,b,c)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_devicetype();
         }
@@ -354,7 +349,7 @@ function add_devicetype(a, b)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_devicetype();
         }
@@ -374,7 +369,7 @@ function delete_device_type(a)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_devicetype();
         }
@@ -411,7 +406,7 @@ function send_new_place_name(a,b) {
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_place();
         }
@@ -431,7 +426,7 @@ function delete_list_place(del_name)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_place();
         }
@@ -451,7 +446,7 @@ function send_add_place(a)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_place();
         }
@@ -477,7 +472,7 @@ function go_list_device()
 
 function search_item(a,b,c)
 {
-    console.log(a+','+b+','+c);
+    // console.log(a+','+b+','+c);
     var url = document.getElementById('url_').innerHTML+"admin_device.json";
     $.ajax({
         url: url,
@@ -495,7 +490,7 @@ function search_item(a,b,c)
 
 function go_add_item()
 {
-    console.log('on go_add_iem');
+    // console.log('on go_add_iem');
     var url = document.getElementById('url_').innerHTML+"admin_add_device.json";
     $.ajax({
         url: url,
@@ -530,7 +525,7 @@ function add_item(a, b, c, d, e, f, g)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_device();
         }
@@ -539,7 +534,6 @@ function add_item(a, b, c, d, e, f, g)
 
 function delete_items(a)
 {
-    alert(a);
     var url = document.getElementById('url_').innerHTML+"admin_delete_device.json";
     $.ajax({
         url: url,
@@ -551,7 +545,7 @@ function delete_items(a)
 
         success:function (respond) {
             if (respond.exception == 1){
-                alert('wrong');
+                alert('Something wrong');
             }
             go_list_device()
         }

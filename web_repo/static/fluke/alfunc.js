@@ -150,7 +150,12 @@ function add_category()
 	$("#page-inner").load(url_static, function () {
 		$('#submit_add_category_button').attr("onclick", "").click(function() {
 			var name_to_add = document.getElementById("category_to_add").value;
-                  submit_add_category(name_to_add);
+			if(name_to_add == ""){
+				alert("กรุณาใส่ชื่อหมวดหมู่หลักที่ต้องการเพิ่ม");
+			}
+			else {
+                submit_add_category(name_to_add);
+            }
 		});
     });
 }
@@ -160,9 +165,33 @@ function edit_main_category(name)
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/edit_category.html";
 	$("#page-inner").load(url_static, function () {
 		var old_name = name;
+		$('#new_name').on('keypress', function (e) {
+			 if(e.which == 13){
+
+				//Disable textbox to prevent multiple submit
+				$('#new_name').attr("disabled", "disabled");
+
+				//Do Stuff, submit, etc..
+				var new_name = document.getElementById("new_name").value;
+				if(new_name == ""){
+					alert("กรุณากรอกชื่อหมวดหมู่หลัก");
+					$('#new_name').removeAttr("disabled");
+				}
+				else {
+                    e.preventDefault();
+                    $('#new_name').removeAttr("disabled");
+                    send_new_category_name(old_name, new_name);
+                }
+         	}
+  		 });
 		$('#submit_main_category_name').attr("onclick", "").click(function() {
 			var new_name = document.getElementById("new_name").value;
-                  send_new_category_name(old_name,new_name);
+			if(new_name == ""){
+				alert("กรุณากรอกชื่อหมวดหมู่หลัก");
+			}
+			else {
+                send_new_category_name(old_name, new_name);
+            }
 		});
     });
 }
@@ -171,7 +200,7 @@ function call_sub_category(respond)
 {
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/list_subcategory.html";
 	$("#page-inner").load(url_static, function () {
-		console.log(respond);
+		// console.log(respond);
 		var inner_detail = "<tr> <th>#</th> <th>ชื่อหมวดหมู่หลัก</th> <th>ชื่อหมวดหมู่ย่อย</th> <th>การจัดการ</th> </tr>";
 		var k =1;
 		for(i in respond){
@@ -188,17 +217,27 @@ function call_add_subcategory(respond)
 {
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/add_subcategory.html";
 	$("#page-inner").load(url_static, function (){
-		console.log(respond);
+		// console.log(respond);
 		var list_main =  "<option value=''>โปรดเลือกหมวดหมูหลัก</option>";
 		for(i in respond){
 			list_main = list_main + "<option value='" + respond[i] + "'>"+respond[i]+"</option>";
 		}
 		$("#select_main").html(list_main);
 		$('#submit_add_subcategory_button').attr("onclick", "").click(function() {
-		alert('Press');
 			var name_to_add = document.getElementById("new_subcategory").value;
 			var main_category_to_add = document.getElementById("select_main").value;
-                  submit_add_subcategory(main_category_to_add, name_to_add);
+			if(main_category_to_add == "" && name_to_add == ""){
+				alert("กรุณาเลือกหมวดหมู่หลักแล้วกรอกชื่อหมวดหมู่ย่อยที่ต้องการเพิ่ม");
+			}
+			else if(main_category_to_add == "" && name_to_add != ""){
+				alert("กรุณาเลือกหมวดหมู่หลัก");
+			}
+			else if(main_category_to_add != "" && name_to_add == ""){
+				alert("กรุณากรอกชื่อหมวดหมู่ย่อยที่ต้องการเพิ่ม");
+			}
+			else {
+                submit_add_subcategory(main_category_to_add, name_to_add);
+            }
 		});
     });
 
@@ -219,14 +258,25 @@ function edit_sub_category(main,sub)
 
 				//Do Stuff, submit, etc..
 				var new_name = document.getElementById("new_name").value;
-				e.preventDefault();
-				$('#new_name').removeAttr("disabled");
-				send_new_subcategory_name(main_name,old_name,new_name);
+				if(new_name == ""){
+					alert("กรุณากรอกชื่อหมวดหมู่ย่อย");
+					$('#new_name').removeAttr("disabled");
+				}
+				else {
+                    e.preventDefault();
+                    $('#new_name').removeAttr("disabled");
+                    send_new_subcategory_name(main_name, old_name, new_name);
+                }
          	}
   		 });
 		$('#submit_subcategory_name').attr("onclick", "").click(function() {
 				var new_name = document.getElementById("new_name").value;
-				send_new_subcategory_name(main_name,old_name,new_name);
+				if(new_name == ""){
+					alert("กรุณากรอกชื่อหมวดหมู่ย่อย");
+				}
+				else {
+                    send_new_subcategory_name(main_name, old_name, new_name);
+                }
 		});
 		// $('#submit_sub_category_name').attr("onclick", "onclick_submit_sub_category_name("+main_name+","+old_name+")")
     });
@@ -243,11 +293,11 @@ function call_list_devicetype(respond)
 {
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/list_devicetype.html";
 	$("#page-inner").load(url_static, function () {
-	    console.log(respond);
+	    // console.log(respond);
 	    var inner_detail = "<tr> <th>#</th> <th>ชื่อประเภทอุปกรณ์</th> <th>ชื่อย่อประเภทอุปกรณ์</th> <th>การจัดการ</th> </tr>";
         var x = 1;
         for(i in respond){
-	        console.log(i+respond[i]);
+	        // console.log(i+respond[i]);
 	        inner_detail = inner_detail + "<tr> <td>"+ x +"</td> <td>"+ i +"</td> <td>"+ respond[i] +"</td> <td> <a><button type='button' class='btn btn-warning' onclick='edit_devicetype("+"\""+ i +"\""+","+"\""+ respond[i] +"\""+")' ><i class='glyphicon glyphicon-pencil'></i></button></a> <button onclick=\"delete_device_type('"+ i +"')\" type='button' class='btn btn-danger'><i class='glyphicon glyphicon-remove'></i></button> </td> </tr>";
             x++;
         }
@@ -262,8 +312,12 @@ function edit_devicetype(old,code,new_name)
 	    document.getElementById("input_code").value = code;
 	    $("#submit_edit_devicetype").attr("onclick", "").click(function () {
             new_name = document.getElementById("new_devicetype").value;
-            alert(old+' '+new_name+' '+code);
-            send_new_devicetype_name(old,new_name,code);
+            if(new_name == ""){
+					alert("กรุณากรอกชื่อประเภทอุปกรณ์");
+				}
+			else {
+                send_new_devicetype_name(old, new_name, code);
+            }
         })
     });
 }
@@ -275,8 +329,12 @@ function call_add_devicetype()
 	    $("#submit_add_devicetype").attr("onclick", "").click(function () {
             new_type = document.getElementById("new_type").value;
             new_code = document.getElementById("new_code").value;
-            alert(new_type+' '+new_code);
-            add_devicetype(new_type,new_code);
+            if(new_type == "" || new_code == ""){
+            	alert("กรุณากรอกชื่อและชื่อย่อของประเภทอุปกรณ์ให้ครบ");
+			}
+			else {
+                add_devicetype(new_type, new_code);
+            }
         })
 
     });
@@ -286,7 +344,7 @@ function call_add_devicetype()
 
 function call_list_place(respond)
 {
-	console.log(respond)
+	// console.log(respond);
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/list_place.html";
 	$("#page-inner").load(url_static, function () {
 		var inner_detail = "<tr> <th>#</th> <th>ชื่อสถานที่เก็บอุปกรณ์</th> <th>การจัดการ</th> </tr>"
@@ -303,7 +361,12 @@ function call_edit_place(old_name)
 	$("#page-inner").load(url_static, function () {
 		$("#submit_new_place").attr("onclick", "").click(function () {
 			var new_name = document.getElementById("new_name").value;
-			send_new_place_name(old_name,new_name)
+			if(new_name == ""){
+					alert("กรุณากรอกสถานที่เก็บอุปกรณ์");
+				}
+			else {
+                send_new_place_name(old_name, new_name);
+            }
 		})
     });
 }
@@ -314,7 +377,12 @@ function call_add_place()
 	$("#page-inner").load(url_static, function () {
 		$("#submit_add_new_place").attr("onclick", "").click(function () {
 			var new_place = document.getElementById("new_place").value;
-			send_add_place(new_place)
+			if(new_place == ""){
+				alert("กรุณากรอกสถานที่ที่ต้องการเพิ่ม");
+			}
+			else {
+                send_add_place(new_place);
+            }
 		})
     });
 }
@@ -323,7 +391,7 @@ function call_add_place()
 
 function call_list_device(respond)
 {
-	console.log(respond)
+	// console.log(respond);
 	var url_static = document.getElementById('url_static').innerHTML+"fluke/list_device.html";
 	$("#page-inner").load(url_static, function () {
 		inner_type = "<option value = ''>ประเภทอุปกรณ์</option>";
@@ -359,7 +427,7 @@ function call_list_device(respond)
 
 function call_add_item(respond)
 {
-	console.log('on call_add_iem');
+	// console.log('on call_add_iem');
 	var url_static = document.getElementById('url_static').innerHTML+"earth/add_item.html";
 	$("#page-inner").load( url_static, function () {
 		var main_category_list = "<option value=''>เลือกหมวดหมู่หลัก</option>";
@@ -378,16 +446,16 @@ function call_add_item(respond)
 		}
 		$("#storage_list").html(in_storage_list);
 		$("#list_category_edit").attr('onChange', '').change( function() {
-			console.log('Change!');
+			// console.log('Change!');
 			main_category = document.getElementById("list_category_edit").value;
-			console.log(main_category_list + ' ' + respond.sub_category[main_category]);
+			// console.log(main_category_list + ' ' + respond.sub_category[main_category]);
 			list_sub_category = respond.sub_category[main_category];
 			$("#div_sub_category").html("<span class='input-group-addon'><i class='glyphicon glyphicon-pencil'></i></span> <select class='form-control' id='sub_category_edit'> ");
 			var in_sub_category = " <option value=''>เลือกหมวดหมู่ย่อย</option>";
 			for (i in list_sub_category) {
 				in_sub_category = in_sub_category + "<option value='" + list_sub_category[i] + "'>" + list_sub_category[i] + "</option>";
 			}
-			console.log(in_sub_category);
+			// console.log(in_sub_category);
 			$("#sub_category_edit").html(in_sub_category);
 		});
     });
@@ -403,7 +471,7 @@ function submit_add_item() {
     var formdata = new FormData();
     // var img = $("#image_inpur").files;
 	formdata.append('photo', $("#image_input")[0].files[0]);
-	console.log(formdata);
+	// console.log(formdata);
 	// var send_pic = JSON.stringify($("#image_input")[0].files[0]);
     add_item(new_name,main_cat,sub_cat,type,storage,note,formdata);
 }

@@ -23,7 +23,7 @@ function request_list_device_from_container(a, b)
 function send_borrow_request(a) {
     // console.log('อย่นี่นะ')
     var url = document.getElementById('url_').innerHTML+"order_item.json";
-    console.log(a);
+    // console.log(a);
     $.ajax({
         url: url,
         type: 'post',
@@ -78,7 +78,7 @@ function send_delete_order(a)
                 alert('something wrong');
             }
             else{
-                alert('เรียบร้อย');
+                alert('ลบข้อมูลเรียบร้อย');
                 delete_order(a);
             }
         }
@@ -104,7 +104,7 @@ function send_save_order(a, b, c, d)
                 alert('something wrong');
             }
             else{
-                alert('Done!');
+                alert('บันทึกสำเร็จ');
             }
         }
     });
