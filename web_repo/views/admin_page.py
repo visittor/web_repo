@@ -69,7 +69,8 @@ class admin_borrow_return(object):
 		try:
 			cart_ = self.request.dbsession.query(cart).filter_by(id = id).one()
 			# request.dbsession.delete(cart_)
-			cart_.admin_approve = -1
+			# cart_.admin_approve = -1
+			self.request.dbsession.delete(cart_)
 			return 0
 		except Exception as e:
 			print "\n",e,"\n"
