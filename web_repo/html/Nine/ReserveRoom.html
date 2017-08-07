@@ -38,57 +38,6 @@
          body { background-color:#ff9900;  }
      </style>
      -->
-    <script language="javascript" type="text/javascript">
-        <!--
-        function listboxchange1(p_index) {
-
-            //Clear Current options in subcategory1
-            document.add_project_form.subcategory1.options.length = 0;
-
-
-            switch (p_index) {
-
-                case "Class Project":
-                    document.add_project_form.subcategory1.options[0] = new Option("เลือกรายวิชา", "");
-
-                    document.add_project_form.subcategory1.options[1] = new Option("FRA241", "FRA241");
-
-                    document.add_project_form.subcategory1.options[2] = new Option("FRA221", "FRA241");
-
-                    break;
-
-                case "Camp":
-                    document.add_project_form.subcategory1.options[0] = new Option("เลือกชื่อค่าย", "");
-
-                    document.add_project_form.subcategory1.options[1] = new Option("FIBO Robocamp#6", "FIBO Robocamp#6");
-
-                    document.add_project_form.subcategory1.options[2] = new Option("FIBOLian4", "FIBOLian4");
-
-                    break;
-
-                case "Competition":
-                    document.add_project_form.subcategory1.options[0] = new Option("เลือกชื่อการแข่งขัน", "");
-
-                    document.add_project_form.subcategory1.options[1] = new Option("ABU2017", "ABU2017");
-
-                    document.add_project_form.subcategory1.options[2] = new Option("ABU2016", "ABU2016");
-
-                    break;
-
-                case "Normal Activity":
-                    document.add_project_form.subcategory1.options[0] = new Option("เลือกกิจกรรมทั่วไป", "");
-
-                    document.add_project_form.subcategory1.options[1] = new Option("FIBOอาสา", "FIBOอาสา");
-
-                    document.add_project_form.subcategory1.options[2] = new Option("Open house 2016", "Open house 2016");
-
-                    break;
-
-            }
-            return true;
-        }
-        //-->
-    </script>
     <!-- Special version of Bootstrap that only affects content wrapped in .bootstrap-iso -->
     <link rel="stylesheet" href="https://formden.com/static/cdn/bootstrap-iso.css" />
 
@@ -138,6 +87,7 @@
 
     <br>
     <form class="well form-horizontal" action=" " method="post" name="room" id="room" onsubmit="return ValidateForm(); true">
+
         <fieldset>
 
             <ol class="breadcrumb">
@@ -152,7 +102,7 @@
 
             <div class="form-group">
 
-        <div class="col-md-2 ">
+        <div class="col-md-1 ">
             <div class="input-group">
                 <span class="input-group-addon"><i class="glyphicon glyphicon-education"></i></span>
                 <select class="form-control" name="Room" id="Room" onchange="javascript: listboxchange1(this.options[this.selectedIndex].value);">
@@ -168,9 +118,6 @@
         </div>
     </div>
 
-    <div class="col-md-2 ">
-
-    </div>
 
 
     <div class="col-md-10 ">

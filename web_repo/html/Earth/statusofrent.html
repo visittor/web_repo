@@ -44,10 +44,9 @@
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
             <ul class="nav navbar-nav navbar-right ">
-                <li><a class="glyphicon glyphicon-shopping-cart tooltip-bottom" href="rentItem.html" data-toggle="tooltip" data-placement="bottom" title="ระบบยืม คืน อุปกรณ์"></a></li>
-                <li><a class="glyphicon glyphicon-calendar tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="ระบบจองห้อง"> </a></li>
-                <!--<li><a class="glyphicon glyphicon-picture tooltip-bottom" href="" data-toggle="tooltip" data-placement="bottom" title="สถานะการจองห้อง"></a></li>-->
-                <li><a class="glyphicon glyphicon-user tooltip-bottom" href="personal_infomation.html" data-toggle="tooltip" data-placement="bottom" title="ข้อมูลส่วนตัว"></a></li>
+                <li><a class="glyphicon glyphicon-shopping-cart tooltip-bottom" href="rentItem.html" > ยืม-คืนอุปกรณ์</a></li>
+                <li><a class="glyphicon glyphicon-calendar tooltip-bottom" href="" > จองห้อง</a></li>
+                <li><a class="glyphicon glyphicon-user tooltip-bottom" href="personal_infomation.html" > ข้อมูลส่วนตัว</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">เพิ่มเติม<span class="caret"></span></a>
                     <ul class="dropdown-menu ">
@@ -98,7 +97,7 @@
                     <td>อาจารย์ทดสอบ ทดลอง</td>
                     <td>20/6/60 - 1/7/60</td>
                     <td>รอตรวจสอบโดยอาจารย์ที่ปรึกษา</td>
-                    <td><button class="btn btn-info " type="button">รายละเอียด</button></td>
+                    <td><button class="btn btn-info " type="button" data-toggle="modal" data-target="#Modal">รายละเอียด</button></td>
                 </tr>
 
                 <tr>
@@ -109,7 +108,7 @@
                     <td>อาจารย์ทดสอบ ทดลอง</td>
                     <td>20/6/60 - 1/7/60</td>
                     <td>ติดต่อเจ้าหน้าที่</td>
-                    <td><button class="btn btn-info " type="button">รายละเอียด</button></td>
+                    <td><button class="btn btn-info " type="button" data-toggle="modal" data-target="#Modal">รายละเอียด</button></td>
                 </tr>
                 <tr>
                     <td>2</td>
@@ -119,7 +118,203 @@
                     <td>อาจารย์ทดสอบ ทดลอง</td>
                     <td>20/6/60 - 1/7/60</td>
                     <td>เรียบร้อย</td>
-                    <td><button class="btn btn-info " type="button">รายละเอียด</button></td>
+                    <td><button class="btn btn-info " type="button" data-toggle="modal" data-target="#Modal" >รายละเอียด</button>
+
+                        <div class="modal fade bs-example-modal-sm" id="Modal" tabindex="-1" role="dialog" aria-labelledby="ModalLabel">
+                            <div class="modal-dialog modal-lg" role="document">
+                                <div class="modal-content">
+                                    <div class="modal-header">
+                                        <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                                        <h3 class="modal-title" id="exampleModalLabel">สถานะการยืม</h3>
+                                    </div>
+                                    <div class="modal-body">
+                                        <center>
+                                            <form>
+                                                <div class="row">
+                                                    <div class="col-md-6">
+                                                        <div class="panel panel-success">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">ข้อมูลนักศึกษาผู้ขอยืม</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <div class="row">
+                                                                    <div class="col-md-4">
+                                                                        <img src="assets/img/find_user.png"/>
+                                                                    </div>
+                                                                    <div class="col-md-8">
+                                                                        <table class="table table-hover">
+                                                                            <tr>
+                                                                                <td><b>ชื่อ - สกุล</b></td>
+                                                                                <td>นายภิเษก ภิญโญธรรมากร</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>รหัสนักศึกษา</b></td>
+                                                                                <td>58340500036</td>
+                                                                            </tr>
+                                                                            <tr>
+                                                                                <td><b>นักศึกษาชั้นปีที่</b></td>
+                                                                                <td>3</td>
+                                                                            </tr>
+                                                                        </table>
+                                                                    </div>
+
+                                                                </div>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    <div class="col-md-6">
+                                                        <div class="panel panel-info">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">ข้อมูลเพิ่มเติ่มเกียวกับการขอยืม</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+
+                                                                <table class="table table-hover">
+                                                                    <tr>
+                                                                        <td><b>อาจารย์ที่ปรึกษา</b></td>
+                                                                        <td>
+                                                                            <select class="form-control" name="" id="" disabled>
+                                                                                <option value="">อาจารย์ที่ปรึกษา</option>
+                                                                                <option value="">รศ.ดร.สยาม เจริญเสียง</option>
+                                                                                <option value="">ดร.อาบทิพย์ ธีรวงศ์กิจ</option>
+                                                                                <option value="">ดร.สุภชัย วงศ์บุณย์ยง</option>
+                                                                                <option value="">ดร.ปิติวุฒญ์ ธีรกิตติกุล</option>
+                                                                                <option value="">ดร.สุริยา นัฏสุภัคพงศ์</option>
+                                                                                <option value="">ดร.ปราการเกียรติ ยังคง</option>
+                                                                                <option value="">ดร.อรพดี จูฉิม</option>
+                                                                                <option value="">ผศ.ดร.ถวิดา มณีวรรณ์</option>
+                                                                                <option value="">ผศ.ดร.เอกชัย เป็งวัง</option>
+                                                                                <option value="">ดร.วราสิณี ฉายแสงมงคล</option>
+                                                                                <option value="">นายบวรศักดิ์ สกุลเกื้อกูลสุข</option>
+                                                                                <option value="">นายธนัชชา ชูพจน์เจริญ</option>
+                                                                            </select>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>วันเริ่มยืม</b></td>
+                                                                        <td >
+                                                                            <input type="date" class="form-control" disabled>
+                                                                        </td>
+                                                                    </tr>
+                                                                    <tr>
+                                                                        <td><b>วันสุดท้ายของการยืม</b></td>
+                                                                        <td> <input type="date" class="form-control" disabled></td>
+                                                                    </tr>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-danger">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">อุปกรณ์ที่นักศึกษาขอยืม</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+
+                                                                <table class="table table-hover">
+                                                                    <tr>
+
+                                                                        <th>รหัสอุปกรณ์</th>
+                                                                        <th>ชื่ออุปกรณ์</th>
+                                                                        <th>จำนวน</th>
+                                                                        <th>โมดูล / ที่มา</th>
+                                                                        <th>สถานที่เก็บ</th>
+                                                                        <th></th>
+                                                                    </tr>
+                                                                    <tr>
+
+                                                                        <td>ELE001</td>
+                                                                        <td>Arduino</td>
+                                                                        <td>1</td>
+                                                                        <td>My first Robot</td>
+                                                                        <td>FB301</td>
+
+                                                                    <tr>
+                                                                    <tr>
+
+                                                                        <td>ELE002</td>
+                                                                        <td>Rasberry Pi</td>
+                                                                        <td>1</td>
+                                                                        <td>Robotic Programming</td>
+                                                                        <td>FB203</td>
+
+                                                                    <tr>
+                                                                    <tr>
+
+                                                                        <td>ELE003</td>
+                                                                        <td>Arduino</td>
+                                                                        <td>1</td>
+                                                                        <td>Exporotion</td>
+                                                                        <td>FB301</td>
+
+                                                                    <tr>
+                                                                    <tr>
+
+                                                                        <td>ELE004</td>
+                                                                        <td>Arduino</td>
+                                                                        <td>1</td>
+                                                                        <td>My first Robot</td>
+                                                                        <td>FB301</td>
+
+                                                                    <tr>
+                                                                </table>
+
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-warning">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">หมายเหตุ / บันทึกเพิ่มเติม</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <textarea class="form-control" rows="3" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-primary">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">ข้อความถึงนักศึกษา</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <textarea class="form-control" rows="3" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+
+                                                    <div class="row">
+                                                    <div class="col-md-12">
+                                                        <div class="panel panel-success">
+                                                            <div class="panel-heading">
+                                                                <h3 class="panel-title">ข้อความถึงผู้รับผิดชอบ</h3>
+                                                            </div>
+                                                            <div class="panel-body">
+                                                                <textarea class="form-control" rows="3" disabled></textarea>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                    </div>
+
+
+                                            </form>
+                                        </center>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+
+                    </td>
                 </tr>
 
             </table>
