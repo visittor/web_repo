@@ -140,9 +140,81 @@ function call_rent_status(respond)
                     "<td>" + "อาจารย์" + respond[i].teacher.first_name + " " + respond[i].teacher.last_name + "</td>"+
                     "<td>" + respond[i].start_date + respond[i].stop_date + "</td>"+
                     "<td>" + status + "</td>"+
-                    "<td><button class='btn btn-info ' type='button'>รายละเอียด</button></td>"+
+                    "<td><button class='btn btn-info ' type='button' onclick='request_borrow_detail(" + respond[i].id + ")'>รายละเอียด</button></td>"+
                 "</tr>");
             counter++;
         }
+    });
+}
+
+function call_borrow_detail_student(respond)
+{
+    console.log(respond);
+    var url_static = document.getElementById('url_static').innerHTML+"/earth/borrow_status.html";
+    $.get(url_static, function(data){
+        $("#inner_container").html(data);
+        $("#owner_full_name").html(respond.owner.first_name+" "+respond.owner.last_name);
+		$("#owner_id").html(respond.owner.student_id);
+		$("#owner_years").html(parseInt(61-(parseInt(respond.owner.student_id)/1000000000)));
+		$("#teacher_name").html(respond.teacher.first_name+" "+respond.teacher.last_name);
+		$("#start_borrow_date").html(respond.start_date);//EDIT LATER
+		$("#stop_borrow_date").html(respond.stop_date);
+		$("#Note").html(respond.student_note);
+        for( i in respond.items){
+		$("#item_list").append("<tr> <td>"+ respond.items[i].code_name +"</td> <td>"+ respond.items[i].name +"</td> <td>1</td> <td>"+ respond.items[i].sub_category +"</td> <td>"+ respond.items[i].storage +"</td> <tr>");
+		}
+
+    });
+}
+
+function call_rent_status_teacher(respond)
+{
+    var url_static = document.getElementById('url_static').innerHTML+"/earth/rent_status.html";
+    $.get(url_static, function(data){
+        $("#inner_container").html(data);
+        var counter = 1 ;
+        var status = '';
+        for(i in respond){
+            if(respond[i].teacher_approve && respond[i].admin_approve){
+                status = "เรียบร้อย";
+            }
+            else if(respond[i].teacher_approve || respond.admin_approve){
+                status = "ติดต่อเจ้าหน้าที่";
+            }
+            else{
+                status = "รอตรวจสอบโดยอาจารย์ที่ปรึกษา";
+            }
+            $("#rent_status_table").append("<tr>"+
+                    "<td>" + counter + "</td>"+
+                    "<td>" + respond[i].id + "</td>"+
+                    "<td>" + respond[i].owner_id + "</td>"+
+                    "<td>" + respond[i].owner.first_name + " " + respond[i].owner.last_name + "</td>"+
+                    "<td>" + "อาจารย์" + respond[i].teacher.first_name + " " + respond[i].teacher.last_name + "</td>"+
+                    "<td>" + respond[i].start_date + respond[i].stop_date + "</td>"+
+                    "<td>" + status + "</td>"+
+                    "<td><button class='btn btn-info ' type='button' onclick='request_borrow_detail_teacher(" + respond[i].id + ")'>รายละเอียด</button></td>"+
+                "</tr>");
+            counter++;
+        }
+    });
+}
+
+function call_borrow_detail_teacher(respond)
+{
+    console.log(respond);
+    var url_static = document.getElementById('url_static').innerHTML+"/earth/borrow_status_teacher.html";
+    $.get(url_static, function(data){
+        $("#inner_container").html(data);
+        $("#owner_full_name").html(respond.owner.first_name+" "+respond.owner.last_name);
+		// $("#owner_id").html(respond.owner.student_id);
+		// $("#owner_years").html(parseInt(61-(parseInt(respond.owner.student_id)/1000000000)));
+		$("#teacher_name").html(respond.teacher.first_name+" "+respond.teacher.last_name);
+		$("#start_borrow_date").html(respond.start_date);//EDIT LATER
+		$("#stop_borrow_date").html(respond.stop_date);
+		$("#Note").html(respond.student_note);
+        for( i in respond.items){
+		$("#item_list").append("<tr> <td>"+ respond.items[i].code_name +"</td> <td>"+ respond.items[i].name +"</td> <td>1</td> <td>"+ respond.items[i].sub_category +"</td> <td>"+ respond.items[i].storage +"</td> <tr>");
+		}
+        $("#submit_edit").attr("onclick",'teacher_approve('+ respond.id +')');
     });
 }

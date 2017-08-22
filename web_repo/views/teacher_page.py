@@ -35,7 +35,7 @@ class teacher_page(object):
 		return  {'a' : 'hello'}
 
 
-	@view_config(renderer = '../templates/earth/rentitem_template.pt', route_name = 'teacher_all_cart')
+	@view_config(renderer = '../templates/earth/rentitem_template_teacher.pt', route_name = 'teacher_all_cart')
 	def teacher_all_cart(self):
 		return {'a' : 'hello'}
 

@@ -22,16 +22,10 @@
     <!-- Custom styles for this template -->
     <link href="${request.static_url('web_repo:static/earth/bootstrap-3.3.7-dist/album.css')}" rel="stylesheet">
 
-    <script tal:condition="request.user.role == 's'">
+    <script>
         $(document).ready(function(){
             var jq = $.noConflict();
             request_rent_status("${request.route_url('user_all_cart_json')}");
-        });
-    </script>
-    <script tal:condition="request.user.role == 't'">
-        $(document).ready(function(){
-            var jq = $.noConflict();
-            request_rent_status("${request.route_url('teacher_all_cart_json')}");
         });
     </script>
     <p id = 'url_' hidden>${request.route_url('home')}</p>

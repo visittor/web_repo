@@ -33,10 +33,10 @@ def create_cart_history(cart_, request):
 		print "\n", e,"\n"
 		return 1
 
-def get_cart_data(id):
+def get_cart_data(request, id):
 	if type(id) == str :
 		id = int(id)
-	cart_ = self.get_cart(id)
+	cart_ = request.dbsession.query(cart).filter_by(id = id).one()
 	dic = cart_.dict_
 	# print "\n", cart_.items, "\n"
 	# items = self.request.dbsession.query(item).filter_by(cart_id = id).all()

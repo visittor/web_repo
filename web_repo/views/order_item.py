@@ -7,7 +7,7 @@ from ..models.Item import order_item, item
 from ..models.Cart import cart
 from ..models.User import member
 from ..models.type import category_type_storage
-from ..scripts import util
+from ..scripts.util import *
 import datetime
 
 @view_defaults(renderer='json', permission = 'access')
@@ -212,5 +212,10 @@ class Cart_status(object):
 	def cart_info(self):
 		json = self.request.GET
 		id = json["id"]
-		dic_ = get_cart_data(id)
-		return dict_
+		dic_ = get_cart_data(self.request,id)
+
+		type_obj = self.request.dbsession.query(category_type_storage).filter_by(name='type_list').one()
+		type_list = eval(type_obj.list_)
+		for i in dic_["items"]:
+			i["code_name"] = str(type_list.get(i["type_"].encode('utf8'), 'NULL')) + str(i["id"])
+		return dic_

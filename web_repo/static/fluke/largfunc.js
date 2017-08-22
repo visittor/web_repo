@@ -519,9 +519,9 @@ function add_item(a, b, c, d, e, f, g)
             type_: d,
             storage: e,
             note: f,
-            item_photo: g
+            // item_photo: g
         },
-        dataType: 'xml',
+        dataType: 'json',
 
         success:function (respond) {
             if (respond.exception == 1){

@@ -1,0 +1,122 @@
+<div class="row">
+                    <center><h2>ข้อมูลการยืมอุปกรณ์</h2></center>
+					<div class="col-md-6">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อมูลนักศึกษาผู้ขอยืม</h3>
+							</div>
+							<div class="panel-body">
+								<div class="row">
+									<div class="col-md-4">
+										<img src="assets/img/find_user.png" />
+									</div>
+									<div class="col-md-8">
+										<table class="table table-hover">
+											<tr>
+												<td><b>ชื่อ - สกุล</b></td>
+												<td id="owner_full_name"></td>
+											</tr>
+											<tr>
+												<td><b>รหัสนักศึกษา</b></td>
+												<td id="owner_id">58340500036</td>
+											</tr>
+											<tr>
+												<td><b>นักศึกษาชั้นปีที่</b></td>
+												<td id="owner_years">3</td>
+											</tr>
+										</table>
+									</div>
+
+								</div>
+							</div>
+						</div>
+                    </div>
+					<div class="col-md-6">
+						<div class="panel panel-info">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อมูลเพิ่มเติ่มเกียวกับการขอยืม</h3>
+							</div>
+							<div class="panel-body">
+
+										<table class="table table-hover">
+											<tr>
+												<td><b>อาจารย์ที่ปรึกษา</b></td>
+												<td id="teacher_name">อาจารย์ทอดสอบ  ทดลอง</td>
+											</tr>
+											<tr>
+												<td><b>วันเริ่มยืม</b></td>
+												<td id="start_borrow_date"></td>
+											</tr>
+											<tr>
+												<td><b>วันสุดท้ายของการยืม</b></td>
+												<td id="stop_borrow_date"></td>
+											</tr>
+										</table>
+
+							</div>
+						</div>
+                    </div>
+
+                </div>
+				<div class="row">
+					<div class="col-md-12">
+						<div class="panel panel-danger">
+							<div class="panel-heading">
+								<h3 class="panel-title">อุปกรณ์ที่นักศึกษาขอยืม</h3>
+							</div>
+							<div class="panel-body">
+
+										<table id="item_list" class="table table-hover">
+											<tr>
+												<th>รหัสอุปกรณ์</th>
+												<th>ชื่ออุปกรณ์</th>
+												<th>จำนวน</th>
+												<th>โมดูล / ที่มา</th>
+												<th>สถานที่เก็บ</th>
+											</tr>
+
+										</table>
+
+							</div>
+						</div>
+					</div>
+				</div>
+				<div class="row">
+					<div class="col-md-6">
+						<div class="panel panel-warning">
+							<div class="panel-heading">
+								<h3 class="panel-title">หมายเหตุ / บันทึกเพิ่มเติม</h3>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" rows="3" id="Note" disabled></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-primary">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อความถึงนักศึกษา</h3>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" rows="3" disabled></textarea>
+							</div>
+						</div>
+					</div>
+					<div class="col-md-3">
+						<div class="panel panel-success">
+							<div class="panel-heading">
+								<h3 class="panel-title">ข้อความถึงผู้รับผิดชอบ</h3>
+							</div>
+							<div class="panel-body">
+								<textarea class="form-control" rows="3" disabled></textarea>
+							</div>
+						</div>
+					</div>
+					<br>
+					<center>
+						<a href="http://localhost:6543/user_all_cart" ><button type="button" class="btn btn-danger"> <i class="glyphicon glyphicon-remove"> ย้อนกลับ</i></button></a>
+					</center>
+				</div>
+
+                 <!-- /. ROW  -->
+                 <hr />

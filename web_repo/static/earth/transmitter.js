@@ -127,3 +127,68 @@ function request_rent_status(url)
         success:call_rent_status
     });
 }
+
+function request_borrow_detail(a) {
+    var url = document.getElementById('url_').innerHTML+"user_cart_info.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            id: a
+        },
+        dataType: 'json',
+
+        success:call_borrow_detail_student
+    });
+    // call_borrow_detail_student("dfsdf")
+}
+
+function request_rent_status_teacher(url)
+{
+    // var url = document.getElementById('url_').innerHTML+"user_all_cart.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            request_order_detail: 1
+        },
+        dataType: 'json',
+
+        success:call_rent_status_teacher
+    });
+}
+function request_borrow_detail_teacher(a) {
+    var url = document.getElementById('url_').innerHTML+"user_cart_info.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            id: a
+        },
+        dataType: 'json',
+
+        success:call_borrow_detail_teacher
+    });
+    // call_borrow_detail_student("dfsdf")
+}
+
+function teacher_approve(a){
+    var url = document.getElementById('url_').innerHTML+"teacher_approve_item.json";
+    $.ajax({
+        url: url,
+        type: 'get',
+        data: {
+            id: a
+        },
+        dataType: 'json',
+
+        success: function(respond){
+            if(respond.exception == 1){
+                alert('something wrong');
+            }
+            else{
+                alert('อนุมัติเรียบร้อย');
+            }
+        }
+    });
+}

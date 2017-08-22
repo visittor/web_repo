@@ -166,14 +166,6 @@
                                 <th>สถานที่เก็บ</th>
                                 <th></th>
                             </tr>
-                            <tr>
-                                <td>ELE001</td>
-                                <td>Arduino</td>
-                                <td>1</td>
-                                <td>My first Robot</td>
-                                <td>FB301</td>
-                                <td><button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button></td>
-                            <tr>
 
                         </table>
 
