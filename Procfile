@@ -1,1 +1,1 @@
-web: ./run
+web: pserve development.ini
