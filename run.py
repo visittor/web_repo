@@ -1,4 +1,4 @@
 from subprocess import call
 
-call(["python", "setup.py", "-e", "."])
+call(["pip", "install", "-e", "."])
 call(["pserve", "development.ini"])
