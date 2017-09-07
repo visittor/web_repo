@@ -1,1 +1,1 @@
-web: pserve development.ini
+web: python run.py
