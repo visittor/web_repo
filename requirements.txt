@@ -9,4 +9,3 @@ SQLAlchemy
 transaction
 zope.sqlalchemy
 waitress
--e .
