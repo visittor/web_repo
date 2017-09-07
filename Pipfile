@@ -1,0 +1,19 @@
+[[source]]
+url = "https://pypi.python.org/simple"
+verify_ssl = true
+
+[packages]
+pyramid
+pyramid_jinja2
+pyramid_chameleon
+pyramid_mailer
+bcrypt
+pyramid_debugtoolbar
+pyramid_tm
+SQLAlchemy
+transaction
+zope.sqlalchemy
+waitress
+
+[requires]
+python_version = "2.7.13"
