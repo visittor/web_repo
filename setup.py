@@ -20,6 +20,7 @@ requires = [
     'transaction',
     'zope.sqlalchemy',
     'waitress',
+    'pyramid_heroku',
 ]
 
 tests_require = [
